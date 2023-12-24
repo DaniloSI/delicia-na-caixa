@@ -1,6 +1,7 @@
 'use client'
 
 import StepperContext from "@/contexts/stepper";
+import { getTotal } from "@/utils/calc";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -11,7 +12,7 @@ export default function Resume() {
   const { watch } = useFormContext()
 
   const snacks = watch('snacks')
-  const amount = Object.values(snacks || {}).reduce((prev, curr) => prev + Math.abs(parseInt(curr || 0)), 0)
+  const amount = getTotal(snacks)
   const subTotal = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
     (amount / 100) * CENT_PRICE,
   )
