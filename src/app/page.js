@@ -13,7 +13,7 @@ import Resume from '@/components/Order/Resume';
 import { FormProvider, useForm } from 'react-hook-form';
 import SmallSavorySnacks from '@/components/SmallSavorySnacks';
 import getMessageFromTemplate from '@/utils/getMessageFromTemplate';
-import encode from 'urlencode';
+import { encode } from 'urlencode';
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
 
@@ -23,15 +23,17 @@ export default function Home() {
     defaultValues
   });
 
+  const onSubmit = methods.handleSubmit((data) => {
+    const message = encode(getMessageFromTemplate(data))
+    window.open(`https://wa.me/5527996324590?text=${message}`)
+  })
+
   return (
     <main className="flex flex-col justify-items-center gap-6 min-h-screen py-8 px-4">
       <Image src={Logo} height={50} className="place-self-center" alt="Logo delícia na caixa" />
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit((data) => {
-          const message = encode(getMessageFromTemplate(data))
-          window.open(`https://wa.me/5527996324590?text=${message}`)
-        })}>
+        <form onSubmit={onSubmit}>
           <StepperContainer
             steps={[
               { name: 'Escolha', done: false },
