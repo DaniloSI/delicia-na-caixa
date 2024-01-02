@@ -17,7 +17,7 @@ export default [
   {
     fieldName: 'risole',
     name: "Risole",
-    description: "Risole de carne",
+    description: "Fugiat voluptate exercitation mollit cupidatat non amet in tempor reprehenderit ex.",
     image:
       "https://saboresdeminassalgados.com.br/dev/wp-content/uploads/2020/05/risolebaixo.jpg",
   },

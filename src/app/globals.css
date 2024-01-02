@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+input {
+  font-size: 16px !important;
+}
+
+input::-webkit-date-and-time-value {
+  text-align: left;
+  line-height: 1.5em;
+}
+
+input::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

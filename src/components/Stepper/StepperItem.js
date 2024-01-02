@@ -4,10 +4,10 @@ import React, { useContext } from 'react';
 
 import StepperContext from '@/contexts/stepper';
 
-const StepperItem = ({ step, children }) => {
+const StepperItem = ({ step, className = '', children }) => {
   const { active } = useContext(StepperContext);
   return (
-    <div className={step !== active ? 'hidden' : ''}>
+    <div className={`${step !== active ? 'hidden' : ''} ${className}`}>
       {children}
     </div>
   )

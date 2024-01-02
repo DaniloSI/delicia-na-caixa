@@ -8,10 +8,10 @@ const SmallSavorySnacks = ({ name, description, image }) => {
   const { setValue } = useFormContext()
 
   return (
-    <div className="flex items-center bg-white flex-row max-w-xl">
-      <img className="object-cover w-auto rounded-lg h-16" src={image} alt={name} />
+    <div className="flex items-start bg-white flex-row max-w-xl">
+      <img className="object-cover w-auto rounded-lg h-24" src={image} alt={name} />
       <div className="flex flex-col grow justify-between px-4 leading-normal">
-        <h5 className="mb-1 text-xl font-bold tracking-tight text-gray-900 ">
+        <h5 className="text-xl font-bold tracking-tight text-gray-900 ">
           {name}
         </h5>
         <p className="mb-1 font-normal text-gray-700 ">{description}</p>
