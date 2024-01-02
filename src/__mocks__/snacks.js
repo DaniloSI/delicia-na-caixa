@@ -24,4 +24,18 @@ export default [
     image:
       "https://saboresdeminassalgados.com.br/dev/wp-content/uploads/2020/05/risolebaixo.jpg",
   },
+  {
+    fieldName: 'croqueteDeMilho',
+    name: "Croquete de milho",
+    namePlural: "croquetes de milho",
+    description: "Recheado com queijo e milho",
+    image: "https://www.homeit.com.br/wp-content/uploads/2023/04/croquete-de-milho.jpg",
+  },
+  {
+    fieldName: 'enroladinhoDeSalsicha',
+    name: "Enroladinho de salsicha",
+    namePlural: "enroladinhos de salsicha",
+    description: "Recado com salsicha",
+    image: "https://festanny.com.br/admin/produtos-fotos/foto/79.jpg",
+  },
 ]
