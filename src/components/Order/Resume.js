@@ -1,11 +1,9 @@
 'use client'
 
 import StepperContext from "@/contexts/stepper";
-import { getTotal } from "@/utils/calc";
+import { getTotal, getTotalPrice } from "@/utils/calc";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-
-const CENT_PRICE = 80
 
 export default function Resume() {
   const { active, isLastActive, nextStep, prevStep } = useContext(StepperContext);
@@ -13,9 +11,7 @@ export default function Resume() {
 
   const snacks = watch('snacks')
   const amount = getTotal(snacks)
-  const subTotal = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
-    (amount / 100) * CENT_PRICE,
-  )
+  const subTotal = getTotalPrice(snacks)
 
   const btnLabelNext = ['Ir para a entrega', 'Ir para a finalização', 'Finalizar'][active]
 
