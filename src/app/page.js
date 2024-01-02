@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
@@ -43,13 +43,19 @@ const datePickerTheme = {
 }
 
 export default function Home() {
+  const minDate = useMemo(() => {
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    return date;
+  }, [])
   const methods = useForm({
     defaultValues: {
       snacks: Object.fromEntries(snacks.map(snack => [snack.name, '0'])),
       reception: 'retire',
       cep: '',
+      date: minDate,
     }
-  });1
+  });
   const { control, watch, setValue } = methods
 
   const onSubmit = methods.handleSubmit((data) => {
@@ -112,15 +118,13 @@ export default function Home() {
                   <label htmlFor="deliveryDate" className="block mb-2 text-sm font-medium text-gray-900">Data</label>
                   <Datepicker
                     language="pt-BR"
-                    labelTodayButton="Hoje"
+                    title="Data da entrega/retirada"
+                    showTodayButton={false}
                     labelClearButton="Limpar"
-                    minDate={(() => {
-                      const date = new Date();
-                      date.setDate(date.getDate() + 1);
-                      return date;
-                    })()}
+                    minDate={minDate}
                     theme={datePickerTheme}
                     onSelectedDateChanged={(date) => setValue('date', date)}
+                    defaultDate={minDate}
                   />
                 </div>
 
@@ -185,13 +189,13 @@ export default function Home() {
                 <div className="flex flex-col gap-4">
                   {[
                     { name: 'cep', label: 'CEP', placeholder: 'Ex.: 29123-000' },
-                    { name: 'state', label: 'Estado', placeholder: 'Ex.: Espírito Santo' },
-                    { name: 'city', label: 'Cidade', placeholder: 'Ex.: Serra' },
-                    { name: 'neighborhood', label: 'Bairro', placeholder: 'Ex.: Morada de Laranjeiras' },
-                    { name: 'street', label: 'Rua', placeholder: 'Ex.: Rua Amaralina' },
+                    { name: 'state', label: 'Estado', placeholder: 'Ex.: Espírito Santo', readOnly: true },
+                    { name: 'city', label: 'Cidade', placeholder: 'Ex.: Serra', readOnly: true },
+                    { name: 'neighborhood', label: 'Bairro', placeholder: 'Ex.: Morada de Laranjeiras', readOnly: true },
+                    { name: 'street', label: 'Rua', placeholder: 'Ex.: Rua Amaralina', readOnly: true },
                     { name: 'number', label: 'Número', placeholder: 'Ex.: 22' },
                     { name: 'complement', label: 'Complemento', placeholder: 'Ex.: Casa 1' },
-                  ].map(({ name, label, placeholder }) => (
+                  ].map(({ name, label, placeholder, readOnly = false }) => (
                     <Controller
                       key={name}
                       control={control}
@@ -200,6 +204,8 @@ export default function Home() {
                         <div className="flex flex-col gap-2">
                           <Label htmlFor={name} value={label} />
                           <MaskedInput
+                            readOnly={readOnly}
+                            disabled={readOnly}
                             placeholder={placeholder}
                             mask={name === 'cep' ? '00000-000' : ''}
                             inputMode={name === 'cep' ? 'numeric' : 'text'}
