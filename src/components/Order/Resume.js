@@ -15,7 +15,7 @@ export default function Resume() {
   const amount = getTotal(snacks)
   const subTotal = getTotalPrice(snacks)
 
-  const btnLabelNext = ['Ir para a entrega', 'Ir para a finalização', 'Finalizar'][active]
+  const btnLabelNext = ['Ir para a entrega', 'Ir para a finalização', 'Enviar pedido'][active]
 
   const handleNext = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })

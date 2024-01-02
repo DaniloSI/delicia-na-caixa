@@ -15,7 +15,7 @@ import SmallSavorySnacks from '@/components/SmallSavorySnacks';
 import getMessageFromTemplate from '@/utils/getMessageFromTemplate';
 import { encode } from 'urlencode';
 
-import { Datepicker, Label } from 'flowbite-react';
+import { Datepicker, Label, Select } from 'flowbite-react';
 import MaskedInput from '@/components/MaskedInput';
 import TextInput from '@/components/TextInput';
 
@@ -105,7 +105,6 @@ export default function Home() {
             </StepperItem>
 
             <StepperItem step={1} className="flex flex-col gap-8">
-
               <div className="flex flex-col gap-4">
                 <h3 className="font-semibold text-gray-900">Retirada/entrega</h3>
 
@@ -212,6 +211,19 @@ export default function Home() {
                     />
                   ))}
                 </div>
+              </div>
+            </StepperItem>
+
+            <StepperItem step={2} className="flex flex-col gap-8">
+              <div className="flex flex-col gap-4">
+                {/* <h3 className="font-semibold text-gray-900">Finalização</h3> */}
+                <Label htmlFor="payment" value="Selecione a forma de pagamento" />
+                <Select id="payment" required onChange={(e) => setValue('payment', e.target.value)}>
+                  <option value disabled selected>-- selecione uma forma de pagamento --</option>
+                  <option>Dinheiro</option>
+                  <option>PIX</option>
+                  <option>PicPay</option>
+                </Select>
               </div>
             </StepperItem>
 
