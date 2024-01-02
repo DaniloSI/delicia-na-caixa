@@ -222,7 +222,6 @@ export default function Home() {
 
             <StepperItem step={2} className="flex flex-col gap-8">
               <div className="flex flex-col gap-4">
-                {/* <h3 className="font-semibold text-gray-900">Finalização</h3> */}
                 <Label htmlFor="payment" value="Selecione a forma de pagamento" />
                 <Select
                   id="payment"
@@ -235,6 +234,11 @@ export default function Home() {
                   <option>PIX</option>
                   <option>PicPay</option>
                 </Select>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <h6 className="text-lg font-bold">Enviar o pedido</h6>
+                <p className="text-base">Clique no botão "Enviar pedido" abaixo para enviar o pedido para a loja por meio do WhatsApp.</p>
               </div>
             </StepperItem>
 
