@@ -218,8 +218,13 @@ export default function Home() {
               <div className="flex flex-col gap-4">
                 {/* <h3 className="font-semibold text-gray-900">Finalização</h3> */}
                 <Label htmlFor="payment" value="Selecione a forma de pagamento" />
-                <Select id="payment" required onChange={(e) => setValue('payment', e.target.value)}>
-                  <option value disabled selected>-- selecione uma forma de pagamento --</option>
+                <Select
+                  id="payment"
+                  required
+                  onChange={(e) => setValue('payment', e.target.value)}
+                  defaultValue=""
+                >
+                  <option value="" disabled>-- selecione uma forma de pagamento --</option>
                   <option>Dinheiro</option>
                   <option>PIX</option>
                   <option>PicPay</option>
