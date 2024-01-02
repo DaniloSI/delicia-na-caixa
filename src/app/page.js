@@ -238,7 +238,7 @@ export default function Home() {
 
               <div className="flex flex-col gap-1">
                 <h6 className="text-lg font-bold">Enviar o pedido</h6>
-                <p className="text-base">Clique no botão "Enviar pedido" abaixo para enviar o pedido para a loja por meio do WhatsApp.</p>
+                <p className="text-base">Clique no botão &quot;Enviar pedido&quot; abaixo para enviar o pedido para a loja por meio do WhatsApp.</p>
               </div>
             </StepperItem>
 
