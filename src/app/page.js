@@ -20,7 +20,6 @@ import MaskedInput from '@/components/MaskedInput';
 import TextInput from '@/components/TextInput';
 
 import { HiOutlineClock } from 'react-icons/hi'
-import AddressField from '@/components/AddressField';
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
 
@@ -96,11 +95,12 @@ export default function Home() {
             <Divider />
 
             <StepperItem step={0}>
-              {snacks.map(({ fieldName, name, description, image }, index, list) => (
+              {snacks.map(({ fieldName, name, namePlural, description, image }, index, list) => (
                 <React.Fragment key={name}>
                   <SmallSavorySnacks
                     fieldName={fieldName}
                     name={name}
+                    namePlural={namePlural}
                     description={description}
                     image={image}
                   />

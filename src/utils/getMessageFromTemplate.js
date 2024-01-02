@@ -2,7 +2,7 @@ import { getTotal, getTotalPrice } from "./calc";
 
 const getOrderList = (snacks) => Object.entries(snacks)
   .filter(([_, amount]) => amount > 0)
-  .map(([name, amount]) => `- ${name}: ${amount}\n`)
+  .map(([name, amount]) => `- ${amount} ${name}\n`)
   .join('')
 
 const getAddress = ({ street, number, complement, neighborhood, city, state }) =>
