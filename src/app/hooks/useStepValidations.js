@@ -1,11 +1,11 @@
 import StepperContext from "@/contexts/stepper";
 import { getTotal } from "@/utils/calc";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 export const stepValidations = {
   0: ({ snacks }) => getTotal(snacks) >= 100 ? '' : 'Adicione no mínimo 100 unidades',
-  1: ({ time, reception, address: { cep, number } }) => {
+  1: ({ time, reception, address: { cep, number } = {} }) => {
     if (!time) {
       return 'Adicione um horário'
     }
@@ -26,14 +26,30 @@ export const stepValidations = {
 };
 
 const useStepValidations = () => {
-  const { active } = useContext(StepperContext);
-  const { getValues } = useFormContext();
+  const { active, addStepDone, removeStepDone } = useContext(StepperContext);
+  const { getValues, watch } = useFormContext();
+
+  const payment = watch('payment');
 
   const validateCurrentStep = () => stepValidations[active](getValues());
   const validateStep = (s) => stepValidations[s](getValues());
-  const validateAll = () => Object.keys(stepValidations).map(validateStep)
+  const validateAll = () => Object.keys(stepValidations).map((_, i) => {
+    const validationResult = validateStep(i)
 
-  return { validateCurrentStep, validateStep, validateAll }
+    if (validationResult) {
+      removeStepDone(i)
+    } else {
+      addStepDone(i)
+    }
+
+    return validationResult
+  })
+
+  useEffect(() =>{
+    validateAll()
+  }, [payment])
+
+  return { validateCurrentStep, validateAll }
 };
 
 export default useStepValidations;

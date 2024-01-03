@@ -13,7 +13,7 @@ const DoneIcon = () => (
 )
 
 const StepperLabel = ({ name, isLast, index }) => {
-  const { active, setActiveStep, addStepDone, removeStepDone, stepsDone } = useContext(StepperContext);
+  const { active, setActiveStep, stepsDone } = useContext(StepperContext);
   const { validateAll } = useStepValidations()
   const isActive = index === active
   const isDone = stepsDone.includes(index)
@@ -23,14 +23,6 @@ const StepperLabel = ({ name, isLast, index }) => {
       className={`flex items-center ${isActive ? 'text-gray-900': ''} after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:inline-block after:mx-6`}
       onClick={() => {
         const validationsResult = validateAll()
-
-        validationsResult.forEach((validationResult, i) => {
-          if (validationResult) {
-            removeStepDone(i)
-          } else {
-            addStepDone(i)
-          }
-        })
 
         if (index > active && index > 0) {
           const error = validationsResult.at(active) || validationsResult.at(index - 1)
