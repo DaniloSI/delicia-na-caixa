@@ -1,34 +1,57 @@
 'use client'
 
+import useStepValidations from "@/app/hooks/useStepValidations";
 import StepperContext from "@/contexts/stepper";
-import { getTotal, getTotalPrice } from "@/utils/calc";
+// import { getTotal, getTotalPrice } from "@/utils/calc";
 import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FiSend } from 'react-icons/fi';
 
 export default function Resume() {
-  const { active, isLastActive, nextStep, prevStep } = useContext(StepperContext);
+  const { active, isLastActive, nextStep, prevStep, addStepDone, removeStepDone } = useContext(StepperContext);
   const { watch } = useFormContext()
+  const { validateCurrentStep } = useStepValidations()
 
   const snacks = watch('snacks')
-  const amount = getTotal(snacks)
-  const subTotal = getTotalPrice(snacks)
+  // const amount = getTotal(snacks)
+  // const subTotal = getTotalPrice(snacks)
 
   const btnLabelNext = ['Ir para a entrega', 'Ir para a finalização', 'Enviar pedido'][active]
 
   const handleNext = () => {
+    const validationResult = validateCurrentStep()
+    
+    if (validationResult) {
+      return toast.error(validationResult)
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    addStepDone(active)
     nextStep()
+  }
+
+  const handlePrev = () => {
+    const validationResult = validateCurrentStep()
+    
+    if (validationResult) {
+      removeStepDone(active)
+    } else {
+      addStepDone(active)
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    prevStep()
   }
 
   return (
     <div className="fixed right-0 bottom-0 z-10 bg-white w-full p-2 border-t-2">
       <div className="max-w-96 m-auto">
-        <div className="pb-2 pr-4 flex flex-col text-end">
+        {/* <div className="pb-2 pr-4 flex flex-col text-end">
           <p>Quantidade: {amount}</p>
           <p>Subtotal: {subTotal}</p>
-        </div>
+        </div> */}
 
         <div className="flex justify-end gap-2">
           <Button
@@ -37,7 +60,7 @@ export default function Resume() {
             outline
             color="light"
             className={active === 0 ? 'invisible' : ''}
-            onClick={prevStep}
+            onClick={handlePrev}
           >
             Voltar
           </Button>

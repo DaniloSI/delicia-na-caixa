@@ -10,12 +10,12 @@ import StepperContainer from '@/components/Stepper/StepperContainer';
 import snacksMock from '@/__mocks__/snacks'
 import StepperItem from '@/components/Stepper/StepperItem';
 import Resume from '@/components/Order/Resume';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, get, useForm } from 'react-hook-form';
 import SmallSavorySnacks from '@/components/SmallSavorySnacks';
 import getMessageFromTemplate from '@/utils/getMessageFromTemplate';
 import { encode } from 'urlencode';
 
-import { Datepicker, Label, Select } from 'flowbite-react';
+import { Accordion, Datepicker, Label, Select } from 'flowbite-react';
 import MaskedInput from '@/components/MaskedInput';
 import TextInput from '@/components/TextInput';
 
@@ -56,7 +56,7 @@ export default function Home() {
       date: minDate,
     }
   });
-  const { control, watch, setValue } = methods
+  const { control, watch, setValue, getValues } = methods
 
   const onSubmit = methods.handleSubmit((data) => {
     const originalMessage = getMessageFromTemplate(data)
@@ -67,6 +67,7 @@ export default function Home() {
   const reception = watch('reception')
   const cep = watch('address.cep')
   const snacks = watch('snacks')
+  const all = watch()
 
   useEffect(() => {
     if (cep?.length === 9) {
@@ -80,6 +81,8 @@ export default function Home() {
         })
     }
   }, [cep])
+
+  const summary = useMemo(() => getMessageFromTemplate(all).trim().replaceAll('*', ''), [all])
 
   return (
     <main className="flex flex-col justify-items-center gap-6 min-h-screen py-8 px-4 md:max-w-96 m-auto">
@@ -239,6 +242,15 @@ export default function Home() {
                 <h6 className="text-lg font-bold">Enviar o pedido</h6>
                 <p className="text-base">Clique no botão &quot;Enviar pedido&quot; abaixo para enviar o pedido para a loja por meio do WhatsApp.</p>
               </div>
+
+              <Accordion>
+                <Accordion.Panel>
+                  <Accordion.Title>Resumo do pedido</Accordion.Title>
+                  <Accordion.Content>
+                    <p className="whitespace-pre-wrap">{summary}</p>
+                  </Accordion.Content>
+                </Accordion.Panel>
+              </Accordion>
             </StepperItem>
 
             <div className='h-36' />

@@ -3,6 +3,8 @@
 import React, { useContext } from 'react';
 
 import StepperContext from '@/contexts/stepper';
+import useStepValidations, { stepValidations } from '@/app/hooks/useStepValidations';
+import toast from 'react-hot-toast';
 
 const DoneIcon = () => (
   <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -10,17 +12,39 @@ const DoneIcon = () => (
   </svg>
 )
 
-const StepperLabel = ({ name, done, isLast, index }) => {
-  const { active, setActiveStep } = useContext(StepperContext);
+const StepperLabel = ({ name, isLast, index }) => {
+  const { active, setActiveStep, addStepDone, removeStepDone, stepsDone } = useContext(StepperContext);
+  const { validateAll } = useStepValidations()
   const isActive = index === active
+  const isDone = stepsDone.includes(index)
 
   return (
     <li
       className={`flex items-center ${isActive ? 'text-gray-900': ''} after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:inline-block after:mx-6`}
-      onClick={() => setActiveStep(index)}
+      onClick={() => {
+        const validationsResult = validateAll()
+
+        validationsResult.forEach((validationResult, i) => {
+          if (validationResult) {
+            removeStepDone(i)
+          } else {
+            addStepDone(i)
+          }
+        })
+
+        if (index > active && index > 0) {
+          const error = validationsResult.at(active) || validationsResult.at(index - 1)
+          
+          if (error) {
+            return toast.error(error)
+          }
+        }
+        
+        setActiveStep(index)
+      }}
     >
       <span className={`flex items-center ${isLast ? "after:content-['/']" : ''} after:mx-2 after:text-gray-200 cursor-pointer`}>
-        {done ? <DoneIcon /> : <span className="me-2">{index + 1}</span>} {name}
+        {isDone ? <DoneIcon /> : <span className="me-2">{index + 1}</span>} {name}
       </span>
   </li>
   )
