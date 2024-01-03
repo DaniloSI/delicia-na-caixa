@@ -7,7 +7,7 @@ import Logo from "@/assets/logo.png";
 
 import StepperContainer from '@/components/Stepper/StepperContainer';
 
-import snacks from '@/__mocks__/snacks'
+import snacksMock from '@/__mocks__/snacks'
 import StepperItem from '@/components/Stepper/StepperItem';
 import Resume from '@/components/Order/Resume';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
@@ -20,6 +20,7 @@ import MaskedInput from '@/components/MaskedInput';
 import TextInput from '@/components/TextInput';
 
 import { HiOutlineClock } from 'react-icons/hi'
+import { getTotal } from '@/utils/calc';
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
 
@@ -49,7 +50,7 @@ export default function Home() {
   }, [])
   const methods = useForm({
     defaultValues: {
-      snacks: Object.fromEntries(snacks.map(snack => [snack.name, '0'])),
+      snacks: Object.fromEntries(snacksMock.map(snack => [snack.name, '0'])),
       reception: 'retire',
       cep: '',
       date: minDate,
@@ -64,17 +65,18 @@ export default function Home() {
   })
 
   const reception = watch('reception')
-  const cep = watch('cep')
+  const cep = watch('address.cep')
+  const snacks = watch('snacks')
 
   useEffect(() => {
     if (cep?.length === 9) {
       fetch(`https://viacep.com.br/ws/${cep.replace(/\D/g, '')}/json/`)
         .then(response => response.json())
         .then(data => {
-          setValue('street', data.logradouro)
-          setValue('neighborhood', data.bairro)
-          setValue('city', data.localidade)
-          setValue('state', data.uf)
+          setValue('address.street', data.logradouro)
+          setValue('address.neighborhood', data.bairro)
+          setValue('address.city', data.localidade)
+          setValue('address.state', data.uf)
         })
     }
   }, [cep])
@@ -87,18 +89,17 @@ export default function Home() {
         <form onSubmit={onSubmit}>
           <StepperContainer
             steps={[
-              { name: 'Escolha', done: false },
-              { name: 'Entrega', done: false },
+              { name: 'Escolha', done: getTotal(snacks || {}) >= 100 },
+              { name: 'Retirada', done: false },
               { name: 'Finalização', done: false },
             ]}
           >
             <Divider />
 
             <StepperItem step={0}>
-              {snacks.map(({ fieldName, name, namePlural, description, image }, index, list) => (
+              {snacksMock.map(({ name, namePlural, description, image }, index, list) => (
                 <React.Fragment key={name}>
                   <SmallSavorySnacks
-                    fieldName={fieldName}
                     name={name}
                     namePlural={namePlural}
                     description={description}
@@ -112,8 +113,6 @@ export default function Home() {
 
             <StepperItem step={1} className="flex flex-col gap-8">
               <div className="flex flex-col gap-4">
-                <h3 className="font-semibold text-gray-900">Retirada/entrega</h3>
-
                 <div>
                   <label htmlFor="deliveryDate" className="block mb-2 text-sm font-medium text-gray-900">Data</label>
                   <Datepicker
@@ -188,13 +187,13 @@ export default function Home() {
 
                 <div className="flex flex-col gap-4">
                   {[
-                    { name: 'cep', label: 'CEP', placeholder: 'Ex.: 29123-000' },
-                    { name: 'state', label: 'Estado', placeholder: 'Ex.: Espírito Santo', readOnly: true },
-                    { name: 'city', label: 'Cidade', placeholder: 'Ex.: Serra', readOnly: true },
-                    { name: 'neighborhood', label: 'Bairro', placeholder: 'Ex.: Morada de Laranjeiras', readOnly: true },
-                    { name: 'street', label: 'Rua', placeholder: 'Ex.: Rua Amaralina', readOnly: true },
-                    { name: 'number', label: 'Número', placeholder: 'Ex.: 22' },
-                    { name: 'complement', label: 'Complemento', placeholder: 'Ex.: Casa 1' },
+                    { name: 'address.cep', label: 'CEP', placeholder: 'Ex.: 29123-000' },
+                    { name: 'address.state', label: 'Estado', placeholder: 'Ex.: Espírito Santo', readOnly: true },
+                    { name: 'address.city', label: 'Cidade', placeholder: 'Ex.: Serra', readOnly: true },
+                    { name: 'address.neighborhood', label: 'Bairro', placeholder: 'Ex.: Morada de Laranjeiras', readOnly: true },
+                    { name: 'address.street', label: 'Rua', placeholder: 'Ex.: Rua Amaralina', readOnly: true },
+                    { name: 'address.number', label: 'Número', placeholder: 'Ex.: 22' },
+                    { name: 'address.complement', label: 'Complemento', placeholder: 'Ex.: Casa 1' },
                   ].map(({ name, label, placeholder, readOnly = false }) => (
                     <Controller
                       key={name}
@@ -207,8 +206,8 @@ export default function Home() {
                             readOnly={readOnly}
                             disabled={readOnly}
                             placeholder={placeholder}
-                            mask={name === 'cep' ? '00000-000' : ''}
-                            inputMode={name === 'cep' ? 'numeric' : 'text'}
+                            mask={name === 'address.cep' ? '00000-000' : ''}
+                            inputMode={name === 'address.cep' ? 'numeric' : 'text'}
                             value={value}
                             onChange={onChange}
                           />

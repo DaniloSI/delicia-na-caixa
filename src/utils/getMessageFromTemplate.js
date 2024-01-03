@@ -17,13 +17,13 @@ const formatDate = (date) => new Intl.DateTimeFormat('pt-BR', {
 
 const isDelivery = (reception) => reception === 'delivery'
 
-const getMessageFromTemplate = ({ snacks, reception, date, time, payment, ...rest }) => `
+const getMessageFromTemplate = ({ snacks, reception, date, time, payment, address }) => `
 Pedido:
 ${getOrderList(snacks)}
 Quantidade total: ${getTotal(snacks)}
 ${isDelivery(reception) ? 'Subtotal' : 'Total'}: ${getTotalPrice(snacks)}
 Forma de pagamento: ${payment}
-${isDelivery(reception) ? getAddress(rest) : ''}
+${isDelivery(reception) ? getAddress(address) : ''}
 Data e horário da *${isDelivery(reception) ? 'entrega': 'retirada'}*: ${formatDate(date)} às ${time}
 `;
 
