@@ -27,7 +27,6 @@ export default function Resume() {
       return toast.error(validationResult)
     }
     
-    window.scrollTo({ top: 0, behavior: 'smooth' })
     addStepDone(active)
     nextStep()
   }
@@ -41,7 +40,6 @@ export default function Resume() {
       addStepDone(active)
     }
     
-    window.scrollTo({ top: 0, behavior: 'smooth' })
     prevStep()
   }
 

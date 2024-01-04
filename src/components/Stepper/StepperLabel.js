@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import StepperContext from '@/contexts/stepper';
 import useStepValidations, { stepValidations } from '@/app/hooks/useStepValidations';
@@ -17,6 +17,10 @@ const StepperLabel = ({ name, isLast, index }) => {
   const { validateAll } = useStepValidations()
   const isActive = index === active
   const isDone = stepsDone.includes(index)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [active])
 
   return (
     <li

@@ -56,7 +56,7 @@ export default function Home() {
       date: minDate,
     }
   });
-  const { control, watch, setValue, getValues } = methods
+  const { control, watch, setValue } = methods
 
   const onSubmit = methods.handleSubmit((data) => {
     const originalMessage = getMessageFromTemplate(data)
