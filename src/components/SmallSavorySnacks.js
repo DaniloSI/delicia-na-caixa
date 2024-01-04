@@ -2,10 +2,24 @@
 
 import React from 'react';
 
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
+import TextInput from './TextInput';
+import { Button } from 'flowbite-react';
+import { HiMinusSm, HiPlusSm } from 'react-icons/hi';
 
 const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
-  const { setValue } = useFormContext()
+  const { control, register, setValue, getValues } = useFormContext()
+  const fieldName = `snacks.${namePlural}`
+
+  const handleAdd = () => {
+    const value = Number(getValues(fieldName))
+    setValue(fieldName, value + 10)
+  }
+
+  const handleSubtract = () => {
+    const value = Number(getValues(fieldName))
+    setValue(fieldName, value > 10 ? value - 10 : 0)
+  }
 
   return (
     <div className="flex items-start bg-white flex-row max-w-xl">
@@ -15,15 +29,27 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
           {name}
         </h5>
         <p className="mb-1 font-normal text-gray-700 ">{description}</p>
-        <div>
-          <input
-            type="number"
-            className="text-base border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
-            placeholder="Quantidade"
-            inputMode='numeric'
-            onChange={(e) => setValue(`snacks.${namePlural}`, e.target.value)}
-            name={name}
+        <div className="flex gap-2">
+          <Button size="xs" color="primary" onClick={handleSubtract}>
+            <HiMinusSm className="h-6 w-6" />
+          </Button>
+          <Controller
+            render={({ field }) => (
+              <TextInput
+                {...field}
+                type="number"
+                placeholder="Quantidade"
+                inputMode="numeric"
+                className="text-center"
+              />
+            )}
+            name={fieldName}
+            control={control}
+            defaultValue=""
           />
+          <Button size="xs" color="primary" onClick={handleAdd}>
+            <HiPlusSm className="h-6 w-6" />
+          </Button>
         </div>
       </div>
     </div>
