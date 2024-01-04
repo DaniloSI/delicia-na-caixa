@@ -73,7 +73,6 @@ export default function Resume() {
             {isLastActive && <FiSend className="mr-2 h-5 w-5" />}
             {btnLabelNext}
           </Button>
-          {/* <button className="w-1/2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"></button> */}
         </div>
       </div>
     </div>

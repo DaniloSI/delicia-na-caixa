@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
@@ -56,12 +56,11 @@ export default function Home() {
       date: minDate,
     }
   });
+  const sendRef = useRef(null)
   const { control, watch, setValue } = methods
 
   const onSubmit = methods.handleSubmit((data) => {
-    const originalMessage = getMessageFromTemplate(data)
-    const message = encode(originalMessage)
-    window.open(`https://wa.me/5527996324590?text=${message}`)
+    sendRef.current.click()
   })
 
   const reception = watch('reception')
@@ -251,6 +250,14 @@ export default function Home() {
                   </Accordion.Content>
                 </Accordion.Panel>
               </Accordion>
+
+              <a
+                ref={sendRef}
+                href={`whatsapp://send?phone=5527996324590&text=${encode(summary)}`}
+                className="hidden h-0 w-0"
+              >
+                Send
+              </a>
             </StepperItem>
 
             <div className='h-36' />
