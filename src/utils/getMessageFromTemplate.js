@@ -17,7 +17,7 @@ const formatDate = (date) => new Intl.DateTimeFormat('pt-BR', {
 
 const isDelivery = (reception) => reception === 'delivery'
 
-const getMessageFromTemplate = ({ snacks, reception, date, time, payment, address }) => `
+const getMessageFromTemplate = ({ snacks, reception, date, time, payment = '', address }) => `
 Pedido:
 ${getOrderList(snacks)}
 Quantidade total: ${getTotal(snacks)}
