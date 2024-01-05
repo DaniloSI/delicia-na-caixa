@@ -18,7 +18,7 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
 
   const handleSubtract = () => {
     const value = Number(getValues(fieldName))
-    setValue(fieldName, value > 10 ? value - 10 : 0)
+    setValue(fieldName, value > 10 ? value - 10 : '')
   }
 
   return (
@@ -29,10 +29,10 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
           {name}
         </h5>
         <p className="mb-1 font-normal text-gray-700 ">{description}</p>
-        <div className="flex gap-2">
-          <Button size="xs" color="primary" onClick={handleSubtract}>
-            <HiMinusSm className="h-6 w-6" />
-          </Button>
+        <div className="flex gap-4">
+          <button onClick={handleSubtract}>
+            <HiMinusSm className="h-6 w-6 text-red-700" />
+          </button>
           <Controller
             render={({ field }) => (
               <TextInput
@@ -47,9 +47,9 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
             control={control}
             defaultValue=""
           />
-          <Button size="xs" color="primary" onClick={handleAdd}>
-            <HiPlusSm className="h-6 w-6" />
-          </Button>
+          <button onClick={handleAdd}>
+            <HiPlusSm className="h-6 w-6 text-red-700" />
+          </button>
         </div>
       </div>
     </div>
