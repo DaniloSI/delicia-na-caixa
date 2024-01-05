@@ -30,7 +30,7 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
         </h5>
         <p className="mb-1 font-normal text-gray-700 ">{description}</p>
         <div className="flex gap-4">
-          <button onClick={handleSubtract}>
+          <button type="button" onClick={handleSubtract}>
             <HiMinusSm className="h-6 w-6 text-red-700" />
           </button>
           <Controller
@@ -47,7 +47,7 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
             control={control}
             defaultValue=""
           />
-          <button onClick={handleAdd}>
+          <button type="button" onClick={handleAdd}>
             <HiPlusSm className="h-6 w-6 text-red-700" />
           </button>
         </div>
