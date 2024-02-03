@@ -3,6 +3,7 @@
 import useStepValidations from "@/app/hooks/useStepValidations";
 import StepperContext from "@/contexts/stepper";
 import { getTotal, getTotalPrice } from "@/utils/calc";
+import { formatPrice } from "@/utils/format";
 import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
@@ -46,9 +47,16 @@ export default function Resume() {
   return (
     <div className="fixed right-0 bottom-0 z-10 bg-white w-full px-4 pb-4 pt-2 shadow-[0_0_10px_rgba(0,0,0,.1)]">
       <div className="max-w-96 m-auto">
-        <div className="pb-2 pr-4 flex flex-col text-end text-gray-700">
-          <p>Quantidade: {amount}</p>
-          <p>Subtotal: {subTotal}</p>
+        <div className="flex justify-between items-stretch text-sm text-gray-500 pb-3 pt-2 px-2">
+          <div className="flex flex-col">
+            <p>Preço do cento: {formatPrice(80, { minimumFractionDigits: 0 })}</p>
+            <p>Peso da unidade: {20}g</p>
+          </div>
+
+          <div className="flex flex-col">
+            <p>Quantidade: {amount}</p>
+            <p>Subtotal: {subTotal}</p>
+          </div>
         </div>
 
         <div className="flex justify-end gap-2">

@@ -1,1 +1,1 @@
-export const formatPrice = (price) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price)
+export const formatPrice = (price, options) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', ...options }).format(price)
