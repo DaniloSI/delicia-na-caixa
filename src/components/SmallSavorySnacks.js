@@ -1,29 +1,35 @@
-'use client'
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import { Controller, useFormContext } from 'react-hook-form';
-import TextInput from './TextInput';
-import { Button } from 'flowbite-react';
-import { HiMinusSm, HiPlusSm } from 'react-icons/hi';
+import { Controller, useFormContext } from "react-hook-form";
+import TextInput from "./TextInput";
+import { HiMinusSm, HiPlusSm } from "react-icons/hi";
+import { CldImage } from "next-cloudinary";
 
 const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
-  const { control, register, setValue, getValues } = useFormContext()
-  const fieldName = `snacks.${namePlural}`
+  const { control, setValue, getValues } = useFormContext();
+  const fieldName = `snacks.${namePlural}`;
 
   const handleAdd = () => {
-    const value = Number(getValues(fieldName))
-    setValue(fieldName, value + 10)
-  }
+    const value = Number(getValues(fieldName));
+    setValue(fieldName, value + 10);
+  };
 
   const handleSubtract = () => {
-    const value = Number(getValues(fieldName))
-    setValue(fieldName, value > 10 ? value - 10 : '')
-  }
+    const value = Number(getValues(fieldName));
+    setValue(fieldName, value > 10 ? value - 10 : "");
+  };
 
   return (
     <div className="flex items-start bg-white flex-row max-w-xl">
-      <img className="object-cover w-auto rounded-lg h-24" src={image} alt={name} />
+      <CldImage
+        className="object-cover w-auto rounded-lg h-24"
+        src={"delicia-na-caixa/" + image}
+        width="600"
+        height="600"
+        alt={name}
+      />
       <div className="flex flex-col grow justify-between px-4 leading-normal">
         <h5 className="text-xl font-bold tracking-tight text-gray-900 ">
           {name}
@@ -54,6 +60,6 @@ const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
       </div>
     </div>
   );
-}
+};
 
 export default SmallSavorySnacks;
