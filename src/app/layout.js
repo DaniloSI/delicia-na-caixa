@@ -31,7 +31,7 @@ const theme = {
 export const revalidate = 60 * 15;
 
 export default async function RootLayout({ children }) {
-  const snacks = (await getSnacks()).record
+  const snacks = (await getSnacks()).record.filter((snack) => snack.active)
 
   const store = {
     snacks
