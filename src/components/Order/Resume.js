@@ -21,9 +21,11 @@ export default function Resume() {
     addStepDone,
     removeStepDone,
   } = useContext(StepperContext);
-  const { snacksStore, centPriceStore } = useContext(StoreContext);
+  const { snacksStore, centPriceStore, otherSettingsStore } =
+    useContext(StoreContext);
   const { watch } = useFormContext();
   const { validateCurrentStep } = useStepValidations();
+  const { unitWeightInGrams } = otherSettingsStore;
 
   const snacks = watch("snacks");
   const amount = getTotal(snacks);
@@ -75,7 +77,8 @@ export default function Resume() {
               <span className="text-xs">(cento)</span>
             </p>
             <p>
-              Peso da unidade: 20<span className="text-xs">g</span>
+              Peso da unidade: {unitWeightInGrams}
+              <span className="text-xs">g</span>
             </p>
           </div>
 
