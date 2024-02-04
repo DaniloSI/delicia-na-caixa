@@ -50,8 +50,9 @@ export default function Resume() {
       <div className="max-w-96 m-auto">
         <div className="flex justify-between items-stretch text-sm text-gray-500 pb-3 pt-2 px-2">
           <div className="flex flex-col">
-            <p>Preço do cento: {formatPrice(80, { minimumFractionDigits: 0 })}</p>
-            <p>Peso da unidade: {20}g</p>
+            <p>Salgado: {formatPrice(80, { minimumFractionDigits: 0 })} <span className="text-xs">(cento)</span></p>
+            <p>Mini-churros: {formatPrice(70, { minimumFractionDigits: 0 })} <span className="text-xs">(cento)</span></p>
+            <p>Peso da unidade: {20}<span className="text-xs">g</span></p>
           </div>
 
           <div className="flex flex-col">
@@ -66,7 +67,7 @@ export default function Resume() {
             size="sm"
             outline
             color="light"
-            className={active === 0 ? 'invisible' : ''}
+            className={`w-1/2 ${active === 0 ? 'invisible' : ''}`}
             onClick={handlePrev}
           >
             Voltar
