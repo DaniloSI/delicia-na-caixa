@@ -5,9 +5,9 @@ import { Flowbite } from "flowbite-react";
 
 import { GoogleTagManager } from '@next/third-parties/google'
 
-import snacksMock from '@/__mocks__/snacks'
-import { useMemo } from "react";
 import StoreProvider from "./providers/store-provider";
+
+import { getSnacks } from "@/services/snacks";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,10 +25,14 @@ const theme = {
   },
 };
 
-export default function RootLayout({ children }) {
-  const store = useMemo(() => ({
-    snacks: snacksMock,
-  }), []);
+export const revalidate = 60 * 15;
+
+export default async function RootLayout({ children }) {
+  const snacks = (await getSnacks()).record
+
+  const store = {
+    snacks
+  };
 
   return (
     <html lang="pt-BR">
