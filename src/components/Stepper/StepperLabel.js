@@ -3,7 +3,7 @@
 import React, { useContext, useEffect } from "react";
 
 import StepperContext from "@/contexts/stepper";
-import useStepValidations from "@/app/hooks/useStepValidations";
+import useStepValidations from "@/hooks/useStepValidations";
 import { toast } from "react-toastify";
 
 const DoneIcon = () => (

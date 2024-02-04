@@ -4,7 +4,7 @@ import { Flowbite } from "flowbite-react";
 
 import { GoogleTagManager } from '@next/third-parties/google'
 
-import StoreProvider from "./providers/store-provider";
+import StoreProvider from "../providers/store-provider";
 
 import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 

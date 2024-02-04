@@ -1,6 +1,6 @@
 "use client";
 
-import useStepValidations from "@/app/hooks/useStepValidations";
+import useStepValidations from "@/hooks/useStepValidations";
 import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
 import { getTotal, getTotalPrice } from "@/utils/calc";
