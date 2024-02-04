@@ -5,6 +5,10 @@ import { Flowbite } from "flowbite-react";
 
 import { GoogleTagManager } from '@next/third-parties/google'
 
+import snacksMock from '@/__mocks__/snacks'
+import { useMemo } from "react";
+import StoreProvider from "./providers/store-provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,10 +26,18 @@ const theme = {
 };
 
 export default function RootLayout({ children }) {
+  const store = useMemo(() => ({
+    snacks: snacksMock,
+  }), []);
+
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <Flowbite theme={{ theme }}>{children}</Flowbite>
+        <Flowbite theme={{ theme }}>
+          <StoreProvider value={store}>
+          {children}
+          </StoreProvider>
+        </Flowbite>
         <Toaster position="bottom-center" />
       </body>
       <GoogleTagManager gtmId="G-ZYM0MPKM3D" />
