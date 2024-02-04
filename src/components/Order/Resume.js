@@ -7,8 +7,9 @@ import { formatPrice } from "@/utils/format";
 import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-import toast from "react-hot-toast";
 import { FiSend } from 'react-icons/fi';
+
+import { toast } from 'react-toastify';
 
 export default function Resume() {
   const { active, isLastActive, nextStep, prevStep, addStepDone, removeStepDone } = useContext(StepperContext);

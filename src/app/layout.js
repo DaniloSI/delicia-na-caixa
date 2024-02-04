@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
 import { Flowbite } from "flowbite-react";
 
 import { GoogleTagManager } from '@next/third-parties/google'
@@ -8,6 +7,10 @@ import { GoogleTagManager } from '@next/third-parties/google'
 import StoreProvider from "./providers/store-provider";
 
 import { getSnacks } from "@/services/snacks";
+
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +45,7 @@ export default async function RootLayout({ children }) {
           {children}
           </StoreProvider>
         </Flowbite>
-        <Toaster position="bottom-center" />
+        <ToastContainer theme="colored" />
       </body>
       <GoogleTagManager gtmId="G-ZYM0MPKM3D" />
     </html>

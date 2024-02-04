@@ -9,7 +9,7 @@ import StepperContainer from "@/components/Stepper/StepperContainer";
 
 import StepperItem from "@/components/Stepper/StepperItem";
 import Resume from "@/components/Order/Resume";
-import { Controller, FormProvider, get, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import SmallSavorySnacks from "@/components/SmallSavorySnacks";
 import getMessageFromTemplate from "@/utils/getMessageFromTemplate";
 import { encode } from "urlencode";
@@ -21,6 +21,7 @@ import TextInput from "@/components/TextInput";
 import { HiOutlineClock } from "react-icons/hi";
 import { getTotal } from "@/utils/calc";
 import StoreContext from "@/contexts/store";
+import MinimumQuantity from "@/components/MiniumQuantity";
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
 
@@ -99,6 +100,7 @@ export default function Home() {
         height={50}
         className="place-self-center"
         alt="Logo delícia na caixa"
+        priority
       />
 
       <FormProvider {...methods}>
@@ -113,6 +115,7 @@ export default function Home() {
             <Divider />
 
             <StepperItem step={0}>
+              <MinimumQuantity />
               {snacksList.map(
                 ({ name, namePlural, description, image }, index, list) => (
                   <React.Fragment key={name}>
