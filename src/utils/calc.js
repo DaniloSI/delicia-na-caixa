@@ -1,7 +1,19 @@
-import { formatPrice } from "./format"
+import { formatPrice } from "./format";
 
-export const getTotal = snacks => Object.values(snacks || {}).reduce((p, n) => p + Math.abs(parseInt(n || '0')), 0)
+export const getTotal = (snacks) => {
+  return Object.values(snacks || {}).reduce(
+    (p, n) => p + Math.abs(parseInt(n || "0")),
+    0
+  );
+};
 
-const CENT_PRICE = 80
+export const getTotalPrice = (snacks, snacksStore) => {
+  const total = Object.entries(snacks)
+    .map(
+      ([namePlural, quantity]) =>
+        (quantity * (snacksStore?.find((s) => s.namePlural === namePlural).centPrice ?? 0)) /
+        100
+    ).reduce((p, c) => p + c, 0);
 
-export const getTotalPrice = snacks => formatPrice((getTotal(snacks) / 100) * CENT_PRICE)
+  return formatPrice(total);
+};

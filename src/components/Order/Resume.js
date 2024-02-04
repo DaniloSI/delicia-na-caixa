@@ -2,6 +2,7 @@
 
 import useStepValidations from "@/app/hooks/useStepValidations";
 import StepperContext from "@/contexts/stepper";
+import StoreContext from "@/contexts/store";
 import { getTotal, getTotalPrice } from "@/utils/calc";
 import { formatPrice } from "@/utils/format";
 import { Button } from "flowbite-react";
@@ -13,12 +14,13 @@ import { toast } from 'react-toastify';
 
 export default function Resume() {
   const { active, isLastActive, nextStep, prevStep, addStepDone, removeStepDone } = useContext(StepperContext);
+  const { snacks: snacksStore } = useContext(StoreContext);
   const { watch } = useFormContext()
   const { validateCurrentStep } = useStepValidations()
 
   const snacks = watch('snacks')
   const amount = getTotal(snacks)
-  const subTotal = getTotalPrice(snacks)
+  const subTotal = getTotalPrice(snacks, snacksStore)
 
   const btnLabelNext = ['Ir para a entrega', 'Ir para a finalização', 'Enviar pedido'][active]
 

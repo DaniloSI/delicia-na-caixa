@@ -49,7 +49,7 @@ const datePickerTheme = {
 };
 
 export default function Home() {
-  const { snacks: snacksList } = useContext(StoreContext);
+  const { snacks: snacksStore } = useContext(StoreContext);
   const minDate = useMemo(() => {
     const date = new Date();
     date.setDate(date.getDate() + 1);
@@ -57,7 +57,7 @@ export default function Home() {
   }, []);
   const methods = useForm({
     defaultValues: {
-      snacks: Object.fromEntries(snacksList.map((snack) => [snack.name, "0"])),
+      snacks: {},
       reception: "retire",
       cep: "",
       date: minDate,
@@ -89,8 +89,8 @@ export default function Home() {
   }, [cep]);
 
   const summary = useMemo(
-    () => getMessageFromTemplate(all).trim().replaceAll("*", ""),
-    [all]
+    () => getMessageFromTemplate(all, snacksStore).trim().replaceAll("*", ""),
+    [all, snacksStore]
   );
 
   return (
@@ -116,7 +116,7 @@ export default function Home() {
 
             <StepperItem step={0}>
               <MinimumQuantity />
-              {snacksList.map(
+              {snacksStore.map(
                 ({ name, namePlural, description, image }, index, list) => (
                   <React.Fragment key={name}>
                     <SmallSavorySnacks
