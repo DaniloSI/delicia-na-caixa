@@ -49,7 +49,7 @@ const datePickerTheme = {
 };
 
 export default function Home() {
-  const { snacks: snacksStore } = useContext(StoreContext);
+  const { snacksStore } = useContext(StoreContext);
   const minDate = useMemo(() => {
     const date = new Date();
     date.setDate(date.getDate() + 1);

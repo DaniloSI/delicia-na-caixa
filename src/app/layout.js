@@ -6,7 +6,7 @@ import { GoogleTagManager } from '@next/third-parties/google'
 
 import StoreProvider from "./providers/store-provider";
 
-import { getSnacks } from "@/services/snacks";
+import { getCentPrice, getSnacks } from "@/services/store";
 
 import { ToastContainer } from 'react-toastify';
 
@@ -31,10 +31,15 @@ const theme = {
 export const revalidate = 60 * 15;
 
 export default async function RootLayout({ children }) {
-  const snacks = (await getSnacks()).record.filter((snack) => snack.active)
+  const snacksStore = await getSnacks()
+  const centPriceStore = await getCentPrice()
 
   const store = {
-    snacks
+    snacksStore: snacksStore.map((snack) => ({
+      ...snack,
+      centPrice: centPriceStore.get(snack.type),
+    })),
+    centPriceStore,
   };
 
   return (
