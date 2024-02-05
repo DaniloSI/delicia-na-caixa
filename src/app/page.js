@@ -94,10 +94,10 @@ export default function Home() {
   );
 
   return (
-    <main className="flex flex-col justify-items-center gap-6 min-h-screen py-8 px-4 md:max-w-96 m-auto">
+    <main className="flex flex-col justify-items-center gap-4 min-h-screen py-4 px-4 md:max-w-96 m-auto">
       <Image
         src={Logo}
-        height={50}
+        height={45}
         className="place-self-center"
         alt="Logo delícia na caixa"
         priority

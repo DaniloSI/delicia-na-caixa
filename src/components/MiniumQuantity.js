@@ -12,7 +12,7 @@ const MinimumQuantity = () => {
   return (
     !!minimumQuantity && (
       <Banner>
-        <div className="flex w-full items-center justify-between border-b border-gray-200 bg-gray-50 py-2 mb-5 text-gray-500">
+        <div className="flex w-full items-center justify-between border-b border-gray-200 bg-gray-50 py mb-5 text-gray-500">
           <div className="mx-auto flex w-full items-center sm:w-auto">
             <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-full">
               <HiOutlineInformationCircle className="h-4 w-4" />
