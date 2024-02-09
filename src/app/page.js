@@ -51,7 +51,10 @@ const datePickerTheme = {
 };
 
 export default function Home() {
-  const { snacksStore, otherSettingsStore: { whatsAppNumber } } = useContext(StoreContext);
+  const {
+    snacksStore,
+    otherSettingsStore: { whatsAppNumber },
+  } = useContext(StoreContext);
   const minDate = useMemo(() => {
     const date = new Date();
     date.setDate(date.getDate() + 1);
@@ -137,14 +140,14 @@ export default function Home() {
               )}
             </StepperItem>
 
-            <StepperItem step={1} className="flex flex-col gap-8">
+            <StepperItem step={1} className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <div>
                   <label
                     htmlFor="deliveryDate"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Data
+                    Data da entrega/retirada
                   </label>
                   <Datepicker
                     language="pt-BR"
@@ -159,7 +162,7 @@ export default function Home() {
                 </div>
 
                 <div className="text-start">
-                  <Label htmlFor="time" value="Horário" />
+                  <Label htmlFor="time" value="Horário da entrega/retirada" />
                   <TextInput
                     id="time"
                     type="time"
@@ -194,14 +197,13 @@ export default function Home() {
                       className="font-medium text-gray-900"
                     >
                       Retirar
+                      <p className="text-xs font-normal text-gray-500">
+                        Sem custo com taxa de entrega
+                        <br />
+                        Retirar em: Rua Amaralina, Nº 22, Morada de Laranjeiras,
+                        Serra, ES
+                      </p>
                     </label>
-                    <p className="text-xs font-normal text-gray-500">
-                      Sem custo com taxa de entrega
-                    </p>
-                    <p className="text-xs font-normal text-gray-500">
-                      Retirar em: Rua Amaralina, Nº 22, Morada de Laranjeiras,
-                      Serra, ES
-                    </p>
                   </div>
                 </div>
 
@@ -223,14 +225,17 @@ export default function Home() {
                       className="font-medium text-gray-900"
                     >
                       Entrega
+                      <p className="text-xs font-normal text-gray-500">
+                        Receber em sua casa ou no local da festa.
+                        <br />
+                        Ao selecionar esta opção, enviaremos o valor da taxa de
+                        entrega pelo WhatsApp após recebermos o pedido.
+                        <br />
+                        Caso mude de ideia e opte pela retirada, basta nos
+                        informar pelo WhatsApp com pelo menos 1 dia de
+                        antecedência.
+                      </p>
                     </label>
-                    <p className="text-xs font-normal text-gray-500">
-                      Receber em sua casa ou no local da festa.
-                    </p>
-                    <p className="text-xs font-normal text-gray-500">
-                      Ao selecionar esta opção, pode ser que entremos em contato
-                      com você para combinar sobre o valor da entrega.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -308,7 +313,7 @@ export default function Home() {
               </div>
             </StepperItem>
 
-            <StepperItem step={2} className="flex flex-col gap-8">
+            <StepperItem step={2} className="flex flex-col gap-4">
               <div className="flex flex-col gap-4">
                 <Label
                   htmlFor="payment"
@@ -332,8 +337,9 @@ export default function Home() {
               <div className="flex flex-col gap-1">
                 <h6 className="text-lg font-bold">Enviar o pedido</h6>
                 <p className="text-base">
-                  Clique no botão &quot;Enviar pedido&quot; abaixo para enviar o
-                  pedido para a loja por meio do WhatsApp.
+                  Confira abaixo se o pedido está correto e, em seguida, clique
+                  no botão &quot;Enviar pedido&quot; abaixo para enviar o pedido
+                  para a loja por meio do WhatsApp.
                 </p>
               </div>
 
