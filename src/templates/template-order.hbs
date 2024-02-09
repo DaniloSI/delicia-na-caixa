@@ -1,0 +1,21 @@
+#### Pedido ####
+
+📝 Pedido realizado em: {{dateOrder}}
+
+------- Itens do Pedido -------
+
+{{#each snacks}}
+  {{#if this}}
+  - {{this}} {{@key}}
+  {{/if}}
+{{/each}}
+
+-------------------------------
+
+🗓️ Data e horário da *{{> partialDeliveryOrPickup}}*: {{fullDate date}} às {{time}}
+
+📍 Endereço de *{{> partialDeliveryOrPickup}}*: {{#if isDelivery}}{{> partialAddress address}}{{else}}Rua Amaralina, Nº 22, Bairro: Morada de Laranjeiras, Serra-ES, CEP: 29166-822{{/if}}
+
+Quantidade total: {{totalQuantity snacks}}
+{{#if isDelivery}}Subtotal{{else}}Total{{/if}}: {{totalPrice snacks snacksStore}}
+Forma de pagamento: {{payment}}

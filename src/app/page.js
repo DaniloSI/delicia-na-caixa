@@ -11,7 +11,7 @@ import StepperItem from "@/components/Stepper/StepperItem";
 import Resume from "@/components/Order/Resume";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import SmallSavorySnacks from "@/components/SmallSavorySnacks";
-import getMessageFromTemplate from "@/utils/getMessageFromTemplate";
+import getOrderSummary from "@/utils/getOrderSummary";
 import { encode } from "urlencode";
 
 import { Accordion, Datepicker, Label, Select } from "flowbite-react";
@@ -22,6 +22,8 @@ import { HiOutlineClock } from "react-icons/hi";
 import { getTotal } from "@/utils/calc";
 import StoreContext from "@/contexts/store";
 import MinimumQuantity from "@/components/MiniumQuantity";
+
+import getOrderMessage from "@/utils/getOrderMessage";
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
 
@@ -67,6 +69,9 @@ export default function Home() {
   const { control, watch, setValue } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
+    const message = encode(getOrderMessage(data, snacksStore));
+
+    sendRef.current.href = `whatsapp://send?phone=5527996324590&text=${message}`;
     sendRef.current.click();
   });
 
@@ -89,7 +94,7 @@ export default function Home() {
   }, [cep]);
 
   const summary = useMemo(
-    () => getMessageFromTemplate(all, snacksStore).trim().replaceAll("*", ""),
+    () => getOrderSummary(all, snacksStore).trim().replaceAll("*", ""),
     [all, snacksStore]
   );
 
@@ -341,13 +346,7 @@ export default function Home() {
                 </Accordion.Panel>
               </Accordion>
 
-              <a
-                ref={sendRef}
-                href={`whatsapp://send?phone=5527996324590&text=${encode(
-                  summary
-                )}`}
-                className="hidden h-0 w-0"
-              >
+              <a ref={sendRef} href="#" className="hidden h-0 w-0">
                 Send
               </a>
             </StepperItem>

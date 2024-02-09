@@ -17,7 +17,7 @@ const formatDate = (date) => new Intl.DateTimeFormat('pt-BR', {
 
 const isDelivery = (reception) => reception === 'delivery'
 
-const getMessageFromTemplate = ({ snacks, reception, date, time, payment = '', address }, snacksStore) => `
+const getOrderSummary = ({ snacks, reception, date, time, payment = '', address }, snacksStore) => `
 Pedido:
 ${getOrderList(snacks)}
 Quantidade total: ${getTotal(snacks)}
@@ -28,4 +28,4 @@ Data e horário da *${isDelivery(reception) ? 'entrega': 'retirada'}*: ${formatD
 `;
 
 
-export default getMessageFromTemplate;
+export default getOrderSummary;

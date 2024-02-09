@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  transpilePackages: ["raw-loader"],
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      handlebars: "handlebars/dist/handlebars.js",
+    };
 
-module.exports = nextConfig
+    return config;
+  },
+};
+
+module.exports = nextConfig;
