@@ -51,7 +51,7 @@ const datePickerTheme = {
 };
 
 export default function Home() {
-  const { snacksStore } = useContext(StoreContext);
+  const { snacksStore, otherSettingsStore: { whatsAppNumber } } = useContext(StoreContext);
   const minDate = useMemo(() => {
     const date = new Date();
     date.setDate(date.getDate() + 1);
@@ -71,7 +71,7 @@ export default function Home() {
   const onSubmit = methods.handleSubmit((data) => {
     const message = encode(getOrderMessage(data, snacksStore));
 
-    sendRef.current.href = `whatsapp://send?phone=5527996324590&text=${message}`;
+    sendRef.current.href = `whatsapp://send?phone=55${whatsAppNumber}&text=${message}`;
     sendRef.current.click();
   });
 
