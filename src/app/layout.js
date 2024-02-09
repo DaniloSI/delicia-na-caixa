@@ -2,15 +2,15 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Flowbite } from "flowbite-react";
 
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import StoreProvider from "../providers/store-provider";
 
 import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +31,9 @@ const theme = {
 export const revalidate = 60 * 15;
 
 export default async function RootLayout({ children }) {
-  const snacksStore = await getSnacks()
-  const centPriceStore = await getCentPrice()
-  const otherSettingsStore = await getOtherSettings()
+  const snacksStore = await getSnacks();
+  const centPriceStore = await getCentPrice();
+  const otherSettingsStore = await getOtherSettings();
 
   const store = {
     snacksStore: snacksStore.map((snack) => ({
@@ -48,9 +48,7 @@ export default async function RootLayout({ children }) {
     <html lang="pt-BR">
       <body className={inter.className}>
         <Flowbite theme={{ theme }}>
-          <StoreProvider value={store}>
-          {children}
-          </StoreProvider>
+          <StoreProvider value={store}>{children}</StoreProvider>
         </Flowbite>
         <ToastContainer theme="colored" />
       </body>

@@ -1,33 +1,41 @@
 import { jsonBinRequest } from "@/utils/jsonBinRequest";
 import { cache } from "react";
+import redisCache, { ONE_DAY_IN_MILLISECONDS } from "./redis";
 
-let cacheSnacks;
-let cacheCentPrice;
-let cacheOtherSettings;
+const getAndUpdateCache = async ({ cacheKey, jsonBinId }) => {
+  let value = await redisCache.get(cacheKey);
 
-export const getSnacks = cache(async () => {
-  if (!cacheSnacks) {
-    cacheSnacks = (await jsonBinRequest("65bfb3e41f5677401f2ab8bb")).filter(
-      (snack) => snack.active
-    );
+  if (!value) {
+    value = await jsonBinRequest(jsonBinId);
+    await redisCache.set(cacheKey, value, ONE_DAY_IN_MILLISECONDS);
   }
 
-  return cacheSnacks;
+  return value;
+};
+
+export const getSnacks = cache(async () => {
+  const snacks = await getAndUpdateCache({
+    cacheKey: "snacks",
+    jsonBinId: "65bfb3e41f5677401f2ab8bb",
+  });
+
+  return snacks.filter((snack) => snack.active);
 });
 
 export const getCentPrice = cache(async () => {
-  if (!cacheCentPrice) {
-    const centPrice = await jsonBinRequest("65bfac54266cfc3fde85a607");
-    cacheCentPrice = new Map(Object.entries(centPrice));
-  }
+  const centPrice = await getAndUpdateCache({
+    cacheKey: "cent-price",
+    jsonBinId: "65bfac54266cfc3fde85a607",
+  });
 
-  return cacheCentPrice;
+  return new Map(Object.entries(centPrice));
 });
 
 export const getOtherSettings = cache(async () => {
-  if (!cacheOtherSettings) {
-    cacheOtherSettings = await jsonBinRequest("65bfb3d6dc74654018a02975");
-  }
+  const otherSettings = await getAndUpdateCache({
+    cacheKey: "other-settings",
+    jsonBinId: "65bfb3d6dc74654018a02975",
+  });
 
-  return cacheOtherSettings;
+  return otherSettings;
 });
