@@ -28,6 +28,7 @@ export default function Resume() {
   const { unitWeightInGrams } = otherSettingsStore;
 
   const snacks = watch("snacks");
+  const reception = watch("reception");
   const amount = getTotal(snacks);
   const subTotal = getTotalPrice(snacks, snacksStore);
 
@@ -84,7 +85,7 @@ export default function Resume() {
 
           <div className="flex flex-col">
             <p>Quantidade: {amount}</p>
-            <p>Subtotal: {subTotal}</p>
+            <p>{reception === 'retire' ? 'Total' : 'Subtotal'}: {subTotal}</p>
           </div>
         </div>
 
