@@ -21,7 +21,7 @@ export default function Resume() {
     addStepDone,
     removeStepDone,
   } = useContext(StepperContext);
-  const { snacksStore, centPriceStore, otherSettingsStore } =
+  const { activeSnacks, centPriceStore, otherSettingsStore } =
     useContext(StoreContext);
   const { watch } = useFormContext();
   const { validateCurrentStep } = useStepValidations();
@@ -30,7 +30,7 @@ export default function Resume() {
   const snacks = watch("snacks");
   const reception = watch("reception");
   const amount = getTotal(snacks);
-  const subTotal = getTotalPrice(snacks, snacksStore);
+  const subTotal = getTotalPrice(snacks, activeSnacks);
 
   const btnLabelNext = [
     "Ir para a entrega",

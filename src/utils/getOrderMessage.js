@@ -34,12 +34,12 @@ const formatDateOrder = (date) =>
     hour12: false,
   }).format(date);
 
-const getOrderMessage = (order, snacksStore) => {
+const getOrderMessage = (order, activeSnacks) => {
   const template = Handlebars.compile(templateOrder);
   const dateOrder = formatDateOrder(new Date());
 
   const data = Handlebars.Utils.extend(order, {
-    snacksStore,
+    activeSnacks,
     dateOrder,
     isDelivery: order.reception === "delivery",
   });

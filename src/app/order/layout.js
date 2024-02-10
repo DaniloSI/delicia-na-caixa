@@ -18,7 +18,7 @@ import { getTomorrowDate } from "@/utils/date";
 
 export default function OrderLayout({ choices, delivery, completion }) {
   const {
-    snacksStore,
+    activeSnacks,
     otherSettingsStore: { whatsAppNumber },
   } = useContext(StoreContext);
   const methods = useForm({
@@ -33,7 +33,7 @@ export default function OrderLayout({ choices, delivery, completion }) {
   const { watch } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
-    const message = encode(getOrderMessage(data, snacksStore));
+    const message = encode(getOrderMessage(data, activeSnacks));
 
     sendRef.current.href = `whatsapp://send?phone=55${whatsAppNumber}&text=${message}`;
     sendRef.current.click();

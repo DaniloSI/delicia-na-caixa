@@ -7,11 +7,11 @@ export const getTotal = (snacks) => {
   );
 };
 
-export const getTotalPrice = (snacks, snacksStore) => {
+export const getTotalPrice = (snacks, activeSnacks) => {
   const total = Object.entries(snacks)
     .map(
       ([namePlural, quantity]) =>
-        (quantity * (snacksStore?.find((s) => s.namePlural === namePlural).centPrice ?? 0)) /
+        (quantity * (activeSnacks?.find((s) => s.namePlural === namePlural).centPrice ?? 0)) /
         100
     ).reduce((p, c) => p + c, 0);
 

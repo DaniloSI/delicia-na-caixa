@@ -19,7 +19,7 @@ export const getSnacks = cache(async () => {
     jsonBinId: "65bfb3e41f5677401f2ab8bb",
   });
 
-  return snacks.filter((snack) => snack.active);
+  return snacks;
 });
 
 export const getCentPrice = cache(async () => {

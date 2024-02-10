@@ -35,12 +35,15 @@ export default async function RootLayout({ children }) {
   ]);
 
   const store = {
-    snacksStore: snacksStore.map((snack) => ({
-      ...snack,
-      centPrice: centPriceStore.get(snack.type),
-    })),
+    snacksStore,
     centPriceStore,
     otherSettingsStore,
+    activeSnacks: snacksStore
+      .filter((snack) => snack.active)
+      .map((snack) => ({
+        ...snack,
+        centPrice: centPriceStore.get(snack.type),
+      })),
   };
 
   return (

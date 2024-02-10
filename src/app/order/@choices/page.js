@@ -9,12 +9,12 @@ import Divider from "@/components/Divider";
 import StoreContext from "@/contexts/store";
 
 export default function Choices() {
-  const { snacksStore } = useContext(StoreContext);
+  const { activeSnacks } = useContext(StoreContext);
 
   return (
     <>
       <MinimumQuantity />
-      {snacksStore.map(
+      {activeSnacks.map(
         ({ name, namePlural, description, image }, index, list) => (
           <React.Fragment key={name}>
             <SmallSavorySnacks

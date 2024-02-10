@@ -10,14 +10,14 @@ import { Accordion, Label, Select } from "flowbite-react";
 import StoreContext from "@/contexts/store";
 
 export default function Completion() {
-  const { snacksStore } = useContext(StoreContext);
+  const { activeSnacks } = useContext(StoreContext);
   const { watch, setValue } = useFormContext();
 
   const all = watch();
 
   const summary = useMemo(
-    () => getOrderSummary(all, snacksStore).trim().replaceAll("*", ""),
-    [all, snacksStore]
+    () => getOrderSummary(all, activeSnacks).trim().replaceAll("*", ""),
+    [all, activeSnacks]
   );
 
   return (
