@@ -18,11 +18,19 @@ export const datePickerTheme = {
   ),
 };
 
+const colorPrimary =
+  "text-white bg-red-700 enabled:hover:bg-red-800 focus:ring-red-400";
+
 const theme = {
   button: {
-    color: {
-      primary:
-        "text-white bg-red-700 enabled:hover:bg-red-800 focus:ring-red-400",
+    color: { primary: colorPrimary },
+  },
+  toggleSwitch: {
+    toggle: {
+      base: 'toggle-bg rounded-full border',
+      checked: {
+        color: { primary: colorPrimary },
+      },
     },
   },
 };
