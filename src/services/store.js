@@ -1,13 +1,13 @@
 import { jsonBinRequest } from "@/utils/jsonBinRequest";
 import { cache } from "react";
-import redisCache, { ONE_DAY_IN_MILLISECONDS } from "./redis";
+import { read, write } from "./dao";
 
 const getAndUpdateCache = async ({ cacheKey, jsonBinId }) => {
-  let value = await redisCache.get(cacheKey);
+  let value = await read(cacheKey);
 
   if (!value) {
     value = await jsonBinRequest(jsonBinId);
-    await redisCache.set(cacheKey, value, ONE_DAY_IN_MILLISECONDS);
+    await write(cacheKey, value)
   }
 
   return value;

@@ -15,6 +15,7 @@
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "handlebars": "^4.7.8",
+    "lowdb": "^7.0.1",
     "next": "14.1.0",
     "next-cloudinary": "^5.20.0",
     "react": "^18",
