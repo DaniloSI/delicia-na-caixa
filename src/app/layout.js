@@ -16,6 +16,7 @@ import Image from "next/image";
 import Logo from "@/assets/logo.png";
 
 import "react-toastify/dist/ReactToastify.css";
+import { GTM_ID, IS_DEVELOPMENT } from "@/utils/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,9 +28,11 @@ export const metadata = {
 export const revalidate = 60 * 15;
 
 export default async function RootLayout({ children }) {
-  const snacksStore = await getSnacks();
-  const centPriceStore = await getCentPrice();
-  const otherSettingsStore = await getOtherSettings();
+  const [snacksStore, centPriceStore, otherSettingsStore] = await Promise.all([
+    getSnacks(),
+    getCentPrice(),
+    getOtherSettings(),
+  ]);
 
   const store = {
     snacksStore: snacksStore.map((snack) => ({
@@ -59,7 +62,7 @@ export default async function RootLayout({ children }) {
         </Flowbite>
         <ToastContainer theme="colored" />
       </body>
-      <GoogleTagManager gtmId="G-ZYM0MPKM3D" />
+      {!IS_DEVELOPMENT && <GoogleTagManager gtmId={GTM_ID} />}
     </html>
   );
 }
