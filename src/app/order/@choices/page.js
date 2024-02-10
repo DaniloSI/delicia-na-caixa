@@ -1,0 +1,33 @@
+"use client";
+
+import React, { useContext } from "react";
+
+import SmallSavorySnacks from "@/components/SmallSavorySnacks";
+
+import MinimumQuantity from "@/components/MiniumQuantity";
+import Divider from "@/components/Divider";
+import StoreContext from "@/contexts/store";
+
+export default function Choices() {
+  const { snacksStore } = useContext(StoreContext);
+
+  return (
+    <>
+      <MinimumQuantity />
+      {snacksStore.map(
+        ({ name, namePlural, description, image }, index, list) => (
+          <React.Fragment key={name}>
+            <SmallSavorySnacks
+              name={name}
+              namePlural={namePlural}
+              description={description}
+              image={image}
+            />
+
+            {index < list.length - 1 && <Divider />}
+          </React.Fragment>
+        )
+      )}
+    </>
+  );
+}

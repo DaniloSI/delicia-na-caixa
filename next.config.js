@@ -9,6 +9,23 @@ const nextConfig = {
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/pedido',
+        destination: '/order',
+      },
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/pedido',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;
