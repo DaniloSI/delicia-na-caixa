@@ -11,21 +11,13 @@ import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import theme from "@/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Delícia na caixa - fazer pedido",
   description: "Fazer pedido de salgados para festas e eventos",
-};
-
-const theme = {
-  button: {
-    color: {
-      primary:
-        "text-white bg-red-700 enabled:hover:bg-red-800 focus:ring-red-400",
-    },
-  },
 };
 
 export const revalidate = 60 * 15;

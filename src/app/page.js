@@ -24,31 +24,9 @@ import StoreContext from "@/contexts/store";
 import MinimumQuantity from "@/components/MiniumQuantity";
 
 import getOrderMessage from "@/utils/getOrderMessage";
+import { datePickerTheme } from "@/theme";
 
 const Divider = () => <hr className="h-px my-4 bg-gray-200 border-0" />;
-
-const btnThemePrimary = "bg-red-700 hover:bg-red-800 text-white";
-const datePickerTheme = {
-  popup: {
-    footer: {
-      button: {
-        today: btnThemePrimary,
-      },
-    },
-  },
-  views: Object.fromEntries(
-    ["days", "months", "years", "decades"].map((view) => [
-      view,
-      {
-        items: {
-          item: {
-            selected: btnThemePrimary,
-          },
-        },
-      },
-    ])
-  ),
-};
 
 export default function Home() {
   const {
