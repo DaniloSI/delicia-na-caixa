@@ -10,8 +10,12 @@ import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 
 import { ToastContainer } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 import theme from "@/theme";
+
+import Image from "next/image";
+import Logo from "@/assets/logo.png";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +44,18 @@ export default async function RootLayout({ children }) {
     <html lang="pt-BR">
       <body className={inter.className}>
         <Flowbite theme={{ theme }}>
-          <StoreProvider value={store}>{children}</StoreProvider>
+          <StoreProvider value={store}>
+            <main className="flex flex-col justify-items-center gap-6 min-h-screen py-5 px-4 md:max-w-96 m-auto">
+              <Image
+                src={Logo}
+                height={50}
+                className="place-self-center"
+                alt="Logo delícia na caixa"
+                priority
+              />
+              {children}
+            </main>
+          </StoreProvider>
         </Flowbite>
         <ToastContainer theme="colored" />
       </body>
