@@ -10,6 +10,7 @@ import { HiCurrencyDollar, HiHashtag } from "react-icons/hi";
 import { FaBalanceScale } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import MaskedInput from "@/components/MaskedInput";
+import FieldContainer from "./components/FieldContainer";
 
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
@@ -38,11 +39,11 @@ function Admin() {
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="grid grid-cols-2 grid-flow-row gap-4">
-            <div className="flex flex-col col-span-2 gap-2">
-              <Label
-                htmlFor="otherSettingsWhatsAppNumber"
-                value="Número do WhatsApp"
-              />
+            <FieldContainer
+              id="otherSettingsWhatsAppNumber"
+              label="Número do WhatsApp"
+              className="col-span-2"
+            >
               <Controller
                 control={control}
                 name="otherSettings.whatsAppNumber"
@@ -56,13 +57,12 @@ function Admin() {
                   />
                 )}
               />
-            </div>
+            </FieldContainer>
 
-            <div className="text-start flex flex-col gap-2">
-              <Label
-                htmlFor="otherSettingsUnitWeightInGrams"
-                value="Peso da unidade em gramas"
-              />
+            <FieldContainer
+              id="otherSettingsUnitWeightInGrams"
+              label="Peso da unidade em gramas"
+            >
               <TextInput
                 id="otherSettingsUnitWeightInGrams"
                 type="number"
@@ -72,13 +72,12 @@ function Admin() {
                   valueAsNumber: true,
                 })}
               />
-            </div>
+            </FieldContainer>
 
-            <div className="text-start flex flex-col gap-2">
-              <Label
-                htmlFor="otherSettingsMinimumQuantity"
-                value="Quantidade mínima por pedido"
-              />
+            <FieldContainer
+              id="otherSettingsMinimumQuantity"
+              label="Quantidade mínima por pedido"
+            >
               <TextInput
                 id="otherSettingsMinimumQuantity"
                 type="number"
@@ -88,13 +87,12 @@ function Admin() {
                   valueAsNumber: true,
                 })}
               />
-            </div>
+            </FieldContainer>
 
-            <div className="text-start flex flex-col gap-2">
-              <Label
-                htmlFor="centPricePartySnacks"
-                value="Preço do cento do salgado"
-              />
+            <FieldContainer
+              id="centPricePartySnacks"
+              label="Preço do cento do salgado"
+            >
               <TextInput
                 id="centPricePartySnacks"
                 type="number"
@@ -104,13 +102,12 @@ function Admin() {
                   valueAsNumber: true,
                 })}
               />
-            </div>
+            </FieldContainer>
 
-            <div className="text-start flex flex-col gap-2">
-              <Label
-                htmlFor="centPriceMiniChurros"
-                value="Preço do cento do mini churros"
-              />
+            <FieldContainer
+              id="centPriceMiniChurros"
+              label="Preço do cento do mini churros"
+            >
               <TextInput
                 id="centPriceMiniChurros"
                 type="number"
@@ -120,7 +117,7 @@ function Admin() {
                   valueAsNumber: true,
                 })}
               />
-            </div>
+            </FieldContainer>
           </div>
 
           <div className="flex flex-col w-full">
