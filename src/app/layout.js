@@ -27,6 +27,8 @@ export const metadata = {
 
 export const revalidate = 60 * 15;
 
+export const dynamic = 'force-dynamic'
+
 export default async function RootLayout({ children }) {
   const [snacksStore, centPriceStore, otherSettingsStore] = await Promise.all([
     getSnacks(),
