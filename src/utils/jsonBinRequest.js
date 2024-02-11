@@ -1,15 +1,28 @@
 export const jsonBinRequest = async (id, method = "GET", data = {}) => {
-  const url = `https://api.jsonbin.io/v3/b/${id}/latest`;
+  const isGet = method === "GET";
+  const url = `https://api.jsonbin.io/v3/b/${id}${isGet ? "/latest" : ""}`;
   const options = {
     method,
-    data,
-    headers: { "X-Master-Key": process.env.BIN_MASTER_KEY },
+    headers: {
+      "Content-Type": "application/json",
+      "X-Master-Key": process.env.BIN_MASTER_KEY,
+    },
+    body: !isGet ? JSON.stringify(data) : undefined,
   };
   const res = await fetch(url, options);
+  const resJson = await res.json();
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error({
+      status: res.status,
+      statusText: res.statusText,
+      message: resJson.message,
+    });
   }
 
-  return (await res.json()).record;
+  return {
+    status: res.status,
+    statusText: res.statusText,
+    ...resJson,
+  };
 };

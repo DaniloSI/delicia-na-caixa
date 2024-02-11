@@ -1,13 +1,18 @@
 import { jsonBinRequest } from "@/utils/jsonBinRequest";
 import { cache } from "react";
 import { read, write } from "./dao";
+import {
+  CENT_PRICE_JSON_BIN_ID,
+  OTHER_SETTINGS_JSON_BIN_ID,
+  SNACKS_JSON_BIN_ID,
+} from "@/utils/constants";
 
 const getAndUpdateCache = async ({ cacheKey, jsonBinId }) => {
   let value = await read(cacheKey);
 
   if (!value) {
-    value = await jsonBinRequest(jsonBinId);
-    await write(cacheKey, value)
+    value = (await jsonBinRequest(jsonBinId)).record;
+    await write(cacheKey, value);
   }
 
   return value;
@@ -16,7 +21,7 @@ const getAndUpdateCache = async ({ cacheKey, jsonBinId }) => {
 export const getSnacks = cache(async () => {
   const snacks = await getAndUpdateCache({
     cacheKey: "snacks",
-    jsonBinId: "65bfb3e41f5677401f2ab8bb",
+    jsonBinId: SNACKS_JSON_BIN_ID,
   });
 
   return snacks;
@@ -25,7 +30,7 @@ export const getSnacks = cache(async () => {
 export const getCentPrice = cache(async () => {
   const centPrice = await getAndUpdateCache({
     cacheKey: "cent-price",
-    jsonBinId: "65bfac54266cfc3fde85a607",
+    jsonBinId: CENT_PRICE_JSON_BIN_ID,
   });
 
   return new Map(Object.entries(centPrice));
@@ -34,7 +39,7 @@ export const getCentPrice = cache(async () => {
 export const getOtherSettings = cache(async () => {
   const otherSettings = await getAndUpdateCache({
     cacheKey: "other-settings",
-    jsonBinId: "65bfb3d6dc74654018a02975",
+    jsonBinId: OTHER_SETTINGS_JSON_BIN_ID,
   });
 
   return otherSettings;
