@@ -1,9 +1,8 @@
 "use client";
 
 import Divider from "@/components/Divider";
-import TextInput from "@/components/TextInput";
 import StoreContext from "@/contexts/store";
-import { Button, Label, ToggleSwitch } from "flowbite-react";
+import { Button, ToggleSwitch } from "flowbite-react";
 import React, { useContext } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { HiCurrencyDollar, HiHashtag } from "react-icons/hi";
@@ -11,6 +10,7 @@ import { FaBalanceScale } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import MaskedInput from "@/components/MaskedInput";
 import FieldContainer from "./components/FieldContainer";
+import NumericField from "./components/NumericField";
 
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
@@ -27,7 +27,7 @@ function Admin() {
       otherSettings: otherSettingsStore,
     },
   });
-  const { control, register } = methods;
+  const { control } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(JSON.stringify(data, null, 2));
@@ -59,68 +59,32 @@ function Admin() {
               />
             </FieldContainer>
 
-            <FieldContainer
-              id="otherSettingsUnitWeightInGrams"
+            <NumericField
+              name="otherSettings.unitWeightInGrams"
               label="Peso da unidade em gramas"
-            >
-              <TextInput
-                id="otherSettingsUnitWeightInGrams"
-                type="number"
-                inputMode="decimal"
-                icon={FaBalanceScale}
-                {...register("otherSettings.unitWeightInGrams", {
-                  valueAsNumber: true,
-                })}
-              />
-            </FieldContainer>
+              icon={FaBalanceScale}
+            />
 
-            <FieldContainer
-              id="otherSettingsMinimumQuantity"
+            <NumericField
+              name="otherSettings.minimumQuantity"
               label="Quantidade mínima por pedido"
-            >
-              <TextInput
-                id="otherSettingsMinimumQuantity"
-                type="number"
-                inputMode="decimal"
-                icon={HiHashtag}
-                {...register("otherSettings.minimumQuantity", {
-                  valueAsNumber: true,
-                })}
-              />
-            </FieldContainer>
+              icon={HiHashtag}
+            />
 
-            <FieldContainer
-              id="centPricePartySnacks"
+            <NumericField
+              name="centPrice.partySnacks"
               label="Preço do cento do salgado"
-            >
-              <TextInput
-                id="centPricePartySnacks"
-                type="number"
-                inputMode="decimal"
-                icon={HiCurrencyDollar}
-                {...register("centPrice.partySnacks", {
-                  valueAsNumber: true,
-                })}
-              />
-            </FieldContainer>
+              icon={HiHashtag}
+            />
 
-            <FieldContainer
-              id="centPriceMiniChurros"
+            <NumericField
+              name="centPrice.miniChurros"
               label="Preço do cento do mini churros"
-            >
-              <TextInput
-                id="centPriceMiniChurros"
-                type="number"
-                inputMode="decimal"
-                icon={HiCurrencyDollar}
-                {...register("centPrice.miniChurros", {
-                  valueAsNumber: true,
-                })}
-              />
-            </FieldContainer>
+              icon={HiCurrencyDollar}
+            />
           </div>
 
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col">
             <h2 className="text-xl font-medium">Salgados</h2>
             <div className="flex flex-col">
               <Divider className="my-0" />
