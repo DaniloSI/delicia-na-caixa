@@ -1,8 +1,12 @@
 import TextInput from "@/components/TextInput";
 import { Label } from "flowbite-react";
 import Button from "@/components/Button";
+import { signIn } from "@/../auth";
+import LoginGoogle from "./components/LoginGoogle";
 
-async function Login({ provider }) {
+async function Login({ searchParams }) {
+  const callbackUrl = searchParams.callbackUrl || '/admin'
+  
   const handleLogin = async (formData) => {
     "use server";
     const credentials = {
@@ -10,7 +14,10 @@ async function Login({ provider }) {
       password: formData.get("password"),
     };
 
-    console.log(credentials);
+    await signIn('credentials', {
+      ...credentials,
+      redirectTo: callbackUrl,
+    });
   };
 
   return (
@@ -41,6 +48,8 @@ async function Login({ provider }) {
         <Button type="submit" color="primary">
           Entrar
         </Button>
+
+        <LoginGoogle />
       </form>
     </div>
   );

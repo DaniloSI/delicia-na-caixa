@@ -12,6 +12,7 @@ import MaskedInput from "@/components/MaskedInput";
 import FieldContainer from "./components/FieldContainer";
 import NumericField from "./components/NumericField";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
@@ -162,6 +163,8 @@ function Admin() {
           >
             Salvar
           </Button>
+
+          <Button color="gray" onClick={() => signOut({ callbackUrl: '/admin/login' })}>Sair</Button>
         </form>
       </FormProvider>
     </div>
