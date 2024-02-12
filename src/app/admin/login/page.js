@@ -21,8 +21,8 @@ async function Login({ searchParams }) {
   };
 
   return (
-    <div className="flex flex-col gap-6 px-6">
-      <h1>Login</h1>
+    <div className="flex flex-col gap-6 px-6 mt-6">
+      <h1 className="text-center font-medium text-2xl">Login</h1>
 
       <form action={handleLogin} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
