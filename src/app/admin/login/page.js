@@ -5,14 +5,22 @@ import { Button, Label } from "flowbite-react";
 import LoginGoogle from "./components/LoginGoogle";
 import { signInCredentials } from "./lib/actions";
 import useCallbackUrl from "@/hooks/useCallbackUrl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Login() {
   const router = useRouter();
-  const callbackUrl = useCallbackUrl();
   const [isLoading, setIsLoading] = useState(false);
+  const callbackUrl = useCallbackUrl();
+  const searchParams = useSearchParams();
+  const isLoginGoogleError = searchParams.get("error") === 'AuthorizedCallbackError';
+
+  useEffect(() => {
+    if (isLoginGoogleError) {
+      toast.error("A conta que você utilizou para fazer login via Google não é uma conta autorizada.");
+    }
+  }, [isLoginGoogleError])
 
   const handleLogin = async (e) => {
     e.preventDefault();
