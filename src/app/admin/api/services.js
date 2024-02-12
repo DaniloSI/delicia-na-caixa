@@ -1,31 +1,30 @@
+import database from "@/services/database";
 import { getSnacks } from "@/services/store";
-import { CENT_PRICE_JSON_BIN_ID, OTHER_SETTINGS_JSON_BIN_ID, SNACKS_JSON_BIN_ID } from "@/utils/constants";
-import { jsonBinRequest } from "@/utils/jsonBinRequest";
 
-export const updateSnacksJsonBin = async (snacks) => {
+export const updateSnacksDataBase = async (snacks) => {
   const originalSnacks = await getSnacks();
+  const newSnacks = originalSnacks.map((o) => ({
+    ...o,
+    active: snacks[o.fieldName],
+  }));
 
-  return await jsonBinRequest(
-    SNACKS_JSON_BIN_ID,
-    "PUT",
-    originalSnacks.map((o) => ({
-      ...o,
-      active: snacks[o.fieldName],
-    }))
-  ).catch((e) => e)
+  await database.setItem("snacks", newSnacks);
+
+  return newSnacks;
 };
 
-export const updateCentPriceJsonBin = async (centPrice) => await jsonBinRequest(
-  CENT_PRICE_JSON_BIN_ID,
-  "PUT",
-  {
-    'party_snacks': centPrice.partySnacks,
-    'mini_churros': centPrice.miniChurros,
-  },
-).catch((e) => e);
+export const updateCentPriceDataBase = async (centPrice) => {
+  const newCentPrice = {
+    party_snacks: centPrice.partySnacks,
+    mini_churros: centPrice.miniChurros,
+  };
 
-export const updateOtherSettingsJsonBin = async (otherSettings) => await jsonBinRequest(
-  OTHER_SETTINGS_JSON_BIN_ID,
-  "PUT",
-  otherSettings,
-).catch((e) => e);
+  await database.setItem("centPrice", newCentPrice);
+
+  return newCentPrice;
+};
+
+export const updateOtherSettingsDataBase = async (otherSettings) => {
+  await database.setItem("otherSettings", otherSettings);
+  return otherSettings;
+};

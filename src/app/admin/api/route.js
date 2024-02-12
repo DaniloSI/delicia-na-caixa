@@ -1,45 +1,34 @@
-import { writeAll } from "@/services/dao";
+import { writeAll } from "@/services/dao-cache";
 import {
-  updateCentPriceJsonBin,
-  updateOtherSettingsJsonBin,
-  updateSnacksJsonBin,
+  updateCentPriceDataBase,
+  updateOtherSettingsDataBase,
+  updateSnacksDataBase,
 } from "./services";
 
 export async function PUT(request) {
   const { snacks, centPrice, otherSettings } = await request.json();
 
-  const [snacksResponse, centPriceResponse, otherSettingsResponse] =
-    await Promise.all([
-      updateSnacksJsonBin(snacks),
-      updateCentPriceJsonBin(centPrice),
-      updateOtherSettingsJsonBin(otherSettings),
-    ]);
+  const [newSnacks, newCentPrice, newOtherSettings] = await Promise.all([
+    updateSnacksDataBase(snacks),
+    updateCentPriceDataBase(centPrice),
+    updateOtherSettingsDataBase(otherSettings),
+  ]);
 
-  const cachesToUpdate = [];
-
-  if (snacksResponse.record) {
-    cachesToUpdate.push(["snacks", snacksResponse.record]);
-  }
-
-  if (centPriceResponse.record) {
-    cachesToUpdate.push(["cent-price", centPriceResponse.record]);
-  }
-
-  if (otherSettingsResponse.record) {
-    cachesToUpdate.push(["other-settings", otherSettingsResponse.record]);
-  }
-
-  await writeAll(cachesToUpdate);
+  await writeAll([
+    ["snacks", newSnacks],
+    ["centPrice", newCentPrice],
+    ["otherSettings", newOtherSettings],
+  ]);
 
   return Response.json({
     snacks: {
-      success: !!snacksResponse.record,
+      success: true,
     },
     centPrice: {
-      success: !!centPriceResponse.record,
+      success: true,
     },
     otherSettings: {
-      success: !!otherSettingsResponse.record,
+      success: true,
     },
   });
 }
