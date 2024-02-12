@@ -4,6 +4,8 @@ import Button from "@/components/Button";
 import { signIn } from "@/../auth";
 import LoginGoogle from "./components/LoginGoogle";
 
+export const dynamic = 'force-dynamic'
+
 async function Login({ searchParams }) {
   const callbackUrl = searchParams.callbackUrl || '/admin'
   
