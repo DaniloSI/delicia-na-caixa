@@ -1,32 +1,47 @@
+"use client";
+
 import TextInput from "@/components/TextInput";
-import { Label } from "flowbite-react";
-import Button from "@/components/Button";
-import { signIn } from "@/../auth";
+import { Button, Label } from "flowbite-react";
 import LoginGoogle from "./components/LoginGoogle";
+import { signInCredentials } from "./lib/actions";
+import useCallbackUrl from "@/hooks/useCallbackUrl";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
-export const dynamic = 'force-dynamic'
+function Login() {
+  const router = useRouter();
+  const callbackUrl = useCallbackUrl();
+  const [isLoading, setIsLoading] = useState(false);
 
-async function Login({ searchParams }) {
-  const callbackUrl = searchParams.callbackUrl || '/admin'
-  
-  const handleLogin = async (formData) => {
-    "use server";
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
     const credentials = {
       email: formData.get("email"),
       password: formData.get("password"),
     };
 
-    await signIn('credentials', {
+    setIsLoading(true);
+    const isSuccess = await signInCredentials({
       ...credentials,
-      redirectTo: callbackUrl,
+      redirect: false,
     });
+
+    if (isSuccess) {
+      router.push(callbackUrl);
+    } else {
+      setIsLoading(false);
+      toast.error("E-mail ou senha inválidos");
+    }
   };
 
   return (
     <div className="flex flex-col gap-6 px-6 mt-6">
       <h1 className="text-center font-medium text-2xl">Login</h1>
 
-      <form action={handleLogin} className="flex flex-col gap-6">
+      <form onSubmit={handleLogin} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <Label htmlFor="email">E-mail</Label>
           <TextInput
@@ -47,7 +62,12 @@ async function Login({ searchParams }) {
           />
         </div>
 
-        <Button type="submit" color="primary">
+        <Button
+          type="submit"
+          color="primary"
+          disabled={isLoading}
+          isProcessing={isLoading}
+        >
           Entrar
         </Button>
 
