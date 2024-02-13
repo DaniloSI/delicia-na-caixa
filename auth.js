@@ -29,7 +29,6 @@ export const { auth, signIn, signOut, handlers: { GET, POST } } = NextAuth({
     }),
     Credentials({
       async authorize(credentials) {
-        console.log(credentials);
         if (credentials.username === process.env.USERNAME_DEFAULT && credentials.password === process.env.PASSWORD_DEFAULT) {
           return { id: 1, name: "Admin" };
         }
