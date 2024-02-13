@@ -52,7 +52,6 @@ export default function Delivery() {
             minDate={tomorrow}
             theme={datePickerTheme}
             onSelectedDateChanged={(date) => setValue("date", date)}
-            defaultDate={tomorrow}
           />
         </div>
 
