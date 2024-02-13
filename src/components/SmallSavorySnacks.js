@@ -8,7 +8,13 @@ import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { CldImage } from "next-cloudinary";
 import { Button } from "flowbite-react";
 
-const SmallSavorySnacks = ({ name, namePlural, description, image, unitWeightInGrams }) => {
+const SmallSavorySnacks = ({
+  name,
+  namePlural,
+  description,
+  image,
+  unitWeightInGrams,
+}) => {
   const { control, setValue, getValues } = useFormContext();
 
   const fieldName = `snacks.${namePlural}`;
@@ -24,17 +30,19 @@ const SmallSavorySnacks = ({ name, namePlural, description, image, unitWeightInG
   };
 
   return (
-    <div className="flex bg-white flex-row max-w-xl gap-4 items-stretch">
-      <CldImage
-        className="object-cover rounded-lg w-1/6"
-        src={"delicia-na-caixa/" + image}
-        width="500"
-        height="500"
-        alt={name}
-      />
+    <div className="flex bg-white flex-row max-w-xl gap-4 items-center">
+      <div className="w-1/6">
+        <CldImage
+          className="object-cover object-top h-auto rounded-lg"
+          src={"delicia-na-caixa/" + image}
+          width="500"
+          height="500"
+          alt={name}
+        />
+      </div>
 
       <div className="flex flex-col grow">
-        <h5 className="text-lg font-bold tracking-tight text-gray-900 ">
+        <h5 className="text-lg font-medium tracking-tight text-gray-900 ">
           {name}
         </h5>
         <div className="flex items-start">
