@@ -17,6 +17,7 @@ import Logo from "@/assets/logo.png";
 
 import "react-toastify/dist/ReactToastify.css";
 import { GTM_ID, IS_DEVELOPMENT } from "@/utils/constants";
+import { capitalize } from "@/utils/format";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +45,8 @@ export default async function RootLayout({ children }) {
       .filter((snack) => snack.active)
       .map((snack) => ({
         ...snack,
-        centPrice: centPriceStore.get(snack.type),
+        centPrice: centPriceStore[snack.type],
+        unitWeightInGrams: otherSettingsStore[`unitWeightInGrams${capitalize(snack.type)}`],
       })),
   };
 

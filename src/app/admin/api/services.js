@@ -14,14 +14,8 @@ export const updateSnacksDataBase = async (snacks) => {
 };
 
 export const updateCentPriceDataBase = async (centPrice) => {
-  const newCentPrice = {
-    party_snacks: centPrice.partySnacks,
-    mini_churros: centPrice.miniChurros,
-  };
-
-  await database.setItem("centPrice", newCentPrice);
-
-  return newCentPrice;
+  await database.setItem("centPrice", centPrice);
+  return centPrice;
 };
 
 export const updateOtherSettingsDataBase = async (otherSettings) => {

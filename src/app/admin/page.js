@@ -24,16 +24,14 @@ function Admin() {
       snacks: Object.fromEntries(
         snacksStore.map(({ fieldName, active }) => [fieldName, active])
       ),
-      centPrice: {
-        partySnacks: centPriceStore.get("party_snacks"),
-        miniChurros: centPriceStore.get("mini_churros"),
-      },
+      centPrice: centPriceStore,
       otherSettings: otherSettingsStore,
     },
   });
   const { control } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
+    console.log({ data });
     setIsUpdating(true);
     fetch("/admin/api", {
       method: "PUT",
@@ -79,7 +77,7 @@ function Admin() {
       <h1 className="text-2xl font-semibold">Configurações</h1>
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
-          <div className="grid grid-cols-2 grid-flow-row gap-4">
+          <div className="grid grid-cols-2 grid-flow-row gap-4 items-end">
             {/* TODO: Disable whatsapp field in PROD for security reasons */}
             <FieldContainer
               id="otherSettingsWhatsAppNumber"
@@ -102,27 +100,33 @@ function Admin() {
             </FieldContainer>
 
             <NumericField
-              name="otherSettings.unitWeightInGrams"
-              label="Peso da unidade em gramas"
+              name="otherSettings.unitWeightInGramsPartySnacks"
+              label="Peso do salgado em gramas"
               icon={FaBalanceScale}
             />
 
             <NumericField
-              name="otherSettings.minimumQuantity"
-              label="Quantidade mínima por pedido"
-              icon={HiHashtag}
+              name="otherSettings.unitWeightInGramsMiniChurros"
+              label="Peso do mini churros em gramas"
+              icon={FaBalanceScale}
             />
 
             <NumericField
               name="centPrice.partySnacks"
               label="Preço do cento do salgado"
-              icon={HiHashtag}
+              icon={HiCurrencyDollar}
             />
 
             <NumericField
               name="centPrice.miniChurros"
               label="Preço do cento do mini churros"
               icon={HiCurrencyDollar}
+            />
+
+            <NumericField
+              name="otherSettings.minimumQuantity"
+              label="Quantidade mínima por pedido"
+              icon={HiHashtag}
             />
           </div>
 

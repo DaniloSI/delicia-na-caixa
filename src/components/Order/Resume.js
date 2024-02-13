@@ -61,7 +61,7 @@ export default function Resume() {
   };
 
   const getFormattedPrice = (type) =>
-    formatPrice(centPriceStore?.get(type), { minimumFractionDigits: 0 });
+    formatPrice(centPriceStore?.[type], { minimumFractionDigits: 0 });
 
   return (
     <div className="fixed right-0 bottom-0 z-10 bg-white w-full px-4 pb-4 pt-2 shadow-[0_0_10px_rgba(0,0,0,.1)]">
@@ -69,11 +69,11 @@ export default function Resume() {
         <div className="flex justify-between items-stretch text-sm text-gray-500 pb-3 pt-2 px-2">
           <div className="flex flex-col">
             <p>
-              Salgado: {getFormattedPrice("party_snacks")}{" "}
+              Salgado: {getFormattedPrice("partySnacks")}{" "}
               <span className="text-xs">(cento)</span>
             </p>
             <p>
-              Mini churros: {getFormattedPrice("mini_churros")}{" "}
+              Mini churros: {getFormattedPrice("miniChurros")}{" "}
               <span className="text-xs">(cento)</span>
             </p>
           </div>

@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useContext } from "react";
+import React from "react";
 
 import { Controller, useFormContext } from "react-hook-form";
 import TextInput from "./TextInput";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { CldImage } from "next-cloudinary";
-import StoreContext from "@/contexts/store";
 import { Button } from "flowbite-react";
 
-const SmallSavorySnacks = ({ name, namePlural, description, image }) => {
+const SmallSavorySnacks = ({ name, namePlural, description, image, unitWeightInGrams }) => {
   const { control, setValue, getValues } = useFormContext();
-  const {
-    otherSettingsStore: { unitWeightInGrams },
-  } = useContext(StoreContext);
 
   const fieldName = `snacks.${namePlural}`;
 

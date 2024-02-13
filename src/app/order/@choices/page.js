@@ -15,13 +15,14 @@ export default function Choices() {
     <>
       <MinimumQuantity />
       {activeSnacks.map(
-        ({ name, namePlural, description, image }, index, list) => (
+        ({ name, namePlural, description, image, unitWeightInGrams }, index, list) => (
           <React.Fragment key={name}>
             <SmallSavorySnacks
               name={name}
               namePlural={namePlural}
               description={description}
               image={image}
+              unitWeightInGrams={unitWeightInGrams}
             />
 
             {index < list.length - 1 && <Divider />}

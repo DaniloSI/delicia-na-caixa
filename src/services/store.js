@@ -14,10 +14,5 @@ const getAndUpdateCache = async (cacheKey) => {
 };
 
 export const getSnacks = cache(() => getAndUpdateCache("snacks"));
-
-export const getCentPrice = cache(async () => {
-  const centPrice = await getAndUpdateCache("centPrice");
-  return new Map(Object.entries(centPrice));
-});
-
+export const getCentPrice = cache(() => getAndUpdateCache("centPrice"));
 export const getOtherSettings = cache(() => getAndUpdateCache("otherSettings"));
