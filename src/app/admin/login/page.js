@@ -27,7 +27,7 @@ function Login() {
     const formData = new FormData(e.target);
 
     const credentials = {
-      email: formData.get("email"),
+      username: formData.get("email"),
       password: formData.get("password"),
     };
 
