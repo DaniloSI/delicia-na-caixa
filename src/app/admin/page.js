@@ -18,6 +18,7 @@ function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
     useContext(StoreContext);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const methods = useForm({
     defaultValues: {
       snacks: Object.fromEntries(
@@ -164,7 +165,17 @@ function Admin() {
             Salvar
           </Button>
 
-          <Button color="gray" onClick={() => signOut({ callbackUrl: '/admin/login' })}>Sair</Button>
+          <Button
+            color="gray"
+            disabled={isLoggingOut}
+            isProcessing={isLoggingOut}
+            onClick={() => {
+              setIsLoggingOut(true);
+              signOut({ callbackUrl: "/admin/login" });
+            }}
+          >
+            Sair
+          </Button>
         </form>
       </FormProvider>
     </div>
