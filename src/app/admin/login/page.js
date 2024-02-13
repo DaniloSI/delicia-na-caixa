@@ -32,7 +32,7 @@ function Login() {
     const formData = new FormData(e.target);
 
     const credentials = {
-      username: formData.get("email"),
+      username: formData.get("username"),
       password: formData.get("password"),
     };
 
@@ -60,7 +60,7 @@ function Login() {
           <TextInput
             id="email"
             type="email"
-            name="email"
+            name="username"
             placeholder="Digite seu e-mail"
             autoComplete="username"
           />
