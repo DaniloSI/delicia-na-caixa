@@ -1,12 +1,8 @@
-import { TextInput as TextInputFlowBite } from 'flowbite-react';
-import { forwardRef } from 'react';
+import { TextInput as TextInputFlowBite } from "flowbite-react";
+import { forwardRef } from "react";
 
-const TextInput = (props, ref) => (
-  <TextInputFlowBite
-    ref={ref}
-    {...props}
-    className="text-base"
-  />
-)
+const TextInput = ({ className, ...rest }, ref) => (
+  <TextInputFlowBite ref={ref} {...rest} className={`text-base ${className}`} />
+);
 
 export default forwardRef(TextInput);

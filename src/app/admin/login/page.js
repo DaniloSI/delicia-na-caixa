@@ -8,19 +8,24 @@ import useCallbackUrl from "@/hooks/useCallbackUrl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 function Login() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const callbackUrl = useCallbackUrl();
   const searchParams = useSearchParams();
-  const isLoginGoogleError = searchParams.get("error") === 'AuthorizedCallbackError';
+  const isLoginGoogleError =
+    searchParams.get("error") === "AuthorizedCallbackError";
 
   useEffect(() => {
     if (isLoginGoogleError) {
-      toast.error("A conta que você utilizou para fazer login via Google não é uma conta autorizada.");
+      toast.error(
+        "A conta que você utilizou para fazer login via Google não é uma conta autorizada."
+      );
     }
-  }, [isLoginGoogleError])
+  }, [isLoginGoogleError]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -57,17 +62,29 @@ function Login() {
             type="email"
             name="email"
             placeholder="Digite seu e-mail"
+            autoComplete="username"
           />
         </div>
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="password">Password</Label>
-          <TextInput
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-          />
+          <div className="flex gap-2">
+            <TextInput
+              className="grow"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Digite sua senha"
+              autoComplete="current-password"
+            />
+            <Button color="light" onClick={() => setShowPassword(s => !s)}>
+              {showPassword ? (
+                <HiOutlineEyeOff className="h-5 w-5" />
+              ) : (
+                <HiOutlineEye className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
 
         <Button
