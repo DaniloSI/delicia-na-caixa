@@ -80,6 +80,7 @@ function Admin() {
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="grid grid-cols-2 grid-flow-row gap-4">
+            {/* TODO: Disable whatsapp field in PROD for security reasons */}
             <FieldContainer
               id="otherSettingsWhatsAppNumber"
               label="Número do WhatsApp"
