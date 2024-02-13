@@ -21,11 +21,10 @@ export default function Resume() {
     addStepDone,
     removeStepDone,
   } = useContext(StepperContext);
-  const { activeSnacks, centPriceStore, otherSettingsStore } =
+  const { activeSnacks, centPriceStore } =
     useContext(StoreContext);
   const { watch } = useFormContext();
   const { validateCurrentStep } = useStepValidations();
-  const { unitWeightInGrams } = otherSettingsStore;
 
   const snacks = watch("snacks");
   const reception = watch("reception");
@@ -76,10 +75,6 @@ export default function Resume() {
             <p>
               Mini churros: {getFormattedPrice("mini_churros")}{" "}
               <span className="text-xs">(cento)</span>
-            </p>
-            <p>
-              Peso da unidade: {unitWeightInGrams}
-              <span className="text-xs">g</span>
             </p>
           </div>
 
