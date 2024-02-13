@@ -81,7 +81,7 @@ export default function Delivery() {
               type="radio"
               value="retire"
               defaultChecked
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+              className="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 focus:ring-red-500 focus:ring-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
@@ -106,7 +106,7 @@ export default function Delivery() {
               aria-describedby="delivery-text"
               type="radio"
               value="delivery"
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+              className="w-4 h-4 text-red-700 bg-gray-100 border-gray-300 focus:ring-red-500 focus:ring-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
