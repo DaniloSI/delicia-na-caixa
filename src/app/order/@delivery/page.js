@@ -6,12 +6,10 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import { Datepicker, Label } from "flowbite-react";
 import MaskedInput from "@/components/MaskedInput";
-import TextInput from "@/components/TextInput";
-
-import { HiOutlineClock } from "react-icons/hi";
 
 import { datePickerTheme } from "@/theme";
 import { getTomorrowDate } from "@/utils/date";
+import { SelectTime } from "./components/SelectTime";
 
 export default function Delivery() {
   const { control, watch, setValue } = useFormContext();
@@ -55,16 +53,7 @@ export default function Delivery() {
           />
         </div>
 
-        <div className="text-start">
-          <Label htmlFor="time" value="Horário da entrega/retirada" />
-          <TextInput
-            id="time"
-            type="time"
-            placeholder="Ex.: 15:30"
-            icon={HiOutlineClock}
-            onChange={(e) => setValue("time", e.target.value)}
-          />
-        </div>
+        <SelectTime />
       </div>
 
       <div>

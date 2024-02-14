@@ -24,7 +24,7 @@ Quantidade total: ${getTotal(snacks)}
 ${isDelivery(reception) ? 'Subtotal' : 'Total'}: ${getTotalPrice(snacks, activeSnacks)}
 Forma de pagamento: ${payment}
 ${isDelivery(reception) ? getAddress(address) : ''}
-Data e horário da *${isDelivery(reception) ? 'entrega': 'retirada'}*: ${formatDate(date)} às ${time}
+Data e horário da *${isDelivery(reception) ? 'entrega': 'retirada'}*: ${formatDate(date)} entre ${time?.replace('-', ' e ')}
 `;
 
 
