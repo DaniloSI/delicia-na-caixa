@@ -4,6 +4,7 @@
 
 input {
   font-size: 16px !important;
+  outline: none;
 }
 
 input::-webkit-date-and-time-value {

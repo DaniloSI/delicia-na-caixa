@@ -21,7 +21,7 @@ const SmallSavorySnacks = ({ snack }) => {
 
   const fieldName = `snacks.${namePlural}`;
 
-  const fieldValue = watch(fieldName)
+  const fieldValue = watch(fieldName);
 
   const updateCartGaEvent = useCallback(
     (event, quantity) => {
@@ -110,7 +110,9 @@ const SmallSavorySnacks = ({ snack }) => {
               color="gray"
               className={`w-16 ${fieldValue > 0 ? "" : "hidden"}`}
               value={inputValue}
-              onChange={e => setInputValue(e.target.value)}
+              onChange={(e) => {
+                setInputValue(e.target.value.replaceAll(/\D/g, ""));
+              }}
               onFocus={(e) => setTempValue(Number(e.target.value))}
               onBlur={(e) => {
                 const newValue = Number(e.target.value);
