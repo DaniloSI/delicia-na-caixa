@@ -11,6 +11,7 @@ import { useFormContext } from "react-hook-form";
 import { FiSend } from "react-icons/fi";
 
 import { toast } from "react-toastify";
+import { HiOutlineArrowRight } from "react-icons/hi";
 
 export default function Resume() {
   const {
@@ -90,7 +91,7 @@ export default function Resume() {
             size="sm"
             outline
             color="light"
-            className={`w-1/2 ${active === 0 ? "invisible" : ""}`}
+            className={`w-5/12 ${active === 0 ? "invisible" : ""}`}
             onClick={handlePrev}
           >
             Voltar
@@ -101,10 +102,11 @@ export default function Resume() {
             onClick={isLastActive ? undefined : handleNext}
             size="sm"
             color="primary"
-            className="w-1/2"
+            className="w-7/12"
           >
             {isLastActive && <FiSend className="mr-2 h-5 w-5" />}
             {btnLabelNext}
+            {!isLastActive && <HiOutlineArrowRight className="ml-2 h-5 w-5" />}
           </Button>
         </div>
       </div>

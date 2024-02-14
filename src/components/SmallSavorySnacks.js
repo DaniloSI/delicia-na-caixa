@@ -51,7 +51,7 @@ const SmallSavorySnacks = ({
               {description}
             </p>
             <div className="flex items-start">
-              <span className="text-xs grow">
+              <span className="text-xs grow text-gray-500 font-light">
                 Unidade: {unitWeightInGrams}g
               </span>
             </div>

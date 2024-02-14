@@ -32,7 +32,7 @@ const StepperLabel = ({ name, isLast, index }) => {
     <li
       className={`flex items-center ${
         isActive ? "text-gray-900" : ""
-      } after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:inline-block after:mx-6`}
+      } after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:mx-6`}
       onClick={() => {
         const validationsResult = validateAll();
 
