@@ -1,28 +1,22 @@
-import {
-  FIVE_MINUTES_IN_MILLISECONDS,
-  IS_DEVELOPMENT,
-  ONE_DAY_IN_MILLISECONDS,
-} from "@/utils/constants";
-import { caching, memoryStore } from "cache-manager";
-import { redisStore } from "cache-manager-redis-yet";
+import { ONE_DAY_IN_MILLISECONDS } from "@/utils/constants";
+import { createStorage } from "unstorage";
+import redisDriver from "unstorage/drivers/redis";
 
-let redisCache;
-
-if (!redisCache) {
-  redisCache = await caching(IS_DEVELOPMENT ? memoryStore() : redisStore, {
+const storage = createStorage({
+  driver: redisDriver({
     url: process.env.URL_REDIS,
-    ttl: FIVE_MINUTES_IN_MILLISECONDS,
-  });
-}
+    ttl: ONE_DAY_IN_MILLISECONDS,
+  }),
+});
 
 export const readRedis = (cacheKey) => {
   console.log("[redis] Reading from cache for: ", cacheKey);
-  return redisCache.get(cacheKey);
+  return storage.getItem(cacheKey);
 };
 
 export const writeRedis = (cacheKey, value) => {
   console.log("[redis] Updating cache for: ", cacheKey);
-  return redisCache.set(cacheKey, value, ONE_DAY_IN_MILLISECONDS);
+  return storage.setItem(cacheKey, value);
 };
 
 export const writeAllRedis = (entries) => {
@@ -30,5 +24,5 @@ export const writeAllRedis = (entries) => {
     "[redis] Updating all cache for: ",
     entries.map(([key]) => key).join(", ")
   );
-  return redisCache.store.mset(entries, ONE_DAY_IN_MILLISECONDS);
+  return storage.setItems(entries.map(([key, value]) => ({ key, value })));
 };
