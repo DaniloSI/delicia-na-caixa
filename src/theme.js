@@ -1,3 +1,5 @@
+import { getTheme } from "flowbite-react";
+
 const datePickerPrimaryButtonTheme = "bg-red-700 hover:bg-red-800 text-white";
 
 export const datePickerTheme = {
@@ -18,12 +20,23 @@ export const datePickerTheme = {
   ),
 };
 
+const { textInput } = getTheme()
+
 const colorPrimary =
   "text-white bg-red-700 enabled:hover:bg-red-800 focus:ring-red-400";
 
 const theme = {
   button: {
     color: { primary: colorPrimary },
+  },
+  textInput: {
+    field: {
+      input: {
+        colors: {
+          gray: textInput.field.input.colors.gray.replaceAll('cyan', 'orange'),
+        },
+      },
+    },
   },
   toggleSwitch: {
     toggle: {

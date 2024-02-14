@@ -8,19 +8,6 @@ import TimeInterval from "./TimeInterval";
 import { HiPencil } from "react-icons/hi";
 import { padStart } from "@/utils/format";
 
-const inputTheme = (color) => `bg-gray-50 border-gray-300 text-gray-900 focus:border-${color}-500 focus:ring-${color}-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-${color}-500 dark:focus:ring-${color}-500`
-
-const selectInputTheme = {
-  field: {
-    input: {
-      colors: {
-        select: `${inputTheme('red')} placeholder-red-700 cursor-pointer`,
-        selected: `${inputTheme('red')} cursor-pointer`,
-      },
-    },
-  },
-};
-
 const timeIntervals = Array.from({ length: 12 }).flatMap((_, index) => {
   const hours = index + 9;
   const first = `${padStart(hours)}:00 - ${padStart(hours)}:30`;
@@ -40,14 +27,11 @@ function SelectTime() {
     <div className="flex flex-col gap-2">
       <Label htmlFor="schedule" value="Horário da entrega/retirada" />
       <TextInput
-        theme={selectInputTheme}
         id="schedule"
         placeholder="Selecione um horário"
         rightIcon={time ? HiPencil : FaAngleRight}
-        color={time ? "selected" : "select"}
         onClick={() => setShowModal(true)}
         value={time}
-        type="text"
         readOnly
       />
 
