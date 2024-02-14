@@ -4,7 +4,7 @@
 
 input {
   font-size: 16px !important;
-  outline: none;
+  outline: none !important;
 }
 
 input::-webkit-date-and-time-value {
@@ -21,6 +21,11 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input:focus {
+  border-color: var(--tw-ring-color) !important;
+  box-shadow: none !important;
 }
 
 /* Firefox */
