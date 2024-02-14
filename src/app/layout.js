@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Flowbite } from "flowbite-react";
 
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import StoreProvider from "../providers/store-provider";
 
@@ -69,7 +69,7 @@ export default async function RootLayout({ children }) {
         </Flowbite>
         <ToastContainer theme="colored" />
       </body>
-      {!IS_DEVELOPMENT && <GoogleTagManager gtmId={GTM_ID} />}
+      {!IS_DEVELOPMENT && <GoogleAnalytics gaId={GTM_ID} />}
     </html>
   );
 }

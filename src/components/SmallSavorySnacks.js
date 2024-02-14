@@ -1,32 +1,68 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useContext, useState } from "react";
 
-import { Controller, useFormContext } from "react-hook-form";
-import TextInput from "./TextInput";
+import { useFormContext } from "react-hook-form";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { CldImage } from "next-cloudinary";
-import { Button } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
+import { sendGAEvent } from "@next/third-parties/google";
+import StoreContext from "@/contexts/store";
 
-const SmallSavorySnacks = ({
-  name,
-  namePlural,
-  description,
-  image,
-  unitWeightInGrams,
-}) => {
-  const { control, setValue, getValues } = useFormContext();
+const QUANTITY_ADD_OR_REMOVE_CLICK = 10;
+
+const SmallSavorySnacks = ({ snack }) => {
+  const { name, namePlural, description, image, unitWeightInGrams, type } =
+    snack;
+  const { centPriceStore } = useContext(StoreContext);
+  const { watch, setValue, getValues } = useFormContext();
+  const [tempValue, setTempValue] = useState();
+  const [inputValue, setInputValue] = useState(0);
 
   const fieldName = `snacks.${namePlural}`;
 
+  const fieldValue = watch(fieldName)
+
+  const updateCartGaEvent = useCallback(
+    (event, quantity) => {
+      sendGAEvent({
+        event,
+        currency: "BRL",
+        value: quantity * (centPriceStore[type] / 100),
+        items: [
+          {
+            ...snack,
+            quantity: quantity,
+          },
+        ],
+      });
+    },
+    [centPriceStore, snack, type]
+  );
+
   const handleAdd = () => {
-    const value = getValues(fieldName);
-    setValue(fieldName, value + 10);
+    const value = getValues(fieldName) || 0;
+    const newValue = value + QUANTITY_ADD_OR_REMOVE_CLICK;
+
+    setValue(fieldName, newValue);
+    setInputValue(newValue);
+
+    updateCartGaEvent("add_to_cart", QUANTITY_ADD_OR_REMOVE_CLICK);
   };
 
   const handleSubtract = () => {
     const value = getValues(fieldName);
-    setValue(fieldName, value > 10 ? value - 10 : 0);
+    const newValue =
+      value > QUANTITY_ADD_OR_REMOVE_CLICK
+        ? value - QUANTITY_ADD_OR_REMOVE_CLICK
+        : 0;
+
+    if (value > 0) {
+      updateCartGaEvent("remove_from_cart", QUANTITY_ADD_OR_REMOVE_CLICK);
+    }
+
+    setValue(fieldName, newValue);
+    setInputValue(newValue);
   };
 
   return (
@@ -56,44 +92,48 @@ const SmallSavorySnacks = ({
               </span>
             </div>
           </div>
-          <Controller
-            rules={{ valueAsNumber: true }}
-            render={({ field: { onChange, value, ...rest } }) => (
-              <div className="flex h-fit">
-                <Button
-                  size="xs"
-                  color="light"
-                  className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none pt-2 ${
-                    value > 0 ? "" : "hidden"
-                  }`}
-                  onClick={handleSubtract}
-                >
-                  <HiMinusSm className="h-6 w-6 text-red-700" />
-                </Button>
-                <TextInput
-                  {...rest}
-                  value={value}
-                  onChange={onChange}
-                  type="number"
-                  placeholder="0"
-                  inputMode="numeric"
-                  sizing="xs"
-                  className={`w-16 ${value > 0 ? "" : "hidden"}`}
-                />
-                <Button
-                  size="xs"
-                  color="light"
-                  className="border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none pt-2"
-                  onClick={handleAdd}
-                >
-                  <HiPlusSm className="h-6 w-6 text-red-700" />
-                </Button>
-              </div>
-            )}
-            name={fieldName}
-            control={control}
-            defaultValue=""
-          />
+
+          <div className="flex h-fit">
+            <Button
+              size="xs"
+              color="light"
+              className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none pt-2 ${
+                fieldValue > 0 ? "" : "hidden"
+              }`}
+              onClick={handleSubtract}
+            >
+              <HiMinusSm className="h-6 w-6 text-red-700" />
+            </Button>
+            <TextInput
+              inputMode="numeric"
+              sizing="md"
+              color="gray"
+              className={`w-16 ${fieldValue > 0 ? "" : "hidden"}`}
+              value={inputValue}
+              onChange={e => setInputValue(e.target.value)}
+              onFocus={(e) => setTempValue(Number(e.target.value))}
+              onBlur={(e) => {
+                const newValue = Number(e.target.value);
+                const difference = newValue - tempValue;
+
+                if (difference > 0) {
+                  updateCartGaEvent("add_to_cart", difference);
+                } else if (difference < 0) {
+                  updateCartGaEvent("remove_from_cart", Math.abs(difference));
+                }
+
+                setValue(fieldName, newValue);
+              }}
+            />
+            <Button
+              size="xs"
+              color="light"
+              className="border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none pt-2"
+              onClick={handleAdd}
+            >
+              <HiPlusSm className="h-6 w-6 text-red-700" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

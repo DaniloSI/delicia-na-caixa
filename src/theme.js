@@ -33,7 +33,7 @@ const theme = {
     field: {
       input: {
         colors: {
-          gray: textInput.field.input.colors.gray.replaceAll('cyan', 'orange'),
+          gray: textInput.field.input.colors.gray.replaceAll('cyan', 'orange') + ' outline-none',
         },
       },
     },
