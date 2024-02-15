@@ -97,7 +97,7 @@ const SmallSavorySnacks = ({ snack }) => {
             <Button
               size="xs"
               color="light"
-              className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none ${
+              className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none py-2 ${
                 fieldValue > 0 ? "" : "hidden"
               }`}
               onClick={handleSubtract}
