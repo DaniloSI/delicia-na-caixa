@@ -34,18 +34,20 @@ const SmallSavorySnacks = ({ snack }) => {
     (event, quantity) => {
       sendGAEvent({
         event,
-        currency: "BRL",
-        value: quantity * (centPriceStore[type] / 100),
-        items: [
-          {
-            item_id: fieldNameOriginal,
-            item_name: name,
-            quantity: quantity,
-          },
-        ],
+        ecommerce: {
+          currency: "BRL",
+          value: quantity * (centPriceStore[type] / 100),
+          items: [
+            {
+              item_id: fieldNameOriginal,
+              item_name: name,
+              quantity: quantity,
+            },
+          ],
+        },
       });
     },
-    [centPriceStore, snack, type]
+    [centPriceStore, fieldNameOriginal, name, type]
   );
 
   const handleAdd = () => {
