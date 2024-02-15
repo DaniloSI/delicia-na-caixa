@@ -12,8 +12,15 @@ import StoreContext from "@/contexts/store";
 const QUANTITY_ADD_OR_REMOVE_CLICK = 10;
 
 const SmallSavorySnacks = ({ snack }) => {
-  const { name, namePlural, description, image, unitWeightInGrams, type } =
-    snack;
+  const {
+    name,
+    fieldName: fieldNameOriginal,
+    namePlural,
+    description,
+    image,
+    unitWeightInGrams,
+    type,
+  } = snack;
   const { centPriceStore } = useContext(StoreContext);
   const { watch, setValue, getValues } = useFormContext();
   const [tempValue, setTempValue] = useState();
@@ -31,7 +38,8 @@ const SmallSavorySnacks = ({ snack }) => {
         value: quantity * (centPriceStore[type] / 100),
         items: [
           {
-            ...snack,
+            item_id: fieldNameOriginal,
+            item_name: name,
             quantity: quantity,
           },
         ],

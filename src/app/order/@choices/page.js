@@ -15,10 +15,9 @@ export default function Choices() {
   useEffect(() => {
     sendGAEvent({
       event: "view_item_list",
-      item_list_id: "related_products",
-      item_list_name: "Related products",
       items: activeSnacks.map(snack => ({
-        ...snack,
+        item_id: snack.fieldName,
+        item_name: snack.name,
         quantity: 1
       }))
     });
