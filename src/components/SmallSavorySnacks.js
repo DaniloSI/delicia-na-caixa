@@ -81,7 +81,7 @@ const SmallSavorySnacks = ({ snack }) => {
         <h5 className="text-lg font-medium tracking-tight text-gray-900 ">
           {name}
         </h5>
-        <div className="flex items-center">
+        <div className="flex items-start">
           <div className="grow">
             <p className="text-sm mb-1 font-normal text-gray-700 ">
               {description}
@@ -130,7 +130,7 @@ const SmallSavorySnacks = ({ snack }) => {
             <Button
               size="xs"
               color="light"
-              className="border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none"
+              className="border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none py-2"
               onClick={handleAdd}
             >
               <HiPlusSm className="h-6 w-6 text-red-700" />
