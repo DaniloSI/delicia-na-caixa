@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Flowbite } from "flowbite-react";
 
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 import StoreProvider from "../providers/store-provider";
 
@@ -16,7 +16,7 @@ import Image from "next/image";
 import Logo from "@/assets/logo.png";
 
 import "react-toastify/dist/ReactToastify.css";
-import { GTM_ID, IS_DEVELOPMENT } from "@/utils/constants";
+import { IS_DEVELOPMENT } from "@/utils/constants";
 import { capitalize } from "@/utils/format";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +28,7 @@ export const metadata = {
 
 export const revalidate = 60 * 15;
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({ children }) {
   const [snacksStore, centPriceStore, otherSettingsStore] = await Promise.all([
@@ -46,7 +46,8 @@ export default async function RootLayout({ children }) {
       .map((snack) => ({
         ...snack,
         centPrice: centPriceStore[snack.type],
-        unitWeightInGrams: otherSettingsStore[`unitWeightInGrams${capitalize(snack.type)}`],
+        unitWeightInGrams:
+          otherSettingsStore[`unitWeightInGrams${capitalize(snack.type)}`],
       })),
   };
 
@@ -69,7 +70,12 @@ export default async function RootLayout({ children }) {
         </Flowbite>
         <ToastContainer theme="colored" />
       </body>
-      {!IS_DEVELOPMENT && <GoogleAnalytics gaId={GTM_ID} />}
+      {!IS_DEVELOPMENT && (
+        <>
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        </>
+      )}
     </html>
   );
 }
