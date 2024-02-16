@@ -22,13 +22,12 @@ const SmallSavorySnacks = ({ snack }) => {
     type,
   } = snack;
   const { centPriceStore } = useContext(StoreContext);
-  const { watch, setValue, getValues } = useFormContext();
+  const { setValue, getValues } = useFormContext();
   const [tempValue, setTempValue] = useState();
   const [inputValue, setInputValue] = useState(0);
+  const [showInputField, setShowInputField] = useState(false);
 
   const fieldName = `snacks.${namePlural}`;
-
-  const fieldValue = watch(fieldName);
 
   const updateCartGaEvent = useCallback(
     (event, quantity) => {
@@ -58,6 +57,10 @@ const SmallSavorySnacks = ({ snack }) => {
     setInputValue(newValue);
 
     updateCartGaEvent("add_to_cart", QUANTITY_ADD_OR_REMOVE_CLICK);
+
+    if (value === 0) {
+      setShowInputField(true);
+    }
   };
 
   const handleSubtract = () => {
@@ -73,6 +76,10 @@ const SmallSavorySnacks = ({ snack }) => {
 
     setValue(fieldName, newValue);
     setInputValue(newValue);
+
+    if (newValue === 0) {
+      setShowInputField(false);
+    }
   };
 
   return (
@@ -108,7 +115,7 @@ const SmallSavorySnacks = ({ snack }) => {
               size="xs"
               color="light"
               className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none py-2 ${
-                fieldValue > 0 ? "" : "hidden"
+                showInputField ? "" : "hidden"
               }`}
               onClick={handleSubtract}
             >
@@ -118,10 +125,12 @@ const SmallSavorySnacks = ({ snack }) => {
               inputMode="numeric"
               sizing="md"
               color="gray"
-              className={`w-16 ${fieldValue > 0 ? "" : "hidden"}`}
+              className={`w-16 ${showInputField ? "" : "hidden"}`}
               value={inputValue}
               onChange={(e) => {
-                setInputValue(e.target.value.replaceAll(/\D/g, ""));
+                const newValue = e.target.value.replaceAll(/\D/g, "");
+                setInputValue(newValue);
+                setValue(fieldName, newValue);
               }}
               onFocus={(e) => setTempValue(Number(e.target.value))}
               onBlur={(e) => {
@@ -134,7 +143,9 @@ const SmallSavorySnacks = ({ snack }) => {
                   updateCartGaEvent("remove_from_cart", Math.abs(difference));
                 }
 
-                setValue(fieldName, newValue);
+                if (newValue === 0) {
+                  setShowInputField(false);
+                }
               }}
             />
             <Button
