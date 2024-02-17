@@ -1,12 +1,13 @@
 "use-client";
 
 import { Button, Label, Modal, TextInput } from "flowbite-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaAngleRight } from "react-icons/fa";
 import TimeInterval from "./TimeInterval";
 import { HiPencil } from "react-icons/hi";
 import { padStart } from "@/utils/format";
+import Divider from "@/components/Divider";
 
 const timeIntervals = Array.from({ length: 12 }).flatMap((_, index) => {
   const hours = index + 9;
@@ -50,18 +51,22 @@ function SelectTime() {
         <Modal.Body>
           <fieldset>
             <legend className="text-sm mb-4">
-              Escolha um intervalo de horário abaixo. <br /> Você receberá o
-              pedido dentro do intervalo de tempo selecionado.
+              Escolha um intervalo de horário abaixo. <br /> Você receberá ou
+              deverá retirar o pedido dentro do intervalo de tempo selecionado.
             </legend>
+
+            <Divider />
 
             <div className="flex flex-col gap-4">
               {timeIntervals.map((timeInterval) => (
-                <TimeInterval
-                  key={timeInterval}
-                  timeInterval={timeInterval}
-                  onChange={setSelectedTime}
-                  checked={selectedTime}
-                />
+                <React.Fragment key={timeInterval}>
+                  <TimeInterval
+                    timeInterval={timeInterval}
+                    onChange={setSelectedTime}
+                    checked={selectedTime}
+                  />
+                  <Divider className="my-0" />
+                </React.Fragment>
               ))}
             </div>
           </fieldset>

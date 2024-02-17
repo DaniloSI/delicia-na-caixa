@@ -3,7 +3,7 @@ import { Label, Radio } from "flowbite-react";
 function TimeInterval({ timeInterval, onChange, checked }) {
   return (
     <Label htmlFor={timeInterval} className="grow">
-      <div className="border border-solid border-gray-300 rounded-xl p-3 flex justify-between">
+      <div className="flex justify-between">
         {timeInterval}
         <Radio
           id={timeInterval}
