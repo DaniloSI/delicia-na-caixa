@@ -5,25 +5,42 @@ import { useContext, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 export const stepValidations = {
-  0: ({ snacks }, minimumQuantity = 0) => getTotal(snacks) >= minimumQuantity ? '' : `Adicione no mínimo ${minimumQuantity} unidades`,
+  0: ({ snacks }, minimumQuantity = 0) =>
+    getTotal(snacks) >= minimumQuantity
+      ? ""
+      : `Adicione no mínimo ${minimumQuantity} unidades`,
   1: ({ time, reception, address: { cep, number } = {} }) => {
     if (!time) {
-      return 'Adicione um horário'
+      return "Adicione um horário";
     }
 
-    if (reception === 'delivery') {
+    if (reception === "delivery") {
       if (!cep || cep.length !== 9) {
-        return 'Adicione um endereço de entrega'
+        return "Adicione um endereço de entrega";
       }
 
       if (!number) {
-        return 'Adicione o número do endereço'
+        return "Adicione o número do endereço";
       }
     }
-    
-    return ''
+
+    return "";
   },
-  2: ({ payment }) => payment ? '' : 'Adicione uma forma de pagamento',
+  2: ({ payment, fullName, phone }) => {
+    if (!payment) {
+      return "Adicione uma forma de pagamento";
+    }
+
+    if (!fullName) {
+      return "Preencha o campo nome";
+    }
+
+    if (!phone) {
+      return "Preencha o campo de telefone para contato";
+    }
+
+    return "";
+  },
 };
 
 const useStepValidations = () => {
@@ -31,29 +48,25 @@ const useStepValidations = () => {
   const {
     otherSettingsStore: { minimumQuantity },
   } = useContext(StoreContext);
-  const { getValues, watch } = useFormContext();
+  const { getValues } = useFormContext();
 
-  const payment = watch('payment');
-
-  const validateCurrentStep = () => stepValidations[active](getValues(), minimumQuantity);
+  const validateCurrentStep = () =>
+    stepValidations[active](getValues(), minimumQuantity);
   const validateStep = (s) => stepValidations[s](getValues(), minimumQuantity);
-  const validateAll = () => Object.keys(stepValidations).map((_, i) => {
-    const validationResult = validateStep(i)
+  const validateAll = () =>
+    Object.keys(stepValidations).map((_, i) => {
+      const validationResult = validateStep(i);
 
-    if (validationResult) {
-      removeStepDone(i)
-    } else {
-      addStepDone(i)
-    }
+      if (validationResult) {
+        removeStepDone(i);
+      } else {
+        addStepDone(i);
+      }
 
-    return validationResult
-  })
+      return validationResult;
+    });
 
-  useEffect(() =>{
-    validateAll()
-  }, [payment])
-
-  return { validateCurrentStep, validateAll }
+  return { validateCurrentStep, validateAll };
 };
 
 export default useStepValidations;

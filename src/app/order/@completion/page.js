@@ -8,6 +8,9 @@ import getOrderSummary from "@/utils/getOrderSummary";
 import { Accordion, Label, Select } from "flowbite-react";
 
 import StoreContext from "@/contexts/store";
+import TextInput from "@/components/TextInput";
+import MaskedInput from "@/components/MaskedInput";
+import { HiPhone, HiUser } from "react-icons/hi";
 
 export default function Completion() {
   const { activeSnacks } = useContext(StoreContext);
@@ -22,11 +25,10 @@ export default function Completion() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="payment" value="Selecione a forma de pagamento" />
         <Select
           id="payment"
-          required
           onChange={(e) => setValue("payment", e.target.value)}
           defaultValue=""
         >
@@ -37,6 +39,29 @@ export default function Completion() {
           <option>PIX</option>
           <option>PicPay</option>
         </Select>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="name" value="Digite o seu nome" />
+        <TextInput
+          id="name"
+          name="fullName"
+          icon={HiUser}
+          onInput={(e) => setValue("fullName", e.target.value)}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="phone" value="Digite um telefone para contato" />
+        <MaskedInput
+          id="phone"
+          name="phone"
+          inputMode="tel"
+          mask="(27) 00000-0000"
+          lazy={false}
+          icon={HiPhone}
+          onInput={(e) => setValue("phone", e.target.value)}
+        />
       </div>
 
       <div className="flex flex-col gap-1">
