@@ -2,17 +2,16 @@
 
 import Divider from "@/components/Divider";
 import StoreContext from "@/contexts/store";
-import { Button, ToggleSwitch } from "flowbite-react";
 import React, { useContext, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { HiCurrencyDollar, HiHashtag } from "react-icons/hi";
 import { FaBalanceScale } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import MaskedInput from "@/components/MaskedInput";
-import FieldContainer from "./components/FieldContainer";
 import NumericField from "./components/NumericField";
 import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
+import FormControl from "@/components/FormControl";
 
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
@@ -79,17 +78,13 @@ function Admin() {
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="grid grid-cols-2 grid-flow-row gap-4 items-end">
             {/* TODO: Disable whatsapp field in PROD for security reasons */}
-            <FieldContainer
-              id="otherSettingsWhatsAppNumber"
-              label="Número do WhatsApp"
-              className="col-span-2"
-            >
+            <FormControl labelTop="Número do WhatsApp" className="col-span-2">
               <Controller
                 control={control}
                 name="otherSettings.whatsAppNumber"
                 render={({ field: { onChange, value } }) => (
                   <MaskedInput
-                    icon={RiWhatsappFill}
+                    leftIcon={RiWhatsappFill}
                     mask="(00) 0 0000-0000"
                     inputMode="tel"
                     value={value}
@@ -97,7 +92,7 @@ function Admin() {
                   />
                 )}
               />
-            </FieldContainer>
+            </FormControl>
 
             <NumericField
               name="otherSettings.unitWeightInGramsPartySnacks"
@@ -131,8 +126,8 @@ function Admin() {
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-xl font-medium">Salgados</h2>
-            <div className="flex flex-col">
+            <h2 className="text-xl font-medium mb-4">Salgados</h2>
+            <div className="flex flex-col gap-4">
               <Divider className="my-0" />
               {snacksStore.map(({ fieldName, name, active }, index) => (
                 <React.Fragment key={fieldName}>
@@ -145,9 +140,10 @@ function Admin() {
                       name={`snacks.${fieldName}`}
                       defaultValue={active}
                       render={({ field: { onChange, value } }) => (
-                        <ToggleSwitch
+                        <input
                           id={fieldName}
-                          color="primary"
+                          type="checkbox"
+                          className="toggle toggle-primary"
                           checked={value}
                           onChange={onChange}
                         />
@@ -160,27 +156,27 @@ function Admin() {
               ))}
             </div>
           </div>
-          <Button
+          <button
             type="submit"
-            color="primary"
-            className="w-full mt-4"
+            className="btn btn-primary"
             disabled={isUpdating}
-            isProcessing={isUpdating}
           >
+            {isUpdating && <span className="loading loading-spinner" />}
             Salvar
-          </Button>
+          </button>
 
-          <Button
-            color="gray"
+          <button
+            type="button"
+            className="btn"
             disabled={isLoggingOut}
-            isProcessing={isLoggingOut}
             onClick={() => {
               setIsLoggingOut(true);
               signOut({ callbackUrl: "/admin/login" });
             }}
           >
+            {isLoggingOut && <span className="loading loading-spinner" />}
             Sair
-          </Button>
+          </button>
         </form>
       </FormProvider>
     </div>

@@ -1,22 +1,23 @@
-import TextInput from "@/components/TextInput";
-import FieldContainer from "./FieldContainer";
 import { useFormContext } from "react-hook-form";
+import FormControl from "@/components/FormControl";
+import TextInputCustom from "@/components/TextInputCustom";
 
 function NumericField({ name, label, icon }) {
   const { register } = useFormContext();
 
   return (
-    <FieldContainer id={name} label={label}>
-      <TextInput
+    <FormControl labelTop={label}>
+      <TextInputCustom
         id={name}
         type="number"
         inputMode="decimal"
-        icon={icon}
+        leftIcon={icon}
         {...register(name, {
           valueAsNumber: true,
         })}
+        className="w-8"
       />
-    </FieldContainer>
+    </FormControl>
   );
 }
 
