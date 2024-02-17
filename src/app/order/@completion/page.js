@@ -5,12 +5,11 @@ import React, { useContext, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import getOrderSummary from "@/utils/getOrderSummary";
 
-import { Accordion, Label, Select } from "flowbite-react";
-
 import StoreContext from "@/contexts/store";
-import TextInput from "@/components/TextInput";
 import MaskedInput from "@/components/MaskedInput";
 import { HiPhone, HiUser } from "react-icons/hi";
+import TextInputCustom from "@/components/TextInputCustom";
+import FormControl from "@/components/FormControl";
 
 export default function Completion() {
   const { activeSnacks } = useContext(StoreContext);
@@ -24,11 +23,12 @@ export default function Completion() {
   );
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="payment" value="Selecione a forma de pagamento" />
-        <Select
+    <>
+      <FormControl labelTop="Selecione a forma de pagamento">
+        <select
           id="payment"
+          name="payment"
+          className="select select-bordered"
           onChange={(e) => setValue("payment", e.target.value)}
           defaultValue=""
         >
@@ -38,33 +38,31 @@ export default function Completion() {
           <option>Dinheiro</option>
           <option>PIX</option>
           <option>PicPay</option>
-        </Select>
-      </div>
+        </select>
+      </FormControl>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="name" value="Digite o seu nome" />
-        <TextInput
+      <FormControl labelTop="Digite o seu nome">
+        <TextInputCustom
           id="name"
           name="fullName"
-          icon={HiUser}
+          leftIcon={HiUser}
           onInput={(e) => setValue("fullName", e.target.value)}
         />
-      </div>
+      </FormControl>
 
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="phone" value="Digite um telefone para contato" />
+      <FormControl labelTop="Digite um telefone para contato">
         <MaskedInput
           id="phone"
           name="phone"
           inputMode="tel"
           mask="(27) 00000-0000"
           lazy={false}
-          icon={HiPhone}
+          leftIcon={HiPhone}
           onInput={(e) => setValue("phone", e.target.value)}
         />
-      </div>
+      </FormControl>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 mb-4">
         <h6 className="text-lg font-bold">Enviar o pedido</h6>
         <p className="text-base">
           Confira abaixo se o pedido está correto e, em seguida, clique no botão
@@ -73,14 +71,17 @@ export default function Completion() {
         </p>
       </div>
 
-      <Accordion>
-        <Accordion.Panel>
-          <Accordion.Title>Resumo do pedido</Accordion.Title>
-          <Accordion.Content>
-            <p className="whitespace-pre-wrap">{summary}</p>
-          </Accordion.Content>
-        </Accordion.Panel>
-      </Accordion>
-    </div>
+      <div
+        tabIndex={0}
+        className="collapse collapse-arrow collapse-open border border-base-300 bg-base-200"
+      >
+        <div className="collapse-title text-xl font-medium">
+          Resumo do pedido
+        </div>
+        <div className="collapse-content bg-white">
+          <p className="whitespace-pre-wrap pt-4">{summary}</p>
+        </div>
+      </div>
+    </>
   );
 }

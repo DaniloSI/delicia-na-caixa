@@ -5,9 +5,9 @@ import React, { useCallback, useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { CldImage } from "next-cloudinary";
-import { Button, TextInput } from "flowbite-react";
 import { sendGAEvent } from "@next/third-parties/google";
 import StoreContext from "@/contexts/store";
+import { twMerge } from "tailwind-merge";
 
 const QUANTITY_ADD_OR_REMOVE_CLICK = 10;
 
@@ -111,21 +111,19 @@ const SmallSavorySnacks = ({ snack }) => {
           </div>
 
           <div className="flex h-fit">
-            <Button
-              size="xs"
-              color="light"
-              className={`border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none py-2 ${
+            <button
+              type="button"
+              className={twMerge(
+                "btn btn-square btn-ghost py-2",
                 showInputField ? "" : "hidden"
-              }`}
+              )}
               onClick={handleSubtract}
             >
               <HiMinusSm className="h-6 w-6 text-red-700" />
-            </Button>
-            <TextInput
+            </button>
+            <input
               inputMode="numeric"
-              sizing="md"
-              color="gray"
-              className={`w-16 ${showInputField ? "" : "hidden"}`}
+              className={`input input-bordered w-16 ${showInputField ? "" : "hidden"}`}
               value={inputValue}
               onChange={(e) => {
                 const newValue = e.target.value.replaceAll(/\D/g, "");
@@ -148,14 +146,13 @@ const SmallSavorySnacks = ({ snack }) => {
                 }
               }}
             />
-            <Button
-              size="xs"
-              color="light"
-              className="border-none focus:ring-0 focus:bg-none hover:enabled:bg-color-none py-2"
+            <button
+              type="button"
+              className="btn btn-square btn-ghost py-2"
               onClick={handleAdd}
             >
               <HiPlusSm className="h-6 w-6 text-red-700" />
-            </Button>
+            </button>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { IMaskMixin } from 'react-imask';
-import { TextInput } from 'flowbite-react';
+import TextInputCustom from './TextInputCustom';
 
 const MaskedInput = IMaskMixin(({ inputRef, ...props }) => (
-  <TextInput
+  <TextInputCustom
     {...props}
     ref={inputRef}
   />

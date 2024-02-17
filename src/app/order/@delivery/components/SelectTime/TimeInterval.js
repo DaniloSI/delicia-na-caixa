@@ -1,20 +1,19 @@
-import { Label, Radio } from "flowbite-react";
-
 function TimeInterval({ timeInterval, onChange, checked }) {
   return (
-    <Label htmlFor={timeInterval} className="grow">
+    <label htmlFor={timeInterval} className="grow">
       <div className="flex justify-between">
         {timeInterval}
-        <Radio
+        <input
           id={timeInterval}
           name="time"
+          type="radio"
+          className="radio radio-primary"
+          checked={checked === timeInterval}
           value={timeInterval}
           onChange={(e) => onChange(e.target.value)}
-          checked={checked === timeInterval}
-          className="text-red-700 focus:ring-orange-500"
         />
       </div>
-    </Label>
+    </label>
   );
 }
 

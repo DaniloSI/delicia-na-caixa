@@ -15,7 +15,20 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: '#BC1823',
+          neutral: 'gray',
+          "--rounded-box": ".5rem"
+        }
+      }
+    ]
+  },
   plugins: [
     require('flowbite/plugin'),
+    require("daisyui"),
   ],
 }

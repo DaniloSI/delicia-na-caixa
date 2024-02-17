@@ -5,7 +5,6 @@ import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
 import { getTotal, getTotalPrice } from "@/utils/calc";
 import { formatPrice } from "@/utils/format";
-import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
 import { FiSend } from "react-icons/fi";
@@ -86,28 +85,23 @@ export default function Resume() {
         </div>
 
         <div className="flex justify-end gap-2">
-          <Button
+          <button
             type="button"
-            size="sm"
-            outline
-            color="light"
-            className={`w-5/12 ${active === 0 ? "invisible" : ""}`}
+            className={`btn btn-outline w-5/12 ${active === 0 ? "invisible" : ""}`}
             onClick={handlePrev}
           >
             Voltar
-          </Button>
-          <Button
+          </button>
+          <button
             key={btnLabelNext}
             type={isLastActive ? "submit" : "button"}
             onClick={isLastActive ? undefined : handleNext}
-            size="sm"
-            color="primary"
-            className="w-7/12"
+            className="btn btn-primary w-7/12"
           >
             {isLastActive && <FiSend className="mr-2 h-5 w-5" />}
             {btnLabelNext}
             {!isLastActive && <HiOutlineArrowRight className="ml-2 h-5 w-5" />}
-          </Button>
+          </button>
         </div>
       </div>
     </div>

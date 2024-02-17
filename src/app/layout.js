@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { Flowbite } from "flowbite-react";
 
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
@@ -52,7 +53,7 @@ export default async function RootLayout({ children }) {
   };
 
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" data-theme="light">
       <body className={inter.className}>
         <Flowbite theme={{ theme }}>
           <StoreProvider value={store}>
