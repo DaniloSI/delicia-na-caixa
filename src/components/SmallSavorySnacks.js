@@ -128,9 +128,9 @@ const SmallSavorySnacks = ({ snack }) => {
               className={`w-16 ${showInputField ? "" : "hidden"}`}
               value={inputValue}
               onChange={(e) => {
-                const newValue = Number(e.target.value.replaceAll(/\D/g, ""));
+                const newValue = e.target.value.replaceAll(/\D/g, "");
                 setInputValue(newValue);
-                setValue(fieldName, newValue);
+                setValue(fieldName, Number(newValue));
               }}
               onFocus={(e) => setTempValue(Number(e.target.value))}
               onBlur={(e) => {
