@@ -128,7 +128,7 @@ const SmallSavorySnacks = ({ snack }) => {
               className={`w-16 ${showInputField ? "" : "hidden"}`}
               value={inputValue}
               onChange={(e) => {
-                const newValue = e.target.value.replaceAll(/\D/g, "");
+                const newValue = Number(e.target.value.replaceAll(/\D/g, ""));
                 setInputValue(newValue);
                 setValue(fieldName, newValue);
               }}
