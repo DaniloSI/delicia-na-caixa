@@ -1,24 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { Controller, useFormContext } from "react-hook-form";
 
 import MaskedInput from "@/components/MaskedInput";
-
-import { getTomorrowDate } from "@/utils/date";
 import { SelectTime } from "./components/SelectTime";
 import FormControl from "@/components/FormControl";
-import ReactDatePicker from "react-datepicker";
 import TextInputCustom from "@/components/TextInputCustom";
 import { HiCalendar } from "react-icons/hi";
+import DatePicker from "@/components/DatePicker";
 
 export default function Delivery() {
   const { control, watch, setValue } = useFormContext();
-  const [date, setDate] = useState(getTomorrowDate());
+  const modalRef = useRef();
 
   const reception = watch("reception");
   const cep = watch("address.cep");
+  const date = watch("date");
 
   useEffect(() => {
     if (cep?.length === 9) {
@@ -33,24 +32,35 @@ export default function Delivery() {
     }
   }, [cep, setValue]);
 
+  const formattedDate = date
+    ? new Intl.DateTimeFormat("pt-BR", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }).format(date)
+    : "";
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col">
-          <label className="label" htmlFor="deliveryDate">
-            <span className="label-text">Data da entrega/retirada</span>
-          </label>
-          <ReactDatePicker
-            selected={date}
+        <FormControl labelTop="Data da entrega/retirada">
+          <TextInputCustom
+            id="deliveryDate"
+            name="deliveryDate"
+            leftIcon={HiCalendar}
+            readOnly
+            value={formattedDate}
+            onClick={() => {
+              modalRef.current.showModal();
+            }}
+          />
+          <DatePicker
+            ref={modalRef}
             onSelect={(date) => {
-              setDate(date);
               setValue("date", date);
             }}
-            customInput={
-              <TextInputCustom id="deliveryDate" leftIcon={HiCalendar} />
-            }
           />
-        </div>
+        </FormControl>
 
         <SelectTime />
       </div>

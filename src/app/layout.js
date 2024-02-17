@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
+import 'react-day-picker/dist/style.css';
 import "./globals.css";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 

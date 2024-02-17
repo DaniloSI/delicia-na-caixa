@@ -20,13 +20,13 @@ module.exports = {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
           primary: '#BC1823',
-          neutral: 'gray',
           "--rounded-box": ".5rem"
         }
       }
     ]
   },
   plugins: [
+    require('@tailwindcss/typography'),
     require("daisyui"),
   ],
 }
