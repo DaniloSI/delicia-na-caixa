@@ -86,11 +86,12 @@ const SmallSavorySnacks = ({ snack }) => {
     <div className="flex bg-white flex-row max-w-xl gap-4 items-center">
       <div className="min-w-16 w-16">
         <CldImage
-          className="rounded-lg object-cover"
+          className="rounded-lg"
           src={"delicia-na-caixa/" + image}
           width="500"
           height="500"
           alt={name}
+          crop="thumb"
         />
       </div>
 
