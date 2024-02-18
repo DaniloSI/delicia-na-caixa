@@ -46,6 +46,7 @@ export default function Payment() {
             name="fullName"
             leftIcon={HiUser}
             onInput={(e) => setValue("fullName", e.target.value)}
+            placeholder="Digite aqui o seu nome"
           />
         </FormControl>
 
@@ -57,6 +58,7 @@ export default function Payment() {
             mask="(27) 00000-0000"
             leftIcon={HiPhone}
             onInput={(e) => setValue("phone", e.target.value)}
+            placeholder="Digite aqui o seu número"
           />
         </FormControl>
       </div>
