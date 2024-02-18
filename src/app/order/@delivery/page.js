@@ -8,8 +8,9 @@ import MaskedInput from "@/components/MaskedInput";
 import { SelectTime } from "./components/SelectTime";
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
-import { HiCalendar } from "react-icons/hi";
+import { HiCalendar, HiPencil } from "react-icons/hi";
 import DatePicker from "@/components/DatePicker";
+import { FaAngleRight } from "react-icons/fa";
 
 export default function Delivery() {
   const { control, watch, setValue } = useFormContext();
@@ -48,11 +49,13 @@ export default function Delivery() {
             id="deliveryDate"
             name="deliveryDate"
             leftIcon={HiCalendar}
+            rightIcon={date ? HiPencil : FaAngleRight}
             readOnly
             value={formattedDate}
             onClick={() => {
               modalRef.current.showModal();
             }}
+            placeholder="Selecione uma data"
           />
           <DatePicker
             ref={modalRef}
@@ -79,11 +82,11 @@ export default function Delivery() {
               type="radio"
               value="retire"
               defaultChecked
-              className="radio radio-primary"
+              className="radio radio-primary mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
-          <div className="ms-2 text-sm">
+          <div className="ms-2">
             <label htmlFor="retire" className="font-medium text-gray-900">
               Retirar
               <p className="text-xs font-normal text-gray-500">
@@ -104,11 +107,11 @@ export default function Delivery() {
               aria-describedby="delivery"
               type="radio"
               value="delivery"
-              className="radio radio-primary"
+              className="radio radio-primary mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
-          <div className="ms-2 text-sm">
+          <div className="ms-2">
             <label htmlFor="delivery" className="font-medium text-gray-900">
               Entrega
               <p className="text-xs font-normal text-gray-500">

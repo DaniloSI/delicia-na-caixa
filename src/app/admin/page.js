@@ -13,6 +13,11 @@ import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
 import FormControl from "@/components/FormControl";
 
+const getUnityComponent = (text) => {
+  const component = () => (<p className="text-sm text-gray-500">{text}</p>);
+  return component;
+}
+
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
     useContext(StoreContext);
@@ -72,11 +77,15 @@ function Admin() {
   });
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold">Configurações</h1>
+    <div className="flex flex-col">
+      <div>
+        <h1 className="text-2xl font-medium">Configurações</h1>
+        <Divider />
+      </div>
+
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
-          <div className="grid grid-cols-2 grid-flow-row gap-4 items-end">
+          <div className="grid grid-cols-2 grid-flow-row gap-y-2 gap-x-4 items-end">
             {/* TODO: Disable whatsapp field in PROD for security reasons */}
             <FormControl labelTop="Número do WhatsApp" className="col-span-2">
               <Controller
@@ -96,32 +105,36 @@ function Admin() {
 
             <NumericField
               name="otherSettings.unitWeightInGramsPartySnacks"
-              label="Peso do salgado em gramas"
-              icon={FaBalanceScale}
+              label="Peso do salgado"
+              leftIcon={FaBalanceScale}
+              rightIcon={getUnityComponent("gramas")}
             />
 
             <NumericField
               name="otherSettings.unitWeightInGramsMiniChurros"
-              label="Peso do mini churros em gramas"
-              icon={FaBalanceScale}
+              label="Peso do mini churros"
+              leftIcon={FaBalanceScale}
+              rightIcon={getUnityComponent("gramas")}
             />
 
             <NumericField
               name="centPrice.partySnacks"
-              label="Preço do cento do salgado"
-              icon={HiCurrencyDollar}
+              label="Preço do salgado"
+              leftIcon={HiCurrencyDollar}
+              rightIcon={getUnityComponent("cento")}
             />
 
             <NumericField
               name="centPrice.miniChurros"
-              label="Preço do cento do mini churros"
-              icon={HiCurrencyDollar}
+              label="Preço do mini churros"
+              leftIcon={HiCurrencyDollar}
+              rightIcon={getUnityComponent("cento")}
             />
 
             <NumericField
               name="otherSettings.minimumQuantity"
-              label="Quantidade mínima por pedido"
-              icon={HiHashtag}
+              label="Quant. mínima por pedido"
+              leftIcon={HiHashtag}
             />
           </div>
 
@@ -167,7 +180,7 @@ function Admin() {
 
           <button
             type="button"
-            className="btn"
+            className="btn mb-4"
             disabled={isLoggingOut}
             onClick={() => {
               setIsLoggingOut(true);

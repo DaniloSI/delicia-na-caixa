@@ -11,7 +11,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { getTotal } from "@/utils/calc";
 
 import Divider from "@/components/Divider";
-import { getTomorrowDate } from "@/utils/date";
 import FormContainer from "./components/FormContainer";
 import { StepperContextProvider } from "@/contexts/stepper";
 
@@ -21,7 +20,6 @@ export default function OrderLayout({ choices, delivery, completion }) {
       snacks: {},
       reception: "retire",
       cep: "",
-      date: getTomorrowDate(),
     },
   });
   const { watch } = methods;

@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaAngleRight } from "react-icons/fa";
 import TimeInterval from "./TimeInterval";
-import { HiPencil } from "react-icons/hi";
+import { HiClock, HiPencil } from "react-icons/hi";
 import { padStart } from "@/utils/format";
 import Divider from "@/components/Divider";
 import FormControl from "@/components/FormControl";
@@ -43,6 +43,7 @@ function SelectTime() {
       <TextInputCustom
         id="schedule"
         placeholder="Selecione um horário"
+        leftIcon={HiClock}
         rightIcon={time ? HiPencil : FaAngleRight}
         onClick={handleOpenModal}
         value={time}

@@ -62,7 +62,7 @@ export default function Completion() {
         />
       </FormControl>
 
-      <div className="flex flex-col gap-1 mb-4">
+      <div className="flex flex-col gap-1 my-6">
         <h6 className="text-lg font-bold">Enviar o pedido</h6>
         <p className="text-base">
           Confira abaixo se o pedido está correto e, em seguida, clique no botão
@@ -71,10 +71,7 @@ export default function Completion() {
         </p>
       </div>
 
-      <div
-        tabIndex={0}
-        className="collapse collapse-arrow collapse-open border border-base-300 bg-base-200"
-      >
+      <div className="collapse collapse-arrow collapse-open border border-base-300 bg-base-200">
         <div className="collapse-title text-xl font-medium">
           Resumo do pedido
         </div>

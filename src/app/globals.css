@@ -24,6 +24,6 @@ input::-webkit-inner-spin-button {
 
 .rdp-button:focus-visible:not([disabled]),
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  border: none;
-  background-color: #BC182324;
+  border: none !important;
+  background-color: #BC182324 !important;
 }

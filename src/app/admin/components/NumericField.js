@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
 
-function NumericField({ name, label, icon }) {
+function NumericField({ name, label, leftIcon, rightIcon }) {
   const { register } = useFormContext();
 
   return (
@@ -11,7 +11,8 @@ function NumericField({ name, label, icon }) {
         id={name}
         type="number"
         inputMode="decimal"
-        leftIcon={icon}
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
         {...register(name, {
           valueAsNumber: true,
         })}

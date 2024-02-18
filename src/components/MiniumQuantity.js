@@ -12,7 +12,7 @@ const MinimumQuantity = () => {
 
   return (
     showAlert && (
-      <div role="alert" className="alert grid-flow-col p-2 mb-4 text-gray-500">
+      <div role="alert" className="alert grid-flow-col px-2 py-1 mb-4 text-gray-500">
         <HiOutlineInformationCircle className="h-5 w-5" />
 
         <span className="text-sm font-medium md:m-0 md:mb-0">

@@ -1,7 +1,7 @@
 import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
 import { getTotal } from "@/utils/calc";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
 
 export const stepValidations = {
@@ -9,9 +9,13 @@ export const stepValidations = {
     getTotal(snacks) >= minimumQuantity
       ? ""
       : `Adicione no mínimo ${minimumQuantity} unidades`,
-  1: ({ time, reception, address: { cep, number } = {} }) => {
+  1: ({ date, time, reception, address: { cep, number } = {} }) => {
+    if (!date) {
+      return "Selecione uma data para receber o produto";
+    }
+
     if (!time) {
-      return "Adicione um horário";
+      return "Adicione um horário para receber o produto";
     }
 
     if (reception === "delivery") {

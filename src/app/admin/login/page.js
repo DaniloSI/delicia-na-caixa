@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { HiKey, HiMail, HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
+import ShowPassword from "./components/ShowPassword";
 
 function Login() {
   const router = useRouter();
@@ -66,31 +67,23 @@ function Login() {
           />
         </FormControl>
 
-        <div className="flex gap-2 items-end">
-          <FormControl labelTop="Senha">
-            <TextInputCustom
-              className="px-0"
-              id="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Digite sua senha"
-              autoComplete="current-password"
-              leftIcon={HiKey}
-            />
-          </FormControl>
-
-          <button
-            type="button"
-            class="btn btn-outline"
-            onClick={() => setShowPassword((s) => !s)}
-          >
-            {showPassword ? (
-              <HiOutlineEyeOff className="h-5 w-5" />
-            ) : (
-              <HiOutlineEye className="h-5 w-5" />
-            )}
-          </button>
-        </div>
+        <FormControl labelTop="Senha">
+          <TextInputCustom
+            className="px-0"
+            id="password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Digite sua senha"
+            autoComplete="current-password"
+            leftIcon={HiKey}
+            after={
+              <ShowPassword
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+              />
+            }
+          />
+        </FormControl>
 
         <button
           type="submit"
