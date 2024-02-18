@@ -1,16 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
@@ -19,14 +19,20 @@ module.exports = {
       {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
-          primary: '#BC1823',
-          "--rounded-box": ".5rem"
-        }
-      }
-    ]
+          primary: "#BC1823",
+          secondary: "#F28705",
+          "--rounded-box": ".5rem",
+
+          ".steps .step:before": {
+            height: "0.35rem",
+          },
+          ".steps .step:after": {
+            height: "1.75rem",
+            width: "1.75rem",
+          },
+        },
+      },
+    ],
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require("daisyui"),
-  ],
-}
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+};

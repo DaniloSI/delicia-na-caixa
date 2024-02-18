@@ -56,7 +56,7 @@ export default async function RootLayout({ children }) {
           <main className="flex flex-col justify-items-center gap-6 min-h-screen py-5 px-4 md:max-w-96 m-auto">
             <Image
               src={Logo}
-              height={50}
+              height={40}
               className="place-self-center"
               alt="Logo delícia na caixa"
               priority

@@ -2,6 +2,7 @@ import { forwardRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { ptBR } from "date-fns/locale";
 import Divider from "./Divider";
+import { getDate } from "@/utils/date";
 
 function DatePicker({ onSelect, footer }, ref) {
   const [date, setDate] = useState();
@@ -34,6 +35,7 @@ function DatePicker({ onSelect, footer }, ref) {
             showOutsideDays
             locale={ptBR}
             footer={footer}
+            disabled={{ before: getDate(1), after: getDate(30 * 6) }}
           />
         </div>
 

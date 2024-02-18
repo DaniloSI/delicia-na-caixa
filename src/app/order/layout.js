@@ -14,7 +14,7 @@ import Divider from "@/components/Divider";
 import FormContainer from "./components/FormContainer";
 import { StepperContextProvider } from "@/contexts/stepper";
 
-export default function OrderLayout({ choices, delivery, completion }) {
+export default function OrderLayout({ choices, delivery, payment, confirmation }) {
   const methods = useForm({
     defaultValues: {
       snacks: {},
@@ -30,7 +30,8 @@ export default function OrderLayout({ choices, delivery, completion }) {
     () => [
       { name: "Escolha", done: getTotal(snacks || {}) >= 100 },
       { name: "Retirada", done: false },
-      { name: "Finalização", done: false },
+      { name: "Pagamento e identificação", done: false },
+      { name: "Confirmação", done: false },
     ],
     [snacks]
   );
@@ -44,7 +45,8 @@ export default function OrderLayout({ choices, delivery, completion }) {
 
             <StepperItem step={0}>{choices}</StepperItem>
             <StepperItem step={1}>{delivery}</StepperItem>
-            <StepperItem step={2}>{completion}</StepperItem>
+            <StepperItem step={2}>{payment}</StepperItem>
+            <StepperItem step={3}>{confirmation}</StepperItem>
 
             <div className="h-36" />
 

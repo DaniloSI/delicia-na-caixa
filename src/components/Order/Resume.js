@@ -21,8 +21,7 @@ export default function Resume() {
     addStepDone,
     removeStepDone,
   } = useContext(StepperContext);
-  const { activeSnacks, centPriceStore } =
-    useContext(StoreContext);
+  const { activeSnacks, centPriceStore } = useContext(StoreContext);
   const { watch } = useFormContext();
   const { validateCurrentStep } = useStepValidations();
 
@@ -31,16 +30,11 @@ export default function Resume() {
   const amount = getTotal(snacks);
   const subTotal = getTotalPrice(snacks, activeSnacks);
 
-  const btnLabelNext = [
-    "Ir para a entrega",
-    "Ir para a finalização",
-    "Enviar pedido",
-  ][active];
-
   const handleNext = () => {
     const validationResult = validateCurrentStep();
 
     if (validationResult) {
+      removeStepDone(active);
       return toast.error(validationResult);
     }
 
@@ -56,7 +50,7 @@ export default function Resume() {
     } else {
       addStepDone(active);
     }
-
+    
     prevStep();
   };
 
@@ -80,27 +74,39 @@ export default function Resume() {
 
           <div className="flex flex-col">
             <p>Quantidade: {amount}</p>
-            <p>{reception === 'retire' ? 'Total' : 'Subtotal'}: {subTotal}</p>
+            <p>
+              {reception === "retire" ? "Total" : "Subtotal"}: {subTotal}
+            </p>
           </div>
         </div>
 
         <div className="flex justify-end gap-2">
           <button
             type="button"
-            className={`btn btn-outline w-5/12 ${active === 0 ? "invisible" : ""}`}
+            className={`btn btn-outline w-5/12 ${
+              active === 0 ? "invisible" : ""
+            }`}
             onClick={handlePrev}
           >
             Voltar
           </button>
           <button
-            key={btnLabelNext}
+            key={active}
             type={isLastActive ? "submit" : "button"}
             onClick={isLastActive ? undefined : handleNext}
             className="btn btn-primary w-7/12"
           >
-            {isLastActive && <FiSend className="mr-2 h-5 w-5" />}
-            {btnLabelNext}
-            {!isLastActive && <HiOutlineArrowRight className="ml-2 h-5 w-5" />}
+            {isLastActive ? (
+              <>
+                <FiSend className="mr-2 h-5 w-5" />
+                Enviar pedido
+              </>
+            ) : (
+              <>
+                <HiOutlineArrowRight className="ml-2 h-5 w-5" />
+                Continuar
+              </>
+            )}
           </button>
         </div>
       </div>
