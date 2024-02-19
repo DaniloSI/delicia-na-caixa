@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import 'react-day-picker/dist/style.css';
+import "react-day-picker/dist/style.css";
 import "./globals.css";
 
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
@@ -51,6 +51,12 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="pt-BR" data-theme="light">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=1"
+        />
+      </head>
       <body className={inter.className}>
         <StoreProvider value={store}>
           <main className="flex flex-col justify-items-center gap-6 min-h-screen py-5 px-4 md:max-w-96 m-auto">
