@@ -5,7 +5,7 @@ const getOrderList = (snacks) => Object.entries(snacks)
   .map(([name, amount]) => `- ${amount} ${name}\n`)
   .join('')
 
-const getAddress = ({ street, number, complement, neighborhood, city, state }) =>
+const getAddress = ({ street, number, complement, neighborhood, city, state } = {}) =>
   `\nEndereço de *entrega*: ${street}, Nº ${number}${complement ? ',' + complement : ''}, ${neighborhood}, ${city}-${state}\n`
 
 const formatDate = (date) => new Intl.DateTimeFormat('pt-BR', {

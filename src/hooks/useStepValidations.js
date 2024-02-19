@@ -13,7 +13,7 @@ const deliveryValidation = ({
   date,
   time,
   reception,
-  address: { cep, number } = {},
+  address = {},
 }) => {
   if (!date) {
     return "Selecione uma data para receber o produto";
@@ -24,12 +24,9 @@ const deliveryValidation = ({
   }
 
   if (reception === "delivery") {
-    if (!cep || cep.length !== 9) {
-      return "Adicione um endereço de entrega";
-    }
-
-    if (!number) {
-      return "Adicione o número do endereço";
+    const requiredFields = ["street", "number", "neighborhood", "city"];
+    if (requiredFields.some((field) => !address[field])){
+      return "Adicione uma endereço de entrega";
     }
   }
 

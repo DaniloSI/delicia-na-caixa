@@ -21,6 +21,8 @@ module.exports = {
           ...require("daisyui/src/theming/themes")["light"],
           primary: "#BC1823",
           secondary: "#F28705",
+          error: "#F12B38",
+          "error-content": "#FFF",
           "--rounded-box": ".5rem",
 
           ".steps .step:before": {

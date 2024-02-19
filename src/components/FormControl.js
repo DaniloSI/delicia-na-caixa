@@ -6,14 +6,21 @@ function FormControl({
   labelBottom,
   labelAltBottom,
   children,
-  className = ''
+  className = "",
+  required = false,
 }) {
   return (
     <label className={twMerge("form-control w-full", className)}>
-      <div className="label">
-        <span className="label-text">{labelTop}</span>
-        {labelAltTop && <span className="label-text-alt">{labelAltTop}</span>}
-      </div>
+      {(labelTop || labelAltTop) && (
+        <div className="label">
+          {labelTop && (
+            <span className="label-text">
+              {labelTop} {required && <span className="text-red-500">*</span>}
+            </span>
+          )}
+          {labelAltTop && <span className="label-text-alt">{labelAltTop}</span>}
+        </div>
+      )}
       {children}
       {(labelBottom || labelAltBottom) && (
         <div className="label">
