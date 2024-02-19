@@ -121,7 +121,7 @@ const SmallSavorySnacks = ({ snack }) => {
                 </button>
                 <input
                   inputMode="numeric"
-                  className={`input input-bordered input-sm w-16 ${
+                  className={`input input-bordered input-sm text-center w-16 ${
                     showInputField ? "" : "hidden"
                   }`}
                   value={inputValue}
