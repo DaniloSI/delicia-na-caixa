@@ -108,52 +108,56 @@ const SmallSavorySnacks = ({ snack }) => {
               <span className="text-xs grow text-gray-500 font-light">
                 Unidade: {unitWeightInGrams}g
               </span>
+              <div className="flex h-fit">
+                <button
+                  type="button"
+                  className={twMerge(
+                    "btn btn-square btn-ghost btn-sm",
+                    showInputField ? "" : "hidden"
+                  )}
+                  onClick={handleSubtract}
+                >
+                  <HiMinusSm className="h-6 w-6 text-red-700" />
+                </button>
+                <input
+                  inputMode="numeric"
+                  className={`input input-bordered input-sm w-16 ${
+                    showInputField ? "" : "hidden"
+                  }`}
+                  value={inputValue}
+                  onChange={(e) => {
+                    const newValue = e.target.value.replaceAll(/\D/g, "");
+                    setInputValue(newValue);
+                    setValue(fieldName, Number(newValue));
+                  }}
+                  onFocus={(e) => setTempValue(Number(e.target.value))}
+                  onBlur={(e) => {
+                    const newValue = Number(e.target.value);
+                    const difference = newValue - tempValue;
+
+                    if (difference > 0) {
+                      updateCartGaEvent("add_to_cart", difference);
+                    } else if (difference < 0) {
+                      updateCartGaEvent(
+                        "remove_from_cart",
+                        Math.abs(difference)
+                      );
+                    }
+
+                    if (newValue === 0) {
+                      setShowInputField(false);
+                    }
+                  }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-square btn-ghost btn-sm"
+                  onClick={handleAdd}
+                >
+                  <HiPlusSm className="h-6 w-6 text-red-700" />
+                </button>
+              </div>
             </div>
-          </div>
-
-          <div className="flex h-fit">
-            <button
-              type="button"
-              className={twMerge(
-                "btn btn-square btn-ghost py-2",
-                showInputField ? "" : "hidden"
-              )}
-              onClick={handleSubtract}
-            >
-              <HiMinusSm className="h-6 w-6 text-red-700" />
-            </button>
-            <input
-              inputMode="numeric"
-              className={`input input-bordered w-16 ${showInputField ? "" : "hidden"}`}
-              value={inputValue}
-              onChange={(e) => {
-                const newValue = e.target.value.replaceAll(/\D/g, "");
-                setInputValue(newValue);
-                setValue(fieldName, Number(newValue));
-              }}
-              onFocus={(e) => setTempValue(Number(e.target.value))}
-              onBlur={(e) => {
-                const newValue = Number(e.target.value);
-                const difference = newValue - tempValue;
-
-                if (difference > 0) {
-                  updateCartGaEvent("add_to_cart", difference);
-                } else if (difference < 0) {
-                  updateCartGaEvent("remove_from_cart", Math.abs(difference));
-                }
-
-                if (newValue === 0) {
-                  setShowInputField(false);
-                }
-              }}
-            />
-            <button
-              type="button"
-              className="btn btn-square btn-ghost py-2"
-              onClick={handleAdd}
-            >
-              <HiPlusSm className="h-6 w-6 text-red-700" />
-            </button>
           </div>
         </div>
       </div>

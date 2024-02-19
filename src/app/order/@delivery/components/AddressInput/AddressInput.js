@@ -22,10 +22,10 @@ function AddressInput() {
   const reception = watch("reception");
 
   useEffect(() => {
-    if (reception === 'delivery') {
+    if (reception === "delivery") {
       refAddress.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [reception])
+  }, [reception]);
 
   const handleChangeCep = (e) => {
     const cep = e.target.value;
@@ -95,7 +95,6 @@ function AddressInput() {
 
           <Divider className="my-2" />
 
-
           <div className="flex-1 overflow-auto">
             {requiredFieldsError && (
               <div role="alert" className="alert alert-error grid-flow-col p-2">
@@ -105,7 +104,7 @@ function AddressInput() {
                 </span>
               </div>
             )}
-            
+
             <div className="grid grid-cols-4 gap-y-1 gap-x-2">
               <FormControl labelTop="CEP" className="col-span-4">
                 <MaskedInput
