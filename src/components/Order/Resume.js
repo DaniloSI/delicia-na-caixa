@@ -7,10 +7,11 @@ import { getTotal, getTotalPrice } from "@/utils/calc";
 import { formatPrice } from "@/utils/format";
 import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-import { FiSend } from "react-icons/fi";
+import { FiArrowRight, FiSend } from "react-icons/fi";
 
 import { toast } from "react-toastify";
 import { HiOutlineArrowRight } from "react-icons/hi";
+import { twMerge } from "tailwind-merge";
 
 export default function Resume() {
   const {
@@ -50,7 +51,7 @@ export default function Resume() {
     } else {
       addStepDone(active);
     }
-    
+
     prevStep();
   };
 
@@ -83,9 +84,10 @@ export default function Resume() {
         <div className="flex justify-end gap-2">
           <button
             type="button"
-            className={`btn btn-outline w-5/12 ${
+            className={twMerge(
+              "btn btn-ghost w-5/12",
               active === 0 ? "invisible" : ""
-            }`}
+            )}
             onClick={handlePrev}
           >
             Voltar
@@ -103,8 +105,8 @@ export default function Resume() {
               </>
             ) : (
               <>
-                <HiOutlineArrowRight className="ml-2 h-5 w-5" />
                 Continuar
+                <FiArrowRight className="ml-2 h-5 w-5" />
               </>
             )}
           </button>
