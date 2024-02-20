@@ -29,7 +29,7 @@ export default function Delivery() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <FormControl labelTop="Data da entrega/retirada">
           <TextInputCustom
             id="deliveryDate"
