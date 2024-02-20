@@ -59,7 +59,7 @@ export default function Resume() {
     formatPrice(centPriceStore?.[type], { minimumFractionDigits: 0 });
 
   return (
-    <div className="grow flex items-end sticky right-0 bottom-0">
+    <div className="flex items-end sticky right-0 bottom-0">
       <div className="bg-white w-full px-4 pb-4 pt-2 shadow-[0_0_10px_rgba(0,0,0,.1)]">
         <div className="max-w-96 m-auto">
           {active === 0 && (
