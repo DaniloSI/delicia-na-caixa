@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 
 import { useFormContext } from "react-hook-form";
 
@@ -11,10 +11,38 @@ import { HiCalendar, HiPencil } from "react-icons/hi";
 import DatePicker from "@/components/DatePicker";
 import { FaAngleRight } from "react-icons/fa";
 import { AddressInput } from "./components/AddressInput";
+import StepperContext from "@/contexts/stepper";
+import { sendGAEvent } from "@next/third-parties/google";
+import { getTotalPrice } from "@/utils/calc";
+import StoreContext from "@/contexts/store";
 
 export default function Delivery() {
-  const { watch, setValue } = useFormContext();
+  const { active } = useContext(StepperContext);
+  const { activeSnacks } = useContext(StoreContext);
+  const { watch, setValue, getValues } = useFormContext();
   const modalRef = useRef();
+
+  useEffect(() => {
+    if (active === 1) {
+      const snacks = getValues("snacks");
+
+      sendGAEvent({
+        event: "begin_checkout",
+        ecommerce: {
+          currency: "BRL",
+          value: getTotalPrice(snacks, activeSnacks),
+          items: activeSnacks
+            .map((s) => ({
+              item_id: s.fieldName,
+              item_name: s.name,
+              quantity: snacks[s.namePlural] || 0,
+              price: s.centPrice / 100,
+            }))
+            .filter((s) => s.quantity > 0),
+        },
+      });
+    }
+  }, [active, activeSnacks, getValues]);
 
   const reception = watch("reception");
   const date = watch("date");
@@ -114,13 +142,15 @@ export default function Delivery() {
         </div>
       </div>
 
-      {<div className={reception === "retire" ? "hidden" : ""}>
-        <h3 className="font-semibold text-gray-900 mb-4">
-          Endereço para entrega
-        </h3>
+      {
+        <div className={reception === "retire" ? "hidden" : ""}>
+          <h3 className="font-semibold text-gray-900 mb-4">
+            Endereço para entrega
+          </h3>
 
-        <AddressInput />        
-      </div>}
+          <AddressInput />
+        </div>
+      }
     </div>
   );
 }

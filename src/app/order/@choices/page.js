@@ -20,26 +20,26 @@ export default function Choices() {
       () => {
         sendGAEvent({
           event: "view_item_list",
-          items: activeSnacks.map(snack => ({
-            item_id: snack.fieldName,
-            item_name: snack.name,
-          }))
+          ecommerce: {
+            items: activeSnacks.map((snack) => ({
+              item_id: snack.fieldName,
+              item_name: snack.name,
+            })),
+          },
         });
       }
     );
-  }, [activeSnacks])
+  }, [activeSnacks]);
 
   return (
     <>
       <MinimumQuantity />
-      {activeSnacks.map(
-        (snack, index) => (
-          <React.Fragment key={snack.name}>
-            <SmallSavorySnacks snack={snack} />
-            {index < activeSnacks.length - 1 && <Divider />}
-          </React.Fragment>
-        )
-      )}
+      {activeSnacks.map((snack, index) => (
+        <React.Fragment key={snack.name}>
+          <SmallSavorySnacks snack={snack} />
+          {index < activeSnacks.length - 1 && <Divider />}
+        </React.Fragment>
+      ))}
     </>
   );
 }

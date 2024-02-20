@@ -11,6 +11,10 @@ import getOrderMessage from "@/utils/getOrderMessage";
 import { toast } from "react-toastify";
 import useStepValidations from "@/hooks/useStepValidations";
 
+import { v4 as uuidv4 } from 'uuid';
+import { sendGAEvent } from "@next/third-parties/google";
+import { getTotalPrice } from "@/utils/calc";
+
 export default function FormContainer({ children }) {
   const {
     activeSnacks,
@@ -29,6 +33,25 @@ export default function FormContainer({ children }) {
     }
 
     const message = encode(getOrderMessage(data, activeSnacks));
+
+    const snacks = data.snacks;
+
+    sendGAEvent({
+      event: "purchase",
+      ecommerce: {
+        currency: "BRL",
+        transaction_id: uuidv4(),
+        value: getTotalPrice(snacks, activeSnacks),
+        items: activeSnacks
+          .map((s) => ({
+            item_id: s.fieldName,
+            item_name: s.name,
+            quantity: snacks[s.namePlural] || 0,
+            price: s.centPrice / 100,
+          }))
+          .filter((s) => s.quantity > 0),
+      },
+    });
 
     sendRef.current.href = `whatsapp://send?phone=55${whatsAppNumber}&text=${message}`;
     sendRef.current.click();
