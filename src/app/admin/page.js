@@ -77,7 +77,7 @@ function Admin() {
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-4">
       <div>
         <h1 className="text-2xl font-medium">Configurações</h1>
         <Divider />

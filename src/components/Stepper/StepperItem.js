@@ -7,7 +7,7 @@ import StepperContext from '@/contexts/stepper';
 const StepperItem = ({ step, className = '', children }) => {
   const { active } = useContext(StepperContext);
   return (
-    <div className={`${step !== active ? 'hidden' : ''} ${className}`}>
+    <div className={`mx-4 mb-6 ${step !== active ? 'hidden' : ''} ${className}`}>
       {children}
     </div>
   )

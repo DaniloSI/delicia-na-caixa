@@ -30,6 +30,10 @@ export default function Delivery() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
+        <h3 className="font-semibold text-gray-900">
+          Quando deseja receber seu pedido?
+        </h3>
+
         <FormControl labelTop="Data da entrega/retirada">
           <TextInputCustom
             id="deliveryDate"
@@ -110,13 +114,13 @@ export default function Delivery() {
         </div>
       </div>
 
-      <div className={reception === "retire" ? "hidden" : ""}>
+      {<div className={reception === "retire" ? "hidden" : ""}>
         <h3 className="font-semibold text-gray-900 mb-4">
           Endereço para entrega
         </h3>
 
         <AddressInput />        
-      </div>
+      </div>}
     </div>
   );
 }

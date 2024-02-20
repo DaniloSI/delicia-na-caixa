@@ -5,7 +5,7 @@ import StepperLabel from './StepperLabel';
 const StepperContainer = ({ steps, children }) => {
   return (
     <>
-      <ul className="steps w-full">
+      <ul className="steps w-full px-2">
         {steps.map(({ name, done }, index) => (
           <StepperLabel
             key={name}

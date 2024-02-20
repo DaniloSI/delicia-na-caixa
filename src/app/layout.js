@@ -59,11 +59,11 @@ export default async function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <StoreProvider value={store}>
-          <main className="flex flex-col justify-items-center gap-6 min-h-screen py-5 px-4 md:max-w-96 m-auto">
+          <main className="flex flex-col justify-items-center min-h-screen md:max-w-96 m-auto">
             <Image
               src={Logo}
               height={40}
-              className="place-self-center"
+              className="place-self-center my-4"
               alt="Logo delícia na caixa"
               priority
             />
