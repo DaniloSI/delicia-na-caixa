@@ -24,7 +24,6 @@ export default function OrderLayout({
     defaultValues: {
       snacks: {},
       reception: "retire",
-      cep: "",
     },
   });
   const { watch } = methods;

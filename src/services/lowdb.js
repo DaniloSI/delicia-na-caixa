@@ -1,8 +1,18 @@
 import { JSONFilePreset } from "lowdb/node";
 
-const db = await JSONFilePreset("db.json", {});
+let dbConnection;
 
-export const readLowdb = (cacheKey) => {
+const getConnection = async () => {
+  if (!dbConnection) {
+    dbConnection = await JSONFilePreset("db.json", {});
+  }
+
+  return dbConnection;
+}
+
+
+export const readLowdb = async (cacheKey) => {
+  const db = await getConnection();
   let value;
 
   console.log("[lowdb] Reading cache for: ", cacheKey);
@@ -11,14 +21,17 @@ export const readLowdb = (cacheKey) => {
   return Promise.resolve(value);
 };
 
-export const writeLowdb = (cacheKey, value) => {
+export const writeLowdb = async (cacheKey, value) => {
+  const db = await getConnection();
   db.update((data) => (data[cacheKey] = value));
   console.log("[lowdb] Cache updated for: ", cacheKey);
 
   return Promise.resolve();
 };
 
-export const writeAllLowdb = (entries) => {
+export const writeAllLowdb = async (entries) => {
+  const db = await getConnection();
+
   db.update((data) => {
     for (const [key, value] of entries) {
       data[key] = value;

@@ -39,11 +39,14 @@ const getOrderMessage = (order, activeSnacks) => {
   const template = Handlebars.compile(templateOrder);
   const dateOrder = formatDateOrder(new Date());
 
-  const data = Handlebars.Utils.extend(order, {
-    activeSnacks,
-    dateOrder,
-    isDelivery: order.reception === "delivery",
-  });
+  const data = Handlebars.Utils.extend(
+    { ...order },
+    {
+      activeSnacks,
+      dateOrder,
+      isDelivery: order.reception === "delivery",
+    }
+  );
 
   return template(data);
 };

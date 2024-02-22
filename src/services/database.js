@@ -9,4 +9,12 @@ const database = createStorage({
   }),
 });
 
+export const databaseOrder = createStorage({
+  driver: mongodbDriver({
+    connectionString: process.env.MONGODB_CONNECTION_STRING,
+    databaseName: "delicia-na-caixa",
+    collectionName: "orders",
+  }),
+});
+
 export default database;

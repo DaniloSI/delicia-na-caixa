@@ -11,13 +11,15 @@ import getOrderMessage from "@/utils/getOrderMessage";
 import { toast } from "react-toastify";
 import useStepValidations from "@/hooks/useStepValidations";
 
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { sendGAEvent } from "@next/third-parties/google";
 import { getTotalPrice } from "@/utils/calc";
+import { createOrder } from "@/app/actions";
 
 export default function FormContainer({ children }) {
   const {
     activeSnacks,
+    centPriceStore,
     otherSettingsStore: { whatsAppNumber },
   } = useContext(StoreContext);
   const { handleSubmit } = useFormContext();
@@ -25,7 +27,7 @@ export default function FormContainer({ children }) {
   const { validateCurrentStep } = useStepValidations();
   const sendRef = useRef(null);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     const validationResult = validateCurrentStep();
 
     if (validationResult) {
@@ -52,6 +54,8 @@ export default function FormContainer({ children }) {
           .filter((s) => s.quantity > 0),
       },
     });
+
+    createOrder({ ...data, centPriceStore });
 
     sendRef.current.href = `whatsapp://send?phone=55${whatsAppNumber}&text=${message}`;
     sendRef.current.click();
