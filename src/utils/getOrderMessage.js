@@ -18,7 +18,7 @@ const helpers = [
         year: "numeric",
       }).format(d),
   ],
-  ["parseTime", (time) => time.replace("-", " e ")],
+  ["parseTime", (time) => time.replace(" - ", " e ")],
 ];
 
 helpers.forEach(([name, fn]) => Handlebars.registerHelper(name, fn));
