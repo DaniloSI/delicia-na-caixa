@@ -51,6 +51,11 @@ const SmallSavorySnacks = ({ snack }) => {
 
   const handleAdd = () => {
     const value = getValues(fieldName) || 0;
+
+    if (value >= 1000) {
+      return;
+    }
+
     const newValue = value + QUANTITY_ADD_OR_REMOVE_CLICK;
 
     setValue(fieldName, newValue);
@@ -126,9 +131,16 @@ const SmallSavorySnacks = ({ snack }) => {
                   }`}
                   value={inputValue}
                   onChange={(e) => {
-                    const newValue = e.target.value.replaceAll(/\D/g, "");
+                    let newValue = e.target.value.replaceAll(/\D/g, "");
+                    let newValueNumber = Number(newValue)
+
+                    if (newValueNumber > 1000) {
+                      newValueNumber = 1000;
+                      newValue = "1000";
+                    }
+
                     setInputValue(newValue);
-                    setValue(fieldName, Number(newValue));
+                    setValue(fieldName, newValueNumber);
                   }}
                   onFocus={(e) => setTempValue(Number(e.target.value))}
                   onBlur={(e) => {
