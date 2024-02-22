@@ -1,43 +1,27 @@
-"use client";
-
-import React, { useMemo } from "react";
+import React from "react";
 
 import StepperContainer from "@/components/Stepper/StepperContainer";
 
 import StepperItem from "@/components/Stepper/StepperItem";
 import Resume from "@/components/Order/Resume";
-import { FormProvider, useForm } from "react-hook-form";
 
 import Divider from "@/components/Divider";
 import FormContainer from "./components/FormContainer";
-import { StepperContextProvider } from "@/contexts/stepper";
+import FormProvider from "./components/FormProvider";
 
-export default function OrderLayout({
+import StoreContainer from "../components/StoreContainer";
+
+export const dynamic = "force-dynamic";
+
+export default async function OrderLayout({
   choices,
   delivery,
   payment,
   confirmation,
 }) {
-  const methods = useForm({
-    defaultValues: {
-      snacks: {},
-      reception: "retire",
-    },
-  });
-
-  const steps = useMemo(
-    () => [
-      { name: "Escolha", done: false },
-      { name: "Entrega", done: false },
-      { name: "Pagamento e identificação", done: false },
-      { name: "Confirmação", done: false },
-    ],
-    []
-  );
-
   return (
-    <FormProvider {...methods}>
-      <StepperContextProvider steps={steps}>
+    <StoreContainer>
+      <FormProvider>
         <FormContainer>
           <StepperContainer>
             <Divider />
@@ -49,7 +33,7 @@ export default function OrderLayout({
           </StepperContainer>
           <Resume />
         </FormContainer>
-      </StepperContextProvider>
-    </FormProvider>
+      </FormProvider>
+    </StoreContainer>
   );
 }
