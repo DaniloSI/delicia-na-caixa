@@ -12,7 +12,7 @@ export async function createOrder(order) {
   const { centPriceStore } = order;
 
   const orderId = uuidv4();
-  const newOrder = { ...order, centPriceOriginal };
+  const newOrder = { ...order, dateOrder: new Date(), centPriceOriginal };
 
   await databaseOrder.setItem(orderId, newOrder);
 
