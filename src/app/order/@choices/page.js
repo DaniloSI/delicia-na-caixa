@@ -37,7 +37,7 @@ export default function Choices() {
       {activeSnacks.map((snack, index) => (
         <React.Fragment key={snack.name}>
           <SmallSavorySnacks snack={snack} />
-          {index < activeSnacks.length - 1 && <Divider />}
+          {index < activeSnacks.length - 1 && <Divider className="my-3" />}
         </React.Fragment>
       ))}
     </>

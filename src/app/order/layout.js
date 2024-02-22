@@ -34,7 +34,7 @@ export default function OrderLayout({
   const steps = useMemo(
     () => [
       { name: "Escolha", done: getTotal(snacks || {}) >= 100 },
-      { name: "Retirada", done: false },
+      { name: "Entrega", done: false },
       { name: "Pagamento e identificação", done: false },
       { name: "Confirmação", done: false },
     ],
