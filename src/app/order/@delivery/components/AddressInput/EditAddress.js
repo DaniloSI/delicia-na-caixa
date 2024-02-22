@@ -6,8 +6,8 @@ function EditAddress({ onClick }) {
   const address = watch("address");
 
   return (
-    <div className="flex items-center gap-4 border rounded-lg border-gray-300 px-4 py-2">
-      <FaLocationDot className="h-5 w-5 text-gray-400" />
+    <div className="flex items-center gap-4 border rounded-lg border-gray-300 px-4 py-2 text-sm">
+      <FaLocationDot className="h-4 w-4 text-gray-400" />
       <div className="grow">
         <p className="font-medium text-gray-700">
           {address.street}, {address.number}

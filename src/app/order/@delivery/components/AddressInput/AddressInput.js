@@ -11,10 +11,13 @@ import { useEffect, useRef, useState } from "react";
 import TextInput from "@/components/TextInput";
 import Divider from "@/components/Divider";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { getAddressFromCep } from "@/services/cep";
+import TextInputCustom from "@/components/TextInputCustom";
 
 function AddressInput() {
   const { watch, setValue } = useFormContext();
   const [requiredFieldsError, setRequiredFieldsError] = useState(false);
+  const [isLoadingAddressFields, setIsLoadingAddressFields] = useState(false);
   const refModal = useRef();
   const refAddress = useRef();
 
@@ -27,28 +30,20 @@ function AddressInput() {
     }
   }, [reception]);
 
-  const handleChangeCep = (e) => {
+  const handleChangeCep = async (e) => {
     const cep = e.target.value;
 
     if (cep?.length === 9) {
-      fetch(`https://viacep.com.br/ws/${cep.replace(/\D/g, "")}/json/`)
-        .then((response) => response.json())
-        .then((data) => {
-          const inputs = refModal.current.querySelectorAll("input");
+      setIsLoadingAddressFields(true);
+      const newAddress = await getAddressFromCep(cep);
+      const inputs = refModal.current.querySelectorAll("input");
 
-          const newAddress = {
-            street: data.logradouro,
-            neighborhood: data.bairro,
-            city: data.localidade,
-            state: data.uf,
-          };
-
-          inputs.forEach((input) => {
-            if (input.name in newAddress) {
-              input.value = newAddress[input.name];
-            }
-          });
-        });
+      inputs.forEach((input) => {
+        if (input.name in newAddress) {
+          input.value = newAddress[input.name];
+        }
+      });
+      setIsLoadingAddressFields(false);
     }
   };
 
@@ -87,7 +82,11 @@ function AddressInput() {
     <div ref={refAddress}>
       <AddOrUpdateAddress onClick={handleOpenModal} />
 
-      <dialog ref={refModal} className="modal modal-bottom sm:modal-middle">
+      <dialog
+        ref={refModal}
+        className="modal modal-bottom sm:modal-middle"
+        autoFocus="false"
+      >
         <div className="modal-box overflow-y-scroll p-4 flex flex-col max-h-[95dvh]">
           <div className="prose leading-6 text-center">
             <h3>Endereço de entrega</h3>
@@ -122,7 +121,9 @@ function AddressInput() {
                 className="col-span-3"
                 required
               >
-                <TextInput
+                <TextInputCustom
+                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  disabled={isLoadingAddressFields}
                   placeholder="Ex.: Rua Ipanema"
                   name="street"
                   defaultValue={address.street}
@@ -138,7 +139,9 @@ function AddressInput() {
               </FormControl>
 
               <FormControl labelTop="Bairro" className="col-span-4" required>
-                <TextInput
+                <TextInputCustom
+                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  disabled={isLoadingAddressFields}
                   placeholder="Ex.: Colina de Laranjeiras"
                   name="neighborhood"
                   defaultValue={address.neighborhood}
@@ -158,7 +161,9 @@ function AddressInput() {
               </FormControl>
 
               <FormControl labelTop="Cidade" className="col-span-3" required>
-                <TextInput
+                <TextInputCustom
+                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  disabled={isLoadingAddressFields}
                   placeholder="Ex.: Serra"
                   name="city"
                   defaultValue={address.city}
@@ -190,6 +195,7 @@ function AddressInput() {
             <button
               type="button"
               className="btn grow btn-primary"
+              disabled={isLoadingAddressFields}
               onClick={handleConfirm}
             >
               Confirmar

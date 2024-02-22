@@ -6,7 +6,7 @@ const getOrderList = (snacks) => Object.entries(snacks)
   .join('')
 
 const getAddress = ({ street, number, complement, neighborhood, city, state } = {}) =>
-  `\nEndereço de *entrega*: ${street}, Nº ${number}${complement ? ',' + complement : ''}, ${neighborhood}, ${city}-${state}\n`
+  `\nEndereço de *entrega*: ${street}, Nº ${number}${complement ? ', ' + complement : ''}, ${neighborhood}, ${city}-${state}\n`
 
 const formatDate = (date) => new Intl.DateTimeFormat('pt-BR', {
   weekday: 'long',

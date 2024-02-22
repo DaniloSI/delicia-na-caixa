@@ -100,7 +100,7 @@ export default function Delivery() {
               type="radio"
               value="retire"
               defaultChecked
-              className="radio radio-primary mt-2"
+              className="radio radio-primary radio-sm mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
@@ -125,7 +125,7 @@ export default function Delivery() {
               aria-describedby="delivery"
               type="radio"
               value="delivery"
-              className="radio radio-primary mt-2"
+              className="radio radio-primary radio-sm mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
