@@ -8,8 +8,6 @@ import StepperItem from "@/components/Stepper/StepperItem";
 import Resume from "@/components/Order/Resume";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { getTotal } from "@/utils/calc";
-
 import Divider from "@/components/Divider";
 import FormContainer from "./components/FormContainer";
 import { StepperContextProvider } from "@/contexts/stepper";
@@ -26,25 +24,22 @@ export default function OrderLayout({
       reception: "retire",
     },
   });
-  const { watch } = methods;
-
-  const snacks = watch("snacks");
 
   const steps = useMemo(
     () => [
-      { name: "Escolha", done: getTotal(snacks || {}) >= 100 },
+      { name: "Escolha", done: false },
       { name: "Entrega", done: false },
       { name: "Pagamento e identificação", done: false },
       { name: "Confirmação", done: false },
     ],
-    [snacks]
+    []
   );
 
   return (
     <FormProvider {...methods}>
       <StepperContextProvider steps={steps}>
         <FormContainer>
-          <StepperContainer steps={steps}>
+          <StepperContainer>
             <Divider />
 
             <StepperItem step={0}>{choices}</StepperItem>

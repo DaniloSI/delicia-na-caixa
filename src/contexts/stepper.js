@@ -10,6 +10,7 @@ export const StepperContextProvider = ({ steps = [], children }) => {
 
   const value = useMemo(
     () => ({
+      steps,
       active,
       isLastActive: active === steps.length - 1,
       stepsDone,
@@ -28,7 +29,7 @@ export const StepperContextProvider = ({ steps = [], children }) => {
       removeStepDone: (s) =>
         setStepsDone((old) => old.filter((step) => step !== s)),
     }),
-    [active, stepsDone, steps.length]
+    [steps, active, stepsDone]
   );
 
   return (

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import StepperLabel from './StepperLabel';
+import StepperContext from '@/contexts/stepper';
 
-const StepperContainer = ({ steps, children }) => {
+const StepperContainer = ({ children }) => {
+  const { steps } = useContext(StepperContext);
+
   return (
     <>
       <ul className="steps w-full px-2">
