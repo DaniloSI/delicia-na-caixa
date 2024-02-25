@@ -28,8 +28,7 @@ function ConfirmSendOrder(_, ref) {
               type="checkbox"
               value={isConfirmed}
               onChange={(e) => setIsConfirmed(e.target.checked)}
-              className="checkbox checkbox-primary"
-              autoFocus={false}
+              className="checkbox checkbox-primary focus-visible:outline-none"
             />
           </label>
         </div>
