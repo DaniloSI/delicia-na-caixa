@@ -13,7 +13,7 @@ function ConfirmSendOrder(_, ref) {
           contendo os detalhes do pedido. No entanto,{" "}
           <span className="text-primary">
             para que o pedido chegue de fato para o estabelecimento, é preciso
-            que clique em enviar mensagem
+            que clique no botão de enviar mensagem do WhatsApp
           </span>
           . Caso não clique no botão de enviar mensagem, no WhatsApp, o
           estabelecimento não receberá o pedido.
@@ -29,6 +29,7 @@ function ConfirmSendOrder(_, ref) {
               value={isConfirmed}
               onChange={(e) => setIsConfirmed(e.target.checked)}
               className="checkbox checkbox-primary"
+              autoFocus={false}
             />
           </label>
         </div>
