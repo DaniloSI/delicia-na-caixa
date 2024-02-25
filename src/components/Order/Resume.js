@@ -5,13 +5,13 @@ import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
 import { getTotal, getTotalPrice } from "@/utils/calc";
 import { formatPrice } from "@/utils/format";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { FiArrowRight, FiSend } from "react-icons/fi";
 
 import { toast } from "react-toastify";
-import { HiOutlineArrowRight } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
+import ConfirmSendOrder from "./ConfirmSendOrder";
 
 export default function Resume() {
   const {
@@ -25,6 +25,7 @@ export default function Resume() {
   const { activeSnacks, centPriceStore } = useContext(StoreContext);
   const { watch } = useFormContext();
   const { validateCurrentStep } = useStepValidations();
+  const confirmModalRef = useRef(null);
 
   const snacks = watch("snacks");
   const reception = watch("reception");
@@ -32,11 +33,17 @@ export default function Resume() {
   const subTotal = getTotalPrice(snacks, activeSnacks);
 
   const handleNext = () => {
+    if (isLastActive) {
+      confirmModalRef.current.showModal();
+      return;
+    }
+
     const validationResult = validateCurrentStep();
 
     if (validationResult) {
       removeStepDone(active);
-      return toast.error(validationResult);
+      toast.error(validationResult);
+      return;
     }
 
     addStepDone(active);
@@ -95,10 +102,11 @@ export default function Resume() {
             >
               Voltar
             </button>
+
             <button
               key={active}
-              type={isLastActive ? "submit" : "button"}
-              onClick={isLastActive ? undefined : handleNext}
+              type="button"
+              onClick={handleNext}
               className="btn btn-primary w-7/12"
             >
               {isLastActive ? (
@@ -113,6 +121,8 @@ export default function Resume() {
                 </>
               )}
             </button>
+
+            <ConfirmSendOrder ref={confirmModalRef} />
           </div>
         </div>
       </div>

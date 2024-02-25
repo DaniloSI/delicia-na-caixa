@@ -85,7 +85,6 @@ function AddressInput() {
       <dialog
         ref={refModal}
         className="modal modal-bottom sm:modal-middle"
-        autoFocus="false"
       >
         <div className="modal-box overflow-y-scroll p-4 flex flex-col max-h-[95dvh]">
           <div className="prose leading-6 text-center">
