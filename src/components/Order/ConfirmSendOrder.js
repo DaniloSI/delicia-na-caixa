@@ -8,15 +8,13 @@ function ConfirmSendOrder(_, ref) {
       <div className="modal-box">
         <h3 className="font-bold text-lg">Por favor, leia com atenção!</h3>
         <p className="py-4">
-          Após clicar em &quot;Enviar pedido&quot;, o seu aplicativo de WhatsApp
-          irá abrir na conversa com o estabelecimento e com a mensagem escrita
-          contendo os detalhes do pedido. No entanto,{" "}
+          Depois de clicar em &apos;Enviar pedido&apos;, o WhatsApp vai abrir
+          com a mensagem do seu pedido. Mas{" "}
           <span className="text-primary">
-            para que o pedido chegue de fato para o estabelecimento, é preciso
-            que clique no botão de enviar mensagem do WhatsApp
+            para o estabelecimento realmente receber o seu pedido, você precisa
+            apertar o botão de &apos;Enviar mensagem&apos; no WhatsApp
           </span>
-          . Caso não clique no botão de enviar mensagem, no WhatsApp, o
-          estabelecimento não receberá o pedido.
+          . Se não fizer isso, o pedido não chegará para o estabelecimento.
         </p>
 
         <div className="form-control">
