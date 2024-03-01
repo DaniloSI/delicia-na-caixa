@@ -1,6 +1,6 @@
 import { databaseOrder } from "@/services/database";
 import { getSnacks } from "@/services/store";
-import { compose, descend, path, prop, sortWith, sum } from "ramda";
+import { compose, descend, path, sortWith, sum } from "ramda";
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 
