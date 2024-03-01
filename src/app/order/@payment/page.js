@@ -32,6 +32,7 @@ export default function Payment() {
           <option>PIX</option>
           <option>PicPay</option>
         </select>
+        <span className="text-xs mt-2">Pagamento feito no dia da entrega</span>
       </FormControl>
 
       <div className="flex flex-col mt-6 gap-2">
