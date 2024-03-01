@@ -173,7 +173,7 @@ const SmallSavorySnacks = ({ snack }) => {
                   </button>
                 </div>
               ): (
-                <div className="badge badge-ghost">Indisponível</div>
+                <div className="badge badge-ghost text-xs">Indisponível</div>
               )}
             </div>
           </div>
