@@ -5,7 +5,8 @@ export const updateSnacksDataBase = async (snacks) => {
   const originalSnacks = await getSnacks();
   const newSnacks = originalSnacks.map((o) => ({
     ...o,
-    active: snacks[o.fieldName],
+    active: snacks[o.fieldName].active,
+    available: snacks[o.fieldName].available,
   }));
 
   await database.setItem("snacks", newSnacks);

@@ -10,6 +10,8 @@ import StoreContext from "@/contexts/store";
 import { sendGAEvent } from "@next/third-parties/google";
 import { waitForConditionAndExecute } from "@/utils/wait-until";
 
+import { sortWith as rSortWith, prop as rProp, descend as rDescend } from "ramda";
+
 export default function Choices() {
   const { activeSnacks } = useContext(StoreContext);
 
@@ -34,7 +36,7 @@ export default function Choices() {
   return (
     <>
       <MinimumQuantity />
-      {activeSnacks.map((snack, index) => (
+      {rSortWith([rDescend(rProp('available'))])(activeSnacks).map((snack, index) => (
         <React.Fragment key={snack.name}>
           <SmallSavorySnacks snack={snack} />
           {index < activeSnacks.length - 1 && <Divider className="my-3" />}

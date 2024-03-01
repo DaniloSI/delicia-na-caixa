@@ -20,6 +20,7 @@ const SmallSavorySnacks = ({ snack }) => {
     image,
     unitWeightInGrams,
     type,
+    available,
   } = snack;
   const { centPriceStore } = useContext(StoreContext);
   const { setValue, getValues } = useFormContext();
@@ -97,78 +98,83 @@ const SmallSavorySnacks = ({ snack }) => {
           height="500"
           alt={name}
           crop="thumb"
+          grayscale={!available}
         />
       </div>
 
       <div className="flex flex-col grow">
-        <h5 className="text-lg font-medium tracking-tight text-gray-900 ">
+        <h5 className="text-lg font-medium tracking-tight text-gray-900">
           {name}
         </h5>
         <div className="flex items-start">
           <div className="grow">
-            <p className="text-sm mb-1 font-normal text-gray-700 ">
+            <p className="text-sm mb-1 font-normal text-gray-700">
               {description}
             </p>
             <div className="flex items-start">
               <span className="text-xs grow text-gray-500 font-light">
                 Unidade: {unitWeightInGrams}g
               </span>
-              <div className="flex h-fit">
-                <button
-                  type="button"
-                  className={twMerge(
-                    "btn btn-square btn-ghost btn-sm",
-                    showInputField ? "" : "hidden"
-                  )}
-                  onClick={handleSubtract}
-                >
-                  <HiMinusSm className="h-6 w-6 text-red-700" />
-                </button>
-                <input
-                  inputMode="numeric"
-                  className={`input input-bordered input-sm text-center w-16 ${
-                    showInputField ? "" : "hidden"
-                  }`}
-                  value={inputValue}
-                  onChange={(e) => {
-                    let newValue = e.target.value.replaceAll(/\D/g, "");
-                    let newValueNumber = Number(newValue)
+              {available ? (
+                <div className="flex h-fit">
+                  <button
+                    type="button"
+                    className={twMerge(
+                      "btn btn-square btn-ghost btn-sm",
+                      showInputField ? "" : "hidden"
+                    )}
+                    onClick={handleSubtract}
+                  >
+                    <HiMinusSm className="h-6 w-6 text-red-700" />
+                  </button>
+                  <input
+                    inputMode="numeric"
+                    className={`input input-bordered input-sm text-center w-16 ${
+                      showInputField ? "" : "hidden"
+                    }`}
+                    value={inputValue}
+                    onChange={(e) => {
+                      let newValue = e.target.value.replaceAll(/\D/g, "");
+                      let newValueNumber = Number(newValue);
 
-                    if (newValueNumber > 1000) {
-                      newValueNumber = 1000;
-                      newValue = "1000";
-                    }
+                      if (newValueNumber > 1000) {
+                        newValueNumber = 1000;
+                        newValue = "1000";
+                      }
 
-                    setInputValue(newValue);
-                    setValue(fieldName, newValueNumber);
-                  }}
-                  onFocus={(e) => setTempValue(Number(e.target.value))}
-                  onBlur={(e) => {
-                    const newValue = Number(e.target.value);
-                    const difference = newValue - tempValue;
+                      setInputValue(newValue);
+                      setValue(fieldName, newValueNumber);
+                    }}
+                    onFocus={(e) => setTempValue(Number(e.target.value))}
+                    onBlur={(e) => {
+                      const newValue = Number(e.target.value);
+                      const difference = newValue - tempValue;
 
-                    if (difference > 0) {
-                      updateCartGaEvent("add_to_cart", difference);
-                    } else if (difference < 0) {
-                      updateCartGaEvent(
-                        "remove_from_cart",
-                        Math.abs(difference)
-                      );
-                    }
+                      if (difference > 0) {
+                        updateCartGaEvent("add_to_cart", difference);
+                      } else if (difference < 0) {
+                        updateCartGaEvent(
+                          "remove_from_cart",
+                          Math.abs(difference)
+                        );
+                      }
 
-                    if (newValue === 0) {
-                      setShowInputField(false);
-                    }
-                  }}
-                />
-                <button
-                  type="button"
-                  className="btn btn-square btn-ghost btn-sm"
-                  onClick={handleAdd}
-                >
-                  <HiPlusSm className="h-6 w-6 text-red-700" />
-                </button>
-              </div>
+                      if (newValue === 0) {
+                        setShowInputField(false);
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-square btn-ghost btn-sm"
+                    onClick={handleAdd}
+                  >
+                    <HiPlusSm className="h-6 w-6 text-red-700" />
+                  </button>
+                </div>
+              ): (
+                <div className="badge badge-ghost">Indisponível</div>
+              )}
             </div>
           </div>
         </div>

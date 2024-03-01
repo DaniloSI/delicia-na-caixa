@@ -14,9 +14,9 @@ import { signOut } from "next-auth/react";
 import FormControl from "@/components/FormControl";
 
 const getUnityComponent = (text) => {
-  const component = () => (<p className="text-sm text-gray-500">{text}</p>);
+  const component = () => <p className="text-sm text-gray-500">{text}</p>;
   return component;
-}
+};
 
 function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
@@ -35,7 +35,6 @@ function Admin() {
   const { control } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
-    console.log({ data });
     setIsUpdating(true);
     fetch("/admin/api", {
       method: "PUT",
@@ -142,26 +141,56 @@ function Admin() {
             <h2 className="text-xl font-medium mb-4">Salgados</h2>
             <div className="flex flex-col gap-4">
               <Divider className="my-0" />
-              {snacksStore.map(({ fieldName, name, active }, index) => (
+              {snacksStore.map(({ fieldName, name, active, available }) => (
                 <React.Fragment key={fieldName}>
                   <div className="flex justify-between">
-                    <label htmlFor={fieldName} className="text-base">
-                      {name}
-                    </label>
-                    <Controller
-                      control={control}
-                      name={`snacks.${fieldName}`}
-                      defaultValue={active}
-                      render={({ field: { onChange, value } }) => (
-                        <input
-                          id={fieldName}
-                          type="checkbox"
-                          className="toggle toggle-primary"
-                          checked={value}
-                          onChange={onChange}
+                    <span className="text-base font-semibold">{name}</span>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2 justify-end">
+                        <label
+                          htmlFor={`${fieldName}.active`}
+                          className="text-sm"
+                        >
+                          Ativo
+                        </label>
+                        <Controller
+                          control={control}
+                          name={`snacks.${fieldName}.active`}
+                          defaultValue={active}
+                          render={({ field: { onChange, value } }) => (
+                            <input
+                              id={`${fieldName}.active`}
+                              type="checkbox"
+                              className="toggle toggle-primary"
+                              checked={value}
+                              onChange={onChange}
+                            />
+                          )}
                         />
-                      )}
-                    />
+                      </div>
+                      <div className="flex gap-2 justify-end">
+                        <label
+                          htmlFor={`${fieldName}.available`}
+                          className="text-sm"
+                        >
+                          Disponível
+                        </label>
+                        <Controller
+                          control={control}
+                          name={`snacks.${fieldName}.available`}
+                          defaultValue={available}
+                          render={({ field: { onChange, value } }) => (
+                            <input
+                              id={`${fieldName}.available`}
+                              type="checkbox"
+                              className="toggle toggle-primary"
+                              checked={value}
+                              onChange={onChange}
+                            />
+                          )}
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <Divider className="my-0" />
