@@ -1,8 +1,9 @@
 import Handlebars from "handlebars";
 
-import templateOrder from "!!raw-loader!@/templates/template-order.hbs";
 import partialAddress from "!!raw-loader!@/templates/partials/address.hbs";
 import partialDeliveryOrPickup from "!!raw-loader!@/templates/partials/delivery-or-pickup.hbs";
+import templateOrder from "!!raw-loader!@/templates/template-order.hbs";
+
 import { getTotal, getTotalPrice } from "./calc";
 
 const helpers = [
@@ -45,7 +46,7 @@ const getOrderMessage = (order, activeSnacks) => {
       activeSnacks,
       dateOrder,
       isDelivery: order.reception === "delivery",
-    }
+    },
   );
 
   return template(data);

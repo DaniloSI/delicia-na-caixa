@@ -3,4 +3,4 @@ export const getDate = (offsetDaysFromToday) => {
   const newDate = new Date(today);
   newDate.setDate(newDate.getDate() + offsetDaysFromToday);
   return newDate;
-}
+};

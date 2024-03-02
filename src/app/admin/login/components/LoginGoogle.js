@@ -1,9 +1,10 @@
 "use client";
 
-import useCallbackUrl from "@/hooks/useCallbackUrl";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+
+import useCallbackUrl from "@/hooks/useCallbackUrl";
 
 function LoginGoogle() {
   const callbackUrl = useCallbackUrl();
@@ -17,7 +18,7 @@ function LoginGoogle() {
       disabled={isLoading}
       onClick={() => {
         setIsLoading(true);
-        signIn("google", { callbackUrl })
+        signIn("google", { callbackUrl });
       }}
     >
       {isLoading && <span className="loading loading-spinner" />}

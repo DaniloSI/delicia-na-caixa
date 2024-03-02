@@ -1,8 +1,9 @@
 "use client";
 
-import StoreContext from "@/contexts/store";
 import { useContext, useState } from "react";
 import { HiOutlineInformationCircle, HiX } from "react-icons/hi";
+
+import StoreContext from "@/contexts/store";
 
 const MinimumQuantity = () => {
   const {
@@ -12,7 +13,10 @@ const MinimumQuantity = () => {
 
   return (
     showAlert && (
-      <div role="alert" className="alert grid-flow-col px-2 py-0 mb-4 text-gray-500">
+      <div
+        role="alert"
+        className="alert grid-flow-col px-2 py-0 mb-4 text-gray-500"
+      >
         <HiOutlineInformationCircle className="h-4 w-4" />
 
         <span className="text-xs font-medium md:m-0 md:mb-0">

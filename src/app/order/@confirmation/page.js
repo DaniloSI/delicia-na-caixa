@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useContext, useMemo } from "react";
-
 import { useFormContext } from "react-hook-form";
-import getOrderSummary from "@/utils/getOrderSummary";
 
 import StoreContext from "@/contexts/store";
+import getOrderSummary from "@/utils/getOrderSummary";
 
 export default function Confirmation() {
   const { activeSnacks } = useContext(StoreContext);
@@ -15,7 +14,7 @@ export default function Confirmation() {
 
   const summary = useMemo(
     () => getOrderSummary(all, activeSnacks).trim().replaceAll("*", ""),
-    [all, activeSnacks]
+    [all, activeSnacks],
   );
 
   return (

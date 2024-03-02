@@ -8,8 +8,7 @@ const getConnection = async () => {
   }
 
   return dbConnection;
-}
-
+};
 
 export const readLowdb = async (cacheKey) => {
   const db = await getConnection();
@@ -40,7 +39,7 @@ export const writeAllLowdb = async (entries) => {
 
   console.log(
     "[lowdb] Cache updated for: ",
-    entries.map(([key]) => key).join(", ")
+    entries.map(([key]) => key).join(", "),
   );
 
   return Promise.resolve();

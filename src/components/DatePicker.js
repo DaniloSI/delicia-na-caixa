@@ -1,8 +1,10 @@
+import { ptBR } from "date-fns/locale";
 import { forwardRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
-import { ptBR } from "date-fns/locale";
-import Divider from "./Divider";
+
 import { getDate } from "@/utils/date";
+
+import Divider from "./Divider";
 
 function DatePicker({ onSelect, footer }, ref) {
   const [date, setDate] = useState();

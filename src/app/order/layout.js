@@ -1,15 +1,13 @@
 import React from "react";
 
-import StepperContainer from "@/components/Stepper/StepperContainer";
-
-import StepperItem from "@/components/Stepper/StepperItem";
-import Resume from "@/components/Order/Resume";
-
 import Divider from "@/components/Divider";
-import FormContainer from "./components/FormContainer";
-import FormProvider from "./components/FormProvider";
+import Resume from "@/components/Order/Resume";
+import StepperContainer from "@/components/Stepper/StepperContainer";
+import StepperItem from "@/components/Stepper/StepperItem";
 
 import StoreContainer from "../components/StoreContainer";
+import FormContainer from "./components/FormContainer";
+import FormProvider from "./components/FormProvider";
 
 export const dynamic = "force-dynamic";
 

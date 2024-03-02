@@ -1,20 +1,16 @@
+import { useContext } from "react";
+import { useFormContext } from "react-hook-form";
+
 import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
 import { getTotal } from "@/utils/calc";
-import { useContext } from "react";
-import { useFormContext } from "react-hook-form";
 
 const choiceValidation = ({ snacks }, minimumQuantity = 0) =>
   getTotal(snacks) >= minimumQuantity
     ? ""
     : `Adicione no mínimo ${minimumQuantity} unidades`;
 
-const deliveryValidation = ({
-  date,
-  time,
-  reception,
-  address = {},
-}) => {
+const deliveryValidation = ({ date, time, reception, address = {} }) => {
   if (!date) {
     return "Selecione uma data para receber o produto";
   }
@@ -25,7 +21,7 @@ const deliveryValidation = ({
 
   if (reception === "delivery") {
     const requiredFields = ["street", "number", "neighborhood", "city"];
-    if (requiredFields.some((field) => !address[field])){
+    if (requiredFields.some((field) => !address[field])) {
       return "Adicione uma endereço de entrega";
     }
   }

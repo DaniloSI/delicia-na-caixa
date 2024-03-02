@@ -1,18 +1,18 @@
 "use client";
 
-import MaskedInput from "@/components/MaskedInput";
-
-import FormControl from "@/components/FormControl";
-
+import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+
+import Divider from "@/components/Divider";
+import FormControl from "@/components/FormControl";
+import MaskedInput from "@/components/MaskedInput";
+import TextInput from "@/components/TextInput";
+import TextInputCustom from "@/components/TextInputCustom";
+import { getAddressFromCep } from "@/services/cep";
+
 import AddAddress from "./AddAddress";
 import EditAddress from "./EditAddress";
-import { useEffect, useRef, useState } from "react";
-import TextInput from "@/components/TextInput";
-import Divider from "@/components/Divider";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { getAddressFromCep } from "@/services/cep";
-import TextInputCustom from "@/components/TextInputCustom";
 
 function AddressInput() {
   const { watch, setValue } = useFormContext();
@@ -82,10 +82,7 @@ function AddressInput() {
     <div ref={refAddress}>
       <AddOrUpdateAddress onClick={handleOpenModal} />
 
-      <dialog
-        ref={refModal}
-        className="modal modal-bottom sm:modal-middle"
-      >
+      <dialog ref={refModal} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box overflow-y-scroll p-4 flex flex-col max-h-[95dvh]">
           <div className="prose leading-6 text-center">
             <h3>Endereço de entrega</h3>
@@ -121,7 +118,11 @@ function AddressInput() {
                 required
               >
                 <TextInputCustom
-                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  after={
+                    isLoadingAddressFields && (
+                      <span className="loading loading-spinner loading-sm text-gray-400"></span>
+                    )
+                  }
                   disabled={isLoadingAddressFields}
                   placeholder="Ex.: Rua Ipanema"
                   name="street"
@@ -139,7 +140,11 @@ function AddressInput() {
 
               <FormControl labelTop="Bairro" className="col-span-4" required>
                 <TextInputCustom
-                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  after={
+                    isLoadingAddressFields && (
+                      <span className="loading loading-spinner loading-sm text-gray-400"></span>
+                    )
+                  }
                   disabled={isLoadingAddressFields}
                   placeholder="Ex.: Colina de Laranjeiras"
                   name="neighborhood"
@@ -161,7 +166,11 @@ function AddressInput() {
 
               <FormControl labelTop="Cidade" className="col-span-3" required>
                 <TextInputCustom
-                  after={isLoadingAddressFields && <span className="loading loading-spinner loading-sm text-gray-400"></span>}
+                  after={
+                    isLoadingAddressFields && (
+                      <span className="loading loading-spinner loading-sm text-gray-400"></span>
+                    )
+                  }
                   disabled={isLoadingAddressFields}
                   placeholder="Ex.: Serra"
                   name="city"

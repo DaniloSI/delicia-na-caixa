@@ -1,6 +1,7 @@
-import { ONE_DAY_IN_MILLISECONDS } from "@/utils/constants";
 import { createStorage } from "unstorage";
 import redisDriver from "unstorage/drivers/redis";
+
+import { ONE_DAY_IN_MILLISECONDS } from "@/utils/constants";
 
 const storage = createStorage({
   driver: redisDriver({
@@ -22,7 +23,7 @@ export const writeRedis = (cacheKey, value) => {
 export const writeAllRedis = (entries) => {
   console.log(
     "[redis] Updating all cache for: ",
-    entries.map(([key]) => key).join(", ")
+    entries.map(([key]) => key).join(", "),
   );
   return storage.setItems(entries.map(([key, value]) => ({ key, value })));
 };

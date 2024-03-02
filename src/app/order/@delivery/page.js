@@ -1,20 +1,20 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import React, { useContext, useEffect, useRef } from "react";
-
 import { useFormContext } from "react-hook-form";
+import { FaAngleRight } from "react-icons/fa";
+import { HiCalendar, HiPencil } from "react-icons/hi";
 
-import { SelectTime } from "./components/SelectTime";
+import DatePicker from "@/components/DatePicker";
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
-import { HiCalendar, HiPencil } from "react-icons/hi";
-import DatePicker from "@/components/DatePicker";
-import { FaAngleRight } from "react-icons/fa";
-import { AddressInput } from "./components/AddressInput";
 import StepperContext from "@/contexts/stepper";
-import { sendGAEvent } from "@next/third-parties/google";
-import { getTotalPrice } from "@/utils/calc";
 import StoreContext from "@/contexts/store";
+import { getTotalPrice } from "@/utils/calc";
+
+import { AddressInput } from "./components/AddressInput";
+import { SelectTime } from "./components/SelectTime";
 
 export default function Delivery() {
   const { active } = useContext(StepperContext);

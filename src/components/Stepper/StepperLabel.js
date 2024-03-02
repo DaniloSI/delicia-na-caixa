@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import { twMerge } from "tailwind-merge";
 
 import StepperContext from "@/contexts/stepper";
 import useStepValidations from "@/hooks/useStepValidations";
-import { toast } from "react-toastify";
-import { twMerge } from "tailwind-merge";
 
 const StepperLabel = ({ name, isLast, index }) => {
   const { active, setActiveStep, stepsDone, addStepDone, removeStepDone } =
@@ -21,7 +21,7 @@ const StepperLabel = ({ name, isLast, index }) => {
 
   const handleClick = () => {
     const validationsResult = Array.from({ length: index }, (_, i) =>
-      validateStep(i)
+      validateStep(i),
     );
 
     validationsResult.forEach((r, i) => {
@@ -30,9 +30,11 @@ const StepperLabel = ({ name, isLast, index }) => {
       } else {
         addStepDone(i);
       }
-    })
+    });
 
-    const errorIndex = validationsResult.findIndex((r, i) => r?.length > 0 && i < index);
+    const errorIndex = validationsResult.findIndex(
+      (r, i) => r?.length > 0 && i < index,
+    );
 
     if (errorIndex >= 0) {
       return toast.error(validationsResult[errorIndex]);
@@ -46,7 +48,7 @@ const StepperLabel = ({ name, isLast, index }) => {
       key={`step-${index}-${isDone}-${isActive}`}
       className={twMerge(
         "step cursor-pointer text-sm",
-        isDone || isActive || isBeforeDone ? "step-primary" : ""
+        isDone || isActive || isBeforeDone ? "step-primary" : "",
       )}
       data-content={isDone || (isLast && isActive) ? "✓" : index + 1}
       onClick={handleClick}

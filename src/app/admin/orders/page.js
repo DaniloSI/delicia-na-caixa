@@ -1,17 +1,18 @@
+import { redirect } from "next/navigation";
+import { compose, descend, path, sortWith, sum } from "ramda";
+
+import { auth } from "@/../auth";
 import { databaseOrder } from "@/services/database";
 import { getSnacks } from "@/services/store";
-import { compose, descend, path, sortWith, sum } from "ramda";
-import { auth } from "../../../../auth";
-import { redirect } from "next/navigation";
 
 export default async function Orders() {
-  const session = await auth()
+  const session = await auth();
   const snacks = await getSnacks();
   const ordersIds = await databaseOrder.getKeys();
   const orders = await databaseOrder.getItems(ordersIds);
 
   if (!session) {
-    redirect("/admin/login")
+    redirect("/admin/login");
   }
 
   const orderedOrders = sortWith([
@@ -57,7 +58,7 @@ export default async function Orders() {
                             ]) /
                             100
                         );
-                      }, 0)
+                      }, 0),
                   )}
                 </td>
               </tr>

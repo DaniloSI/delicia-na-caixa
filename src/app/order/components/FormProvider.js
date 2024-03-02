@@ -1,8 +1,9 @@
 "use client";
 
-import { StepperContextProvider } from "@/contexts/stepper";
 import { useMemo } from "react";
-import { useForm, FormProvider as FormProviderRoot } from "react-hook-form";
+import { FormProvider as FormProviderRoot, useForm } from "react-hook-form";
+
+import { StepperContextProvider } from "@/contexts/stepper";
 
 export default function FormProvider({ children }) {
   const methods = useForm({
@@ -19,7 +20,7 @@ export default function FormProvider({ children }) {
       { name: "Pagamento e identificação", done: false },
       { name: "Confirmação", done: false },
     ],
-    []
+    [],
   );
 
   return (

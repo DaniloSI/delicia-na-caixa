@@ -3,12 +3,14 @@
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaAngleRight } from "react-icons/fa";
-import TimeInterval from "./TimeInterval";
 import { HiClock, HiPencil } from "react-icons/hi";
-import { padStart } from "@/utils/format";
+
 import Divider from "@/components/Divider";
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
+import { padStart } from "@/utils/format";
+
+import TimeInterval from "./TimeInterval";
 
 const timeIntervals = Array.from({ length: 12 }).flatMap((_, index) => {
   const hours = index + 9;
@@ -21,22 +23,22 @@ const timeIntervals = Array.from({ length: 12 }).flatMap((_, index) => {
 function SelectTime() {
   const [selectedTime, setSelectedTime] = useState();
   const { setValue, watch } = useFormContext();
-  const modalRef = useRef()
+  const modalRef = useRef();
 
   const time = watch("time") || "";
 
   const handleCloseModal = () => {
-    modalRef.current.close()
-  }
+    modalRef.current.close();
+  };
 
   const handleOpenModal = () => {
-    modalRef.current.showModal()
-  }
+    modalRef.current.showModal();
+  };
 
   const handleConfirm = () => {
     setValue("time", selectedTime);
     handleCloseModal();
-  }
+  };
 
   return (
     <FormControl labelTop="Horário da entrega/retirada">
@@ -60,7 +62,7 @@ function SelectTime() {
             </legend>
 
             <div className="flex flex-col max-h-[50dvh] overflow-scroll pr-4">
-            <Divider />
+              <Divider />
               {timeIntervals.map((timeInterval) => (
                 <React.Fragment key={timeInterval}>
                   <TimeInterval
@@ -74,8 +76,20 @@ function SelectTime() {
             </div>
           </fieldset>
           <div className="modal-action mr-4 flex gap-2">
-            <button type="button" className="btn grow" onClick={handleCloseModal}>Fechar</button>
-            <button type="button" className="btn grow btn-primary" onClick={handleConfirm}>Confirmar</button>
+            <button
+              type="button"
+              className="btn grow"
+              onClick={handleCloseModal}
+            >
+              Fechar
+            </button>
+            <button
+              type="button"
+              className="btn grow btn-primary"
+              onClick={handleConfirm}
+            >
+              Confirmar
+            </button>
           </div>
         </div>
       </dialog>

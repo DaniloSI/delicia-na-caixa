@@ -1,10 +1,9 @@
 import React from "react";
 
+import LogoStore from "@/components/LogoStore";
 import StoreProvider from "@/providers/store-provider";
-
 import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 import { capitalize } from "@/utils/format";
-import LogoStore from "@/components/LogoStore";
 
 export default async function StoreContainer({ children }) {
   const [snacksStore, centPriceStore, otherSettingsStore] = await Promise.all([

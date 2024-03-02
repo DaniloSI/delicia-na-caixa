@@ -12,19 +12,19 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/pedido',
-        destination: '/order',
+        source: "/pedido",
+        destination: "/order",
       },
-    ]
+    ];
   },
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/pedido',
+        source: "/",
+        destination: "/pedido",
         permanent: true,
       },
-    ]
+    ];
   },
 };
 

@@ -29,7 +29,7 @@ export const StepperContextProvider = ({ steps = [], children }) => {
       removeStepDone: (s) =>
         setStepsDone((old) => old.filter((step) => step !== s)),
     }),
-    [steps, active, stepsDone]
+    [steps, active, stepsDone],
   );
 
   return (

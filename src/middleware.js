@@ -1,8 +1,9 @@
-import { authConfig } from "@/../auth.config"
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
+
+import { authConfig } from "@/../auth.config";
 
 export const config = {
   matcher: ["/admin"],
-}
+};
 
-export const { auth: middleware } = NextAuth(authConfig)
+export const { auth: middleware } = NextAuth(authConfig);

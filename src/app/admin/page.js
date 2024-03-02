@@ -1,17 +1,19 @@
 "use client";
 
-import Divider from "@/components/Divider";
-import StoreContext from "@/contexts/store";
+import { signOut } from "next-auth/react";
 import React, { useContext, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import { HiCurrencyDollar, HiHashtag } from "react-icons/hi";
 import { FaBalanceScale } from "react-icons/fa";
+import { HiCurrencyDollar, HiHashtag } from "react-icons/hi";
 import { RiWhatsappFill } from "react-icons/ri";
-import MaskedInput from "@/components/MaskedInput";
-import NumericField from "./components/NumericField";
 import { toast } from "react-toastify";
-import { signOut } from "next-auth/react";
+
+import Divider from "@/components/Divider";
 import FormControl from "@/components/FormControl";
+import MaskedInput from "@/components/MaskedInput";
+import StoreContext from "@/contexts/store";
+
+import NumericField from "./components/NumericField";
 
 const getUnityComponent = (text) => {
   const component = () => <p className="text-sm text-gray-500">{text}</p>;
@@ -26,7 +28,7 @@ function Admin() {
   const methods = useForm({
     defaultValues: {
       snacks: Object.fromEntries(
-        snacksStore.map(({ fieldName, active }) => [fieldName, active])
+        snacksStore.map(({ fieldName, active }) => [fieldName, active]),
       ),
       centPrice: centPriceStore,
       otherSettings: otherSettingsStore,
@@ -64,7 +66,7 @@ function Admin() {
           toast.success("Configurações atualizadas com sucesso");
         } else if (success.length) {
           toast.success(
-            `Configurações de ${success.join(", ")} atualizadas com sucesso`
+            `Configurações de ${success.join(", ")} atualizadas com sucesso`,
           );
         }
 

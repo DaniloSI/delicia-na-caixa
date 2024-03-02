@@ -1,9 +1,10 @@
-'use client'
+"use client";
 
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import StepperLabel from './StepperLabel';
-import StepperContext from '@/contexts/stepper';
+import StepperContext from "@/contexts/stepper";
+
+import StepperLabel from "./StepperLabel";
 
 const StepperContainer = ({ children }) => {
   const { steps } = useContext(StepperContext);
@@ -23,7 +24,7 @@ const StepperContainer = ({ children }) => {
       </ul>
       {children}
     </>
-  )
-}
+  );
+};
 
 export default StepperContainer;

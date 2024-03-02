@@ -22,10 +22,10 @@ export const updateCentPriceDataBase = async (centPrice) => {
 export const updateOtherSettingsDataBase = async (otherSettings) => {
   const newOtherSettings = {
     ...otherSettings,
-    whatsAppNumber: otherSettings.whatsAppNumber.replaceAll(/\D/g, ''),
+    whatsAppNumber: otherSettings.whatsAppNumber.replaceAll(/\D/g, ""),
   };
 
   await database.setItem("otherSettings", newOtherSettings);
-  
+
   return newOtherSettings;
 };

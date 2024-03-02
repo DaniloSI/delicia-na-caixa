@@ -1,13 +1,13 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
+import { CldImage } from "next-cloudinary";
 import React, { useCallback, useContext, useState } from "react";
-
 import { useFormContext } from "react-hook-form";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
-import { CldImage } from "next-cloudinary";
-import { sendGAEvent } from "@next/third-parties/google";
-import StoreContext from "@/contexts/store";
 import { twMerge } from "tailwind-merge";
+
+import StoreContext from "@/contexts/store";
 
 const QUANTITY_ADD_OR_REMOVE_CLICK = 10;
 
@@ -47,7 +47,7 @@ const SmallSavorySnacks = ({ snack }) => {
         },
       });
     },
-    [centPriceStore, fieldNameOriginal, name, type]
+    [centPriceStore, fieldNameOriginal, name, type],
   );
 
   const handleAdd = () => {
@@ -121,7 +121,7 @@ const SmallSavorySnacks = ({ snack }) => {
                     type="button"
                     className={twMerge(
                       "btn btn-square btn-ghost btn-sm",
-                      showInputField ? "" : "hidden"
+                      showInputField ? "" : "hidden",
                     )}
                     onClick={handleSubtract}
                   >
@@ -155,7 +155,7 @@ const SmallSavorySnacks = ({ snack }) => {
                       } else if (difference < 0) {
                         updateCartGaEvent(
                           "remove_from_cart",
-                          Math.abs(difference)
+                          Math.abs(difference),
                         );
                       }
 
@@ -172,7 +172,7 @@ const SmallSavorySnacks = ({ snack }) => {
                     <HiPlusSm className="h-6 w-6 text-red-700" />
                   </button>
                 </div>
-              ): (
+              ) : (
                 <div className="badge badge-ghost text-xs">Indisponível</div>
               )}
             </div>

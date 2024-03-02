@@ -1,11 +1,13 @@
+import { UnstorageAdapter } from "@auth/unstorage-adapter";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { createStorage } from "unstorage";
-import { UnstorageAdapter } from "@auth/unstorage-adapter";
 import redisDriver from "unstorage/drivers/redis";
+
 import { IS_DEVELOPMENT, ONE_DAY_IN_MILLISECONDS } from "@/utils/constants";
-import { authConfig } from './auth.config';
+
+import { authConfig } from "./auth.config";
 
 const storage = createStorage({
   driver: redisDriver({
@@ -15,9 +17,14 @@ const storage = createStorage({
   }),
 });
 
-export const { auth, signIn, signOut, handlers: { GET, POST } } = NextAuth({
+export const {
+  auth,
+  signIn,
+  signOut,
+  handlers: { GET, POST },
+} = NextAuth({
   ...authConfig,
-  session: { strategy: "jwt", },
+  session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
   debug: IS_DEVELOPMENT,
   adapter: UnstorageAdapter(storage),
@@ -29,7 +36,10 @@ export const { auth, signIn, signOut, handlers: { GET, POST } } = NextAuth({
     }),
     Credentials({
       async authorize(credentials) {
-        if (credentials.username === process.env.USERNAME_DEFAULT && credentials.password === process.env.PASSWORD_DEFAULT) {
+        if (
+          credentials.username === process.env.USERNAME_DEFAULT &&
+          credentials.password === process.env.PASSWORD_DEFAULT
+        ) {
           return { id: 1, name: "Admin" };
         }
 

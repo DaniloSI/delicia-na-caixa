@@ -1,11 +1,12 @@
 "use server";
 
+import { Resend } from "resend";
+import { v4 as uuidv4 } from "uuid";
+
 import { databaseOrder } from "@/services/database";
 import { getCentPrice } from "@/services/store";
-import { v4 as uuidv4 } from "uuid";
-import { Resend } from 'resend';
 
-const resend = new Resend('re_eAWNjTpL_2fi1vaLYKqyyoNpFrsV7DBzy');
+const resend = new Resend("re_eAWNjTpL_2fi1vaLYKqyyoNpFrsV7DBzy");
 
 export async function createOrder(order) {
   const centPriceOriginal = await getCentPrice();
@@ -22,16 +23,16 @@ export async function createOrder(order) {
   ) {
     (async function () {
       const { data, error } = await resend.emails.send({
-        from: 'Danilo de Oliveira <danilo@danilodeoliveira.dev>',
-        to: ['danilodeoliveira94@gmail.com'],
-        subject: 'Preço incompatível',
+        from: "Danilo de Oliveira <danilo@danilodeoliveira.dev>",
+        to: ["danilodeoliveira94@gmail.com"],
+        subject: "Preço incompatível",
         html: `<p>O preço do pedido não condiz com o preço da loja. <br />Id do pedido: <strong><code>${orderId}</code></strong></p>`,
       });
-    
+
       if (error) {
         return console.error({ error });
       }
-    
+
       console.log({ data });
     })();
 

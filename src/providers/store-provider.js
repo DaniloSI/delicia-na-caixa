@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import StoreContext from "@/contexts/store";
 

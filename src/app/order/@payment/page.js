@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-
 import { useFormContext } from "react-hook-form";
-
-import MaskedInput from "@/components/MaskedInput";
 import { HiPhone, HiUser } from "react-icons/hi";
-import TextInputCustom from "@/components/TextInputCustom";
+
 import FormControl from "@/components/FormControl";
+import MaskedInput from "@/components/MaskedInput";
+import TextInputCustom from "@/components/TextInputCustom";
 
 export default function Payment() {
   const { setValue } = useFormContext();
@@ -38,7 +37,10 @@ export default function Payment() {
       <div className="flex flex-col mt-6 gap-2">
         <div className="prose">
           <h3>Identificação</h3>
-          <p className="leading-6">Por favor, forneça suas informações de contato, pois é essencial para futuros contatos, caso seja necessário.</p>
+          <p className="leading-6">
+            Por favor, forneça suas informações de contato, pois é essencial
+            para futuros contatos, caso seja necessário.
+          </p>
         </div>
 
         <FormControl labelTop="Digite o seu nome">

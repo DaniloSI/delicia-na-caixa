@@ -1,16 +1,15 @@
-import { Inter } from "next/font/google";
 import "react-day-picker/dist/style.css";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
-
+import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 import { IS_DEVELOPMENT } from "@/utils/constants";
-import { Suspense } from "react";
-import Loading from "./loading";
 
+import Loading from "./loading";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

@@ -1,16 +1,18 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
+import {
+  descend as rDescend,
+  prop as rProp,
+  sortWith as rSortWith,
+} from "ramda";
 import React, { useContext, useEffect } from "react";
 
-import SmallSavorySnacks from "@/components/SmallSavorySnacks";
-
-import MinimumQuantity from "@/components/MiniumQuantity";
 import Divider from "@/components/Divider";
+import MinimumQuantity from "@/components/MiniumQuantity";
+import SmallSavorySnacks from "@/components/SmallSavorySnacks";
 import StoreContext from "@/contexts/store";
-import { sendGAEvent } from "@next/third-parties/google";
 import { waitForConditionAndExecute } from "@/utils/wait-until";
-
-import { sortWith as rSortWith, prop as rProp, descend as rDescend } from "ramda";
 
 export default function Choices() {
   const { activeSnacks } = useContext(StoreContext);
@@ -29,19 +31,21 @@ export default function Choices() {
             })),
           },
         });
-      }
+      },
     );
   }, [activeSnacks]);
 
   return (
     <>
       <MinimumQuantity />
-      {rSortWith([rDescend(rProp('available'))])(activeSnacks).map((snack, index) => (
-        <React.Fragment key={snack.name}>
-          <SmallSavorySnacks snack={snack} />
-          {index < activeSnacks.length - 1 && <Divider className="my-3" />}
-        </React.Fragment>
-      ))}
+      {rSortWith([rDescend(rProp("available"))])(activeSnacks).map(
+        (snack, index) => (
+          <React.Fragment key={snack.name}>
+            <SmallSavorySnacks snack={snack} />
+            {index < activeSnacks.length - 1 && <Divider className="my-3" />}
+          </React.Fragment>
+        ),
+      )}
     </>
   );
 }

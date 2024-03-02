@@ -1,15 +1,17 @@
 "use client";
 
-import LoginGoogle from "./components/LoginGoogle";
-import { signInCredentials } from "./lib/actions";
-import useCallbackUrl from "@/hooks/useCallbackUrl";
 import { useRouter, useSearchParams } from "next/navigation";
-import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { HiKey, HiMail, HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { toast } from "react-toastify";
+
 import FormControl from "@/components/FormControl";
 import TextInputCustom from "@/components/TextInputCustom";
+import useCallbackUrl from "@/hooks/useCallbackUrl";
+
+import LoginGoogle from "./components/LoginGoogle";
 import ShowPassword from "./components/ShowPassword";
+import { signInCredentials } from "./lib/actions";
 
 function Login() {
   const router = useRouter();
@@ -23,7 +25,7 @@ function Login() {
   useEffect(() => {
     if (isLoginGoogleError) {
       toast.error(
-        "A conta que você utilizou para fazer login via Google não é uma conta autorizada."
+        "A conta que você utilizou para fazer login via Google não é uma conta autorizada.",
       );
     }
   }, [isLoginGoogleError]);

@@ -1,16 +1,17 @@
 "use client";
 
-import useStepValidations from "@/hooks/useStepValidations";
-import StepperContext from "@/contexts/stepper";
-import StoreContext from "@/contexts/store";
-import { getTotal, getTotalPrice } from "@/utils/calc";
-import { formatPrice } from "@/utils/format";
 import { useContext, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { FiArrowRight, FiSend } from "react-icons/fi";
-
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
+
+import StepperContext from "@/contexts/stepper";
+import StoreContext from "@/contexts/store";
+import useStepValidations from "@/hooks/useStepValidations";
+import { getTotal, getTotalPrice } from "@/utils/calc";
+import { formatPrice } from "@/utils/format";
+
 import ConfirmSendOrder from "./ConfirmSendOrder";
 
 export default function Resume() {
@@ -96,7 +97,7 @@ export default function Resume() {
               type="button"
               className={twMerge(
                 "btn btn-ghost w-5/12",
-                active === 0 ? "invisible" : ""
+                active === 0 ? "invisible" : "",
               )}
               onClick={handlePrev}
             >
