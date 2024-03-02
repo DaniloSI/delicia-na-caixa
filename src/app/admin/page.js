@@ -16,8 +16,9 @@ import StoreContext from "@/contexts/store";
 import NumericField from "./components/NumericField";
 
 const getUnityComponent = (text) => {
-  const component = () => <p className="text-sm text-gray-500">{text}</p>;
-  return component;
+  return function UnityComponent() {
+    return <p className="text-sm text-gray-500">{text}</p>;
+  };
 };
 
 function Admin() {

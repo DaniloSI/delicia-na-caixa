@@ -2,9 +2,7 @@ const { useSearchParams } = require("next/navigation");
 
 const useCallbackUrl = () => {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/admin";
-
-  return callbackUrl;
+  return searchParams.get("callbackUrl") || "/admin";
 };
 
 export default useCallbackUrl;
