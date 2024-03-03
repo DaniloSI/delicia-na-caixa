@@ -22,7 +22,7 @@ function LoginGoogle() {
       }}
     >
       {isLoading && <span className="loading loading-spinner" />}
-      <FcGoogle className="mr-2 h-5 w-5" />
+      <FcGoogle className="mr-2 size-5" />
       Login com Google
     </button>
   );

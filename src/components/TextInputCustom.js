@@ -17,10 +17,10 @@ const TextInputCustom = (
     disabled={disabled}
   >
     {before}
-    {LeftIcon && <LeftIcon className="min-h-5 h-5 min-w-5 w-5 text-gray-400" />}
+    {LeftIcon && <LeftIcon className="size-5 min-h-5 min-w-5 text-gray-400" />}
     <input ref={ref} {...rest} className={`grow text-base ${className}`} />
     {RightIcon && (
-      <RightIcon className="min-h-5 h-5 min-w-5 w-5 text-gray-400" />
+      <RightIcon className="size-5 min-h-5 min-w-5 text-gray-400" />
     )}
     {after}
   </div>

@@ -89,8 +89,8 @@ const SmallSavorySnacks = ({ snack }) => {
   };
 
   return (
-    <div className="flex bg-white flex-row max-w-xl gap-4 items-center">
-      <div className="min-w-16 w-16">
+    <div className="flex max-w-xl flex-row items-center gap-4 bg-white">
+      <div className="w-16 min-w-16">
         <CldImage
           className="rounded-lg"
           src={"delicia-na-caixa/" + image}
@@ -102,17 +102,17 @@ const SmallSavorySnacks = ({ snack }) => {
         />
       </div>
 
-      <div className="flex flex-col grow">
+      <div className="flex grow flex-col">
         <h5 className="text-lg font-medium tracking-tight text-gray-900">
           {name}
         </h5>
         <div className="flex items-start">
           <div className="grow">
-            <p className="text-sm mb-1 font-normal text-gray-700">
+            <p className="mb-1 text-sm font-normal text-gray-700">
               {description}
             </p>
             <div className="flex items-start">
-              <span className="text-xs grow text-gray-500 font-light">
+              <span className="grow text-xs font-light text-gray-500">
                 Unidade: {unitWeightInGrams}g
               </span>
               {available ? (
@@ -125,11 +125,11 @@ const SmallSavorySnacks = ({ snack }) => {
                     )}
                     onClick={handleSubtract}
                   >
-                    <HiMinusSm className="h-6 w-6 text-red-700" />
+                    <HiMinusSm className="size-6 text-red-700" />
                   </button>
                   <input
                     inputMode="numeric"
-                    className={`input input-bordered input-sm text-center w-16 ${
+                    className={`input input-sm input-bordered w-16 text-center ${
                       showInputField ? "" : "hidden"
                     }`}
                     value={inputValue}
@@ -169,7 +169,7 @@ const SmallSavorySnacks = ({ snack }) => {
                     className="btn btn-square btn-ghost btn-sm"
                     onClick={handleAdd}
                   >
-                    <HiPlusSm className="h-6 w-6 text-red-700" />
+                    <HiPlusSm className="size-6 text-red-700" />
                   </button>
                 </div>
               ) : (

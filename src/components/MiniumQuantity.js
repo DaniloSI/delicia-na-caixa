@@ -15,20 +15,20 @@ const MinimumQuantity = () => {
     showAlert && (
       <div
         role="alert"
-        className="alert grid-flow-col px-2 py-0 mb-4 text-gray-500"
+        className="alert mb-4 grid-flow-col px-2 py-0 text-gray-500"
       >
-        <HiOutlineInformationCircle className="h-4 w-4" />
+        <HiOutlineInformationCircle className="size-4" />
 
-        <span className="text-xs font-medium md:m-0 md:mb-0">
+        <span className="text-xs font-medium md:m-0">
           Quantidade mínima: {minimumQuantity} unidades
         </span>
 
         <button
-          className="btn btn-sm btn-ghost"
+          className="btn btn-ghost btn-sm"
           type="button"
           onClick={() => setShowAlert(false)}
         >
-          <HiX className="h-4 w-4" />
+          <HiX className="size-4" />
         </button>
       </div>
     )

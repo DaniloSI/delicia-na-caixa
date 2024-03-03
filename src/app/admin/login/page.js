@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { HiKey, HiMail, HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { HiKey, HiMail } from "react-icons/hi";
 import { toast } from "react-toastify";
 
 import FormControl from "@/components/FormControl";
@@ -54,9 +54,9 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col gap-6 px-6 mt-4">
+    <div className="mt-4 flex flex-col gap-6 px-6">
       <form onSubmit={handleLogin} className="flex flex-col gap-2">
-        <h1 className="text-center font-medium text-2xl">Login</h1>
+        <h1 className="text-center text-2xl font-medium">Login</h1>
         <FormControl labelTop="E-mail">
           <TextInputCustom
             id="email"
@@ -89,7 +89,7 @@ function Login() {
 
         <button
           type="submit"
-          className="btn btn-primary w-full mt-4"
+          className="btn btn-primary mt-4 w-full"
           disabled={isLoading}
         >
           {isLoading && <span className="loading loading-spinner" />}

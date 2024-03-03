@@ -31,10 +31,10 @@ export default function Payment() {
           <option>PIX</option>
           <option>PicPay</option>
         </select>
-        <span className="text-xs mt-2">Pagamento feito no dia da entrega</span>
+        <span className="mt-2 text-xs">Pagamento feito no dia da entrega</span>
       </FormControl>
 
-      <div className="flex flex-col mt-6 gap-2">
+      <div className="mt-6 flex flex-col gap-2">
         <div className="prose">
           <h3>Identificação</h3>
           <p className="leading-6">

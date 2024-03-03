@@ -6,7 +6,7 @@ function ConfirmSendOrder(_, ref) {
   return (
     <dialog ref={ref} className="modal modal-bottom sm:modal-middle">
       <div className="modal-box">
-        <h3 className="font-bold text-lg">Por favor, leia com atenção!</h3>
+        <h3 className="text-lg font-bold">Por favor, leia com atenção!</h3>
         <p className="py-4">
           Depois de clicar em &apos;Enviar pedido&apos;, o WhatsApp vai abrir
           com a mensagem do seu pedido. Mas{" "}
@@ -26,11 +26,11 @@ function ConfirmSendOrder(_, ref) {
               type="checkbox"
               value={isConfirmed}
               onChange={(e) => setIsConfirmed(e.target.checked)}
-              className="checkbox checkbox-primary focus-visible:outline-none"
+              className="checkbox-primary checkbox focus-visible:outline-none"
             />
           </label>
         </div>
-        <div className="modal-action flex justify justify-evenly gap-2">
+        <div className="modal-action flex justify-evenly gap-2">
           <button
             type="button"
             className="btn btn-ghost grow"
@@ -40,7 +40,7 @@ function ConfirmSendOrder(_, ref) {
           </button>
 
           <button className="btn btn-primary grow" disabled={!isConfirmed}>
-            <FiSend className="mr-2 h-5 w-5" />
+            <FiSend className="mr-2 size-5" />
             Enviar pedido
           </button>
         </div>

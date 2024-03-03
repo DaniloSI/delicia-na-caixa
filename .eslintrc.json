@@ -1,5 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended", "plugin:sonarjs/recommended"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:tailwindcss/recommended"
+  ],
   "plugins": ["simple-import-sort", "sonarjs"],
   "rules": {
     "simple-import-sort/imports": "error",

@@ -19,7 +19,7 @@ export default function Confirmation() {
 
   return (
     <>
-      <div className="flex flex-col mb-6 prose">
+      <div className="prose mb-6 flex flex-col">
         <h3 className="mb-2">Enviar o pedido</h3>
         <p className="leading-6">
           Confira abaixo se o pedido está correto e, em seguida, clique no botão
@@ -28,7 +28,7 @@ export default function Confirmation() {
         </p>
       </div>
 
-      <div className="collapse collapse-arrow collapse-open border border-base-300 bg-base-200">
+      <div className="collapse collapse-open collapse-arrow border border-base-300 bg-base-200">
         <div className="collapse-title text-xl font-medium">
           Resumo do pedido
         </div>

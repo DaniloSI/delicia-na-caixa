@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-        <main className="flex flex-col justify-items-center min-h-screen md:max-w-96 m-auto">
+        <main className="m-auto flex min-h-screen flex-col justify-items-center md:max-w-96">
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </main>
         <ToastContainer theme="colored" />

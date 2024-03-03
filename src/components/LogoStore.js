@@ -7,7 +7,7 @@ export default function LogoStore() {
     <Image
       src={Logo}
       height={40}
-      className="place-self-center my-4"
+      className="my-4 place-self-center"
       alt="Logo delícia na caixa"
       priority
     />

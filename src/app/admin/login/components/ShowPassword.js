@@ -11,9 +11,9 @@ function ShowPassword({ showPassword, setShowPassword }) {
       }}
     >
       {showPassword ? (
-        <HiOutlineEyeOff className="h-5 w-5" />
+        <HiOutlineEyeOff className="size-5" />
       ) : (
-        <HiOutlineEye className="h-5 w-5" />
+        <HiOutlineEye className="size-5" />
       )}
     </button>
   );

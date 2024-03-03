@@ -67,11 +67,11 @@ export default function Resume() {
     formatPrice(centPriceStore?.[type], { minimumFractionDigits: 0 });
 
   return (
-    <div className="flex items-end sticky right-0 bottom-0">
-      <div className="bg-white w-full px-4 pb-4 pt-2 shadow-[0_0_10px_rgba(0,0,0,.1)]">
-        <div className="max-w-96 m-auto">
+    <div className="sticky bottom-0 right-0 flex items-end">
+      <div className="w-full bg-white px-4 pb-4 pt-2 shadow-[0_0_10px_rgba(0,0,0,.1)]">
+        <div className="m-auto max-w-96">
           {active === 0 && (
-            <div className="flex justify-between items-stretch text-sm text-gray-500 pb-3 pt-2 px-2">
+            <div className="flex items-stretch justify-between px-2 pb-3 pt-2 text-sm text-gray-500">
               <div className="flex flex-col">
                 <p>
                   Salgado: {getFormattedPrice("partySnacks")}{" "}
@@ -112,13 +112,13 @@ export default function Resume() {
             >
               {isLastActive ? (
                 <>
-                  <FiSend className="mr-2 h-5 w-5" />
+                  <FiSend className="mr-2 size-5" />
                   Enviar pedido
                 </>
               ) : (
                 <>
                   Continuar
-                  <FiArrowRight className="ml-2 h-5 w-5" />
+                  <FiArrowRight className="ml-2 size-5" />
                 </>
               )}
             </button>

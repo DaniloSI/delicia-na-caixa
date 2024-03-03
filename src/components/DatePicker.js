@@ -49,7 +49,7 @@ function DatePicker({ onSelect, footer }, ref) {
           </button>
           <button
             type="button"
-            className="btn grow btn-primary"
+            className="btn btn-primary grow"
             onClick={handleConfirm}
           >
             Confirmar

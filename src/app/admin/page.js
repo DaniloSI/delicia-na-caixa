@@ -87,7 +87,7 @@ function Admin() {
 
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
-          <div className="grid grid-cols-2 grid-flow-row gap-y-2 gap-x-4 items-end">
+          <div className="grid grid-flow-row grid-cols-2 items-end gap-x-4 gap-y-2">
             {/* TODO: Disable whatsapp field in PROD for security reasons */}
             <FormControl labelTop="Número do WhatsApp" className="col-span-2">
               <Controller
@@ -141,7 +141,7 @@ function Admin() {
           </div>
 
           <div className="flex flex-col">
-            <h2 className="text-xl font-medium mb-4">Salgados</h2>
+            <h2 className="mb-4 text-xl font-medium">Salgados</h2>
             <div className="flex flex-col gap-4">
               <Divider className="my-0" />
               {snacksStore.map(({ fieldName, name, active, available }) => (
@@ -149,7 +149,7 @@ function Admin() {
                   <div className="flex justify-between">
                     <span className="text-base font-semibold">{name}</span>
                     <div className="flex flex-col gap-2">
-                      <div className="flex gap-2 justify-end">
+                      <div className="flex justify-end gap-2">
                         <label
                           htmlFor={`${fieldName}.active`}
                           className="text-sm"
@@ -171,7 +171,7 @@ function Admin() {
                           )}
                         />
                       </div>
-                      <div className="flex gap-2 justify-end">
+                      <div className="flex justify-end gap-2">
                         <label
                           htmlFor={`${fieldName}.available`}
                           className="text-sm"

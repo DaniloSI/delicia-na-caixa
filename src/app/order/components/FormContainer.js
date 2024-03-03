@@ -59,9 +59,9 @@ export default function FormContainer({ children }) {
   });
 
   return (
-    <form onSubmit={onSubmit} className="grow flex flex-col">
+    <form onSubmit={onSubmit} className="flex grow flex-col">
       {children}
-      <a ref={sendRef} href="#" className="hidden h-0 w-0">
+      <a ref={sendRef} href="#" className="hidden size-0">
         Send
       </a>
     </form>

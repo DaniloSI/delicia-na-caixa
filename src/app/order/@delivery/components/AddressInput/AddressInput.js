@@ -83,8 +83,8 @@ function AddressInput() {
       <AddOrUpdateAddress onClick={handleOpenModal} />
 
       <dialog ref={refModal} className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box overflow-y-scroll p-4 flex flex-col max-h-[95dvh]">
-          <div className="prose leading-6 text-center">
+        <div className="modal-box flex max-h-[95dvh] flex-col overflow-y-scroll p-4">
+          <div className="prose text-center leading-6">
             <h3>Endereço de entrega</h3>
           </div>
 
@@ -93,14 +93,14 @@ function AddressInput() {
           <div className="flex-1 overflow-auto">
             {requiredFieldsError && (
               <div role="alert" className="alert alert-error grid-flow-col p-2">
-                <IoIosCloseCircleOutline className="h-5 w-5" />
+                <IoIosCloseCircleOutline className="size-5" />
                 <span className="text-sm">
                   Por favor, preencha os campos obrigatórios.
                 </span>
               </div>
             )}
 
-            <div className="grid grid-cols-4 gap-y-1 gap-x-2">
+            <div className="grid grid-cols-4 gap-x-2 gap-y-1">
               <FormControl labelTop="CEP" className="col-span-4">
                 <MaskedInput
                   placeholder="Ex.: 29123-000"
@@ -192,7 +192,7 @@ function AddressInput() {
 
           <Divider />
 
-          <div className="modal-action flex gap-2 col-span-4">
+          <div className="modal-action col-span-4 flex gap-2">
             <button
               type="button"
               className="btn grow"
@@ -202,7 +202,7 @@ function AddressInput() {
             </button>
             <button
               type="button"
-              className="btn grow btn-primary"
+              className="btn btn-primary grow"
               disabled={isLoadingAddressFields}
               onClick={handleConfirm}
             >

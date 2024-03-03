@@ -54,14 +54,14 @@ function SelectTime() {
 
       <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Horários disponíveis</h3>
+          <h3 className="text-lg font-bold">Horários disponíveis</h3>
           <fieldset>
-            <legend className="text-sm mb-4 mr-4">
+            <legend className="mb-4 mr-4 text-sm">
               Escolha um intervalo de horário abaixo. <br /> Você receberá ou
               deverá retirar o pedido dentro do intervalo de tempo selecionado.
             </legend>
 
-            <div className="flex flex-col max-h-[50dvh] overflow-scroll pr-4">
+            <div className="flex max-h-[50dvh] flex-col overflow-scroll pr-4">
               <Divider />
               {timeIntervals.map((timeInterval) => (
                 <React.Fragment key={timeInterval}>
@@ -85,7 +85,7 @@ function SelectTime() {
             </button>
             <button
               type="button"
-              className="btn grow btn-primary"
+              className="btn btn-primary grow"
               onClick={handleConfirm}
             >
               Confirmar

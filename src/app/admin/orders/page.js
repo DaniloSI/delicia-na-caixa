@@ -24,7 +24,7 @@ export default async function Orders() {
       <div className="prose">
         <h3 className="text-center">Últimos 20 pedidos</h3>
       </div>
-      <div className="overflow-x-auto mt-4">
+      <div className="mt-4 overflow-x-auto">
         <table className="table">
           <thead>
             <tr>

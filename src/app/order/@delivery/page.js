@@ -91,8 +91,8 @@ export default function Delivery() {
           Como deseja receber seu pedido?
         </h3>
 
-        <div className="flex mt-4">
-          <div className="flex items-center h-5">
+        <div className="mt-4 flex">
+          <div className="flex h-5 items-center">
             <input
               id="retire"
               name="reception"
@@ -100,7 +100,7 @@ export default function Delivery() {
               type="radio"
               value="retire"
               defaultChecked
-              className="radio radio-primary radio-sm mt-2"
+              className="radio-primary radio radio-sm mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
@@ -117,15 +117,15 @@ export default function Delivery() {
           </div>
         </div>
 
-        <div className="flex mt-4">
-          <div className="flex items-center h-5">
+        <div className="mt-4 flex">
+          <div className="flex h-5 items-center">
             <input
               id="delivery"
               name="reception"
               aria-describedby="delivery"
               type="radio"
               value="delivery"
-              className="radio radio-primary radio-sm mt-2"
+              className="radio-primary radio radio-sm mt-2"
               onChange={(e) => setValue("reception", e.target.value)}
             />
           </div>
@@ -144,7 +144,7 @@ export default function Delivery() {
 
       {
         <div className={reception === "retire" ? "hidden" : ""}>
-          <h3 className="font-semibold text-gray-900 mb-4">
+          <h3 className="mb-4 font-semibold text-gray-900">
             Endereço para entrega
           </h3>
 

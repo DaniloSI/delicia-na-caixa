@@ -8,7 +8,7 @@ const StepperItem = ({ step, className = "", children }) => {
   const { active } = useContext(StepperContext);
   return (
     <div
-      className={`mx-4 grow mb-6 ${step !== active ? "hidden" : ""} ${className}`}
+      className={`mx-4 mb-6 grow ${step !== active ? "hidden" : ""} ${className}`}
     >
       {children}
     </div>

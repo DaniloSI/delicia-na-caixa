@@ -7,7 +7,7 @@ function TimeInterval({ timeInterval, onChange, checked }) {
           id={timeInterval}
           name="time"
           type="radio"
-          className="radio radio-primary"
+          className="radio-primary radio"
           checked={checked === timeInterval}
           value={timeInterval}
           onChange={(e) => onChange(e.target.value)}
