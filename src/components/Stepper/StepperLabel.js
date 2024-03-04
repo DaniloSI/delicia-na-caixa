@@ -1,16 +1,14 @@
 "use client";
 
 import React, { useContext, useEffect } from "react";
-import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 
 import StepperContext from "@/contexts/stepper";
-import useStepValidations from "@/hooks/useStepValidations";
+import useStepValidation from "@/hooks/useStepValidation";
 
 const StepperLabel = ({ name, isLast, index }) => {
-  const { active, setActiveStep, stepsDone, addStepDone, removeStepDone } =
-    useContext(StepperContext);
-  const { validateStep } = useStepValidations();
+  const { active, setActiveStep, stepsDone } = useContext(StepperContext);
+  const { validateStep } = useStepValidation();
   const isActive = index === active;
   const isBeforeDone = stepsDone.includes(index - 1);
   const isDone = stepsDone.includes(index);
@@ -19,25 +17,12 @@ const StepperLabel = ({ name, isLast, index }) => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [active]);
 
-  const handleClick = () => {
-    const validationsResult = Array.from({ length: index }, (_, i) =>
-      validateStep(i),
-    );
+  const handleClick = async () => {
+    const stepsToValidate = Array.from({ length: index }, (_, i) => i);
 
-    validationsResult.forEach((r, i) => {
-      if (r?.length > 0) {
-        removeStepDone(i);
-      } else {
-        addStepDone(i);
-      }
-    });
-
-    const errorIndex = validationsResult.findIndex(
-      (r, i) => r?.length > 0 && i < index,
-    );
-
-    if (errorIndex >= 0) {
-      return toast.error(validationsResult[errorIndex]);
+    for (const step of stepsToValidate) {
+      const isValid = await validateStep(step);
+      if (!isValid) return;
     }
 
     setActiveStep(index);

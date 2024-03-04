@@ -8,6 +8,7 @@ function FormControl({
   children,
   className = "",
   required = false,
+  isInvalid = false,
 }) {
   return (
     <label className={twMerge("form-control w-full", className)}>
@@ -24,7 +25,16 @@ function FormControl({
       {children}
       {(labelBottom || labelAltBottom) && (
         <div className="label">
-          {labelBottom && <span className="label-text-alt">{labelBottom}</span>}
+          {labelBottom && (
+            <span
+              className={twMerge(
+                "label-text-alt",
+                isInvalid ? "text-error" : "",
+              )}
+            >
+              {labelBottom}
+            </span>
+          )}
           {labelAltBottom && (
             <span className="label-text-alt">{labelAltBottom}</span>
           )}

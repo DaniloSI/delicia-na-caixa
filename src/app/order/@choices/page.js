@@ -7,6 +7,8 @@ import {
   sortWith as rSortWith,
 } from "ramda";
 import React, { useContext, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import Divider from "@/components/Divider";
 import MinimumQuantity from "@/components/MiniumQuantity";
@@ -16,6 +18,15 @@ import { waitForConditionAndExecute } from "@/utils/wait-until";
 
 export default function Choices() {
   const { activeSnacks } = useContext(StoreContext);
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  useEffect(() => {
+    if (errors.snacks) {
+      toast.error(errors.snacks.message);
+    }
+  }, [errors.snacks]);
 
   useEffect(() => {
     waitForConditionAndExecute(

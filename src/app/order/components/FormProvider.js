@@ -1,25 +1,31 @@
 "use client";
 
-import { useMemo } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext, useMemo } from "react";
 import { FormProvider as FormProviderRoot, useForm } from "react-hook-form";
 
 import { StepperContextProvider } from "@/contexts/stepper";
+import StoreContext from "@/contexts/store";
+
+import { stepsForm } from "../lib/constants";
+import { getSchema } from "../lib/schema";
 
 export default function FormProvider({ children }) {
+  const {
+    otherSettingsStore: { minimumQuantity },
+  } = useContext(StoreContext);
   const methods = useForm({
     defaultValues: {
-      snacks: {},
+      snacks: {
+        quibes: 0,
+      },
       reception: "retire",
     },
+    resolver: zodResolver(getSchema({ minimumQuantity })),
   });
 
   const steps = useMemo(
-    () => [
-      { name: "Escolha", done: false },
-      { name: "Entrega", done: false },
-      { name: "Pagamento e identificação", done: false },
-      { name: "Confirmação", done: false },
-    ],
+    () => stepsForm.map((step) => ({ ...step, done: false })),
     [],
   );
 

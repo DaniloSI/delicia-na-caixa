@@ -19,7 +19,12 @@ import { SelectTime } from "./components/SelectTime";
 export default function Delivery() {
   const { active } = useContext(StepperContext);
   const { activeSnacks } = useContext(StoreContext);
-  const { watch, setValue, getValues } = useFormContext();
+  const {
+    watch,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext();
   const modalRef = useRef();
 
   useEffect(() => {
@@ -62,7 +67,11 @@ export default function Delivery() {
           Quando deseja receber seu pedido?
         </h3>
 
-        <FormControl labelTop="Data da entrega/retirada">
+        <FormControl
+          labelTop="Data da entrega/retirada"
+          labelBottom={errors.date?.message}
+          isInvalid={!!errors.date}
+        >
           <TextInputCustom
             id="deliveryDate"
             name="deliveryDate"

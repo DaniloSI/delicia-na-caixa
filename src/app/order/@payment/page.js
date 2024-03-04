@@ -9,14 +9,25 @@ import MaskedInput from "@/components/MaskedInput";
 import TextInputCustom from "@/components/TextInputCustom";
 
 export default function Payment() {
-  const { setValue } = useFormContext();
+  const {
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <>
       <div className="prose">
         <h3>Pagamento</h3>
+        <p className="leading-6">
+          Escolha a forma de pagamento. O pagamento será feito no dia da
+          entrega.
+        </p>
       </div>
-      <FormControl labelTop="Selecione a forma de pagamento">
+      <FormControl
+        labelTop="Selecione a forma de pagamento"
+        labelBottom={errors.payment?.message}
+        isInvalid={!!errors.payment}
+      >
         <select
           id="payment"
           name="payment"
@@ -31,7 +42,6 @@ export default function Payment() {
           <option>PIX</option>
           <option>PicPay</option>
         </select>
-        <span className="mt-2 text-xs">Pagamento feito no dia da entrega</span>
       </FormControl>
 
       <div className="mt-6 flex flex-col gap-2">
@@ -43,7 +53,11 @@ export default function Payment() {
           </p>
         </div>
 
-        <FormControl labelTop="Digite o seu nome">
+        <FormControl
+          labelTop="Digite o seu nome"
+          labelBottom={errors.fullName?.message}
+          isInvalid={!!errors.fullName}
+        >
           <TextInputCustom
             id="name"
             name="fullName"
@@ -53,7 +67,11 @@ export default function Payment() {
           />
         </FormControl>
 
-        <FormControl labelTop="Digite um telefone para contato">
+        <FormControl
+          labelTop="Digite um telefone para contato"
+          labelBottom={errors.phone?.message}
+          isInvalid={!!errors.phone}
+        >
           <MaskedInput
             id="phone"
             name="phone"

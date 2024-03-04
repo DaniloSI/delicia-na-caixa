@@ -10,7 +10,7 @@ function ConfirmSendOrder(_, ref) {
         <p className="py-4">
           Depois de clicar em &apos;Enviar pedido&apos;, o WhatsApp vai abrir
           com a mensagem do seu pedido. Mas{" "}
-          <span className="text-primary">
+          <span className="underline">
             para o estabelecimento realmente receber o seu pedido, você precisa
             apertar o botão de &apos;Enviar mensagem&apos; no WhatsApp
           </span>
@@ -26,7 +26,7 @@ function ConfirmSendOrder(_, ref) {
               type="checkbox"
               value={isConfirmed}
               onChange={(e) => setIsConfirmed(e.target.checked)}
-              className="checkbox-primary checkbox focus-visible:outline-none"
+              className="checkbox-primary checkbox checkbox-sm focus-visible:outline-none"
             />
           </label>
         </div>

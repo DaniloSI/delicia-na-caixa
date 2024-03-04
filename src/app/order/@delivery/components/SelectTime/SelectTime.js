@@ -22,7 +22,11 @@ const timeIntervals = Array.from({ length: 12 }).flatMap((_, index) => {
 
 function SelectTime() {
   const [selectedTime, setSelectedTime] = useState();
-  const { setValue, watch } = useFormContext();
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
   const modalRef = useRef();
 
   const time = watch("time") || "";
@@ -41,7 +45,11 @@ function SelectTime() {
   };
 
   return (
-    <FormControl labelTop="Horário da entrega/retirada">
+    <FormControl
+      labelTop="Horário da entrega/retirada"
+      labelBottom={errors.time?.message}
+      isInvalid={!!errors.time}
+    >
       <TextInputCustom
         id="schedule"
         placeholder="Selecione um horário"

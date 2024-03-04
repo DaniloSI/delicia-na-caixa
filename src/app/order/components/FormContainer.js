@@ -3,13 +3,11 @@
 import { sendGAEvent } from "@next/third-parties/google";
 import React, { useContext, useRef } from "react";
 import { useFormContext } from "react-hook-form";
-import { toast } from "react-toastify";
 import { encode } from "urlencode";
 import { v4 as uuidv4 } from "uuid";
 
 import { createOrder } from "@/app/actions";
 import StoreContext from "@/contexts/store";
-import useStepValidations from "@/hooks/useStepValidations";
 import { getTotalPrice } from "@/utils/calc";
 import getOrderMessage from "@/utils/getOrderMessage";
 
@@ -21,16 +19,9 @@ export default function FormContainer({ children }) {
   } = useContext(StoreContext);
   const { handleSubmit } = useFormContext();
 
-  const { validateCurrentStep } = useStepValidations();
   const sendRef = useRef(null);
 
   const onSubmit = handleSubmit(async (data) => {
-    const validationResult = validateCurrentStep();
-
-    if (validationResult) {
-      return toast.error(validationResult);
-    }
-
     const message = encode(getOrderMessage(data, activeSnacks));
 
     const snacks = data.snacks;

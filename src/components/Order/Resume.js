@@ -3,29 +3,22 @@
 import { useContext, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { FiArrowRight, FiSend } from "react-icons/fi";
-import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 
 import StepperContext from "@/contexts/stepper";
 import StoreContext from "@/contexts/store";
-import useStepValidations from "@/hooks/useStepValidations";
+import useStepValidation from "@/hooks/useStepValidation";
 import { getTotal, getTotalPrice } from "@/utils/calc";
 import { formatPrice } from "@/utils/format";
 
 import ConfirmSendOrder from "./ConfirmSendOrder";
 
 export default function Resume() {
-  const {
-    active,
-    isLastActive,
-    nextStep,
-    prevStep,
-    addStepDone,
-    removeStepDone,
-  } = useContext(StepperContext);
+  const { active, isLastActive, nextStep, prevStep } =
+    useContext(StepperContext);
   const { activeSnacks, centPriceStore } = useContext(StoreContext);
   const { watch } = useFormContext();
-  const { validateCurrentStep } = useStepValidations();
+  const { validateStep } = useStepValidation();
   const confirmModalRef = useRef(null);
 
   const snacks = watch("snacks");
@@ -33,33 +26,21 @@ export default function Resume() {
   const amount = getTotal(snacks);
   const subTotal = getTotalPrice(snacks, activeSnacks);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isLastActive) {
       confirmModalRef.current.showModal();
       return;
     }
 
-    const validationResult = validateCurrentStep();
+    const isValid = await validateStep(active);
 
-    if (validationResult) {
-      removeStepDone(active);
-      toast.error(validationResult);
-      return;
+    if (isValid) {
+      nextStep();
     }
-
-    addStepDone(active);
-    nextStep();
   };
 
-  const handlePrev = () => {
-    const validationResult = validateCurrentStep();
-
-    if (validationResult) {
-      removeStepDone(active);
-    } else {
-      addStepDone(active);
-    }
-
+  const handlePrev = async () => {
+    await validateStep(active, false);
     prevStep();
   };
 
