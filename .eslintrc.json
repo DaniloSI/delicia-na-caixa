@@ -5,10 +5,21 @@
     "plugin:sonarjs/recommended",
     "plugin:tailwindcss/recommended"
   ],
-  "plugins": ["simple-import-sort", "sonarjs"],
+  "plugins": ["simple-import-sort", "sonarjs", "unused-imports"],
   "rules": {
     "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   },
   "parserOptions": {
     "sourceType": "module",

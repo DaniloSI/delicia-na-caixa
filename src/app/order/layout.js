@@ -1,6 +1,7 @@
 import React from "react";
 
 import Divider from "@/components/Divider";
+import LogoStore from "@/components/LogoStore";
 import Resume from "@/components/Order/Resume";
 import StepperContainer from "@/components/Stepper/StepperContainer";
 import StepperItem from "@/components/Stepper/StepperItem";
@@ -19,6 +20,7 @@ export default async function OrderLayout({
 }) {
   return (
     <StoreContainer>
+      <LogoStore />
       <FormProvider>
         <FormContainer>
           <StepperContainer>

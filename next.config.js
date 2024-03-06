@@ -24,6 +24,11 @@ const nextConfig = {
         destination: "/pedido",
         permanent: true,
       },
+      {
+        source: "/admin",
+        destination: "/admin/settings",
+        permanent: true,
+      },
     ];
   },
 };

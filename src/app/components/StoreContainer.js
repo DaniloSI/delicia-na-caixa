@@ -1,6 +1,3 @@
-import React from "react";
-
-import LogoStore from "@/components/LogoStore";
 import StoreProvider from "@/providers/store-provider";
 import { getCentPrice, getOtherSettings, getSnacks } from "@/services/store";
 import { capitalize } from "@/utils/format";
@@ -26,10 +23,5 @@ export default async function StoreContainer({ children }) {
       })),
   };
 
-  return (
-    <StoreProvider value={store}>
-      <LogoStore />
-      {children}
-    </StoreProvider>
-  );
+  return <StoreProvider value={store}>{children}</StoreProvider>;
 }

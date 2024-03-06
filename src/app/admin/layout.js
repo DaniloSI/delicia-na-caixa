@@ -1,9 +1,15 @@
-import React from "react";
+import LogoStore from "@/components/LogoStore";
 
-import StoreContainer from "../components/StoreContainer";
+import TabNavigation from "./components/TabNavigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({ children }) {
-  return <StoreContainer>{children}</StoreContainer>;
+  return (
+    <>
+      <LogoStore />
+      <TabNavigation />
+      {children}
+    </>
+  );
 }

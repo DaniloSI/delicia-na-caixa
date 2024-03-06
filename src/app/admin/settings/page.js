@@ -1,6 +1,5 @@
 "use client";
 
-import { signOut } from "next-auth/react";
 import React, { useContext, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { FaBalanceScale } from "react-icons/fa";
@@ -13,7 +12,8 @@ import FormControl from "@/components/FormControl";
 import MaskedInput from "@/components/MaskedInput";
 import StoreContext from "@/contexts/store";
 
-import NumericField from "./components/NumericField";
+import LogoutButton from "../components/LogoutButton";
+import NumericField from "../components/NumericField";
 
 const getUnityComponent = (text) => {
   return function UnityComponent() {
@@ -25,7 +25,6 @@ function Admin() {
   const { snacksStore, centPriceStore, otherSettingsStore } =
     useContext(StoreContext);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const methods = useForm({
     defaultValues: {
       snacks: Object.fromEntries(
@@ -80,11 +79,6 @@ function Admin() {
 
   return (
     <div className="flex flex-col p-4">
-      <div>
-        <h1 className="text-2xl font-medium">Configurações</h1>
-        <Divider />
-      </div>
-
       <FormProvider {...methods}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <div className="grid grid-flow-row grid-cols-2 items-end gap-x-4 gap-y-2">
@@ -210,18 +204,7 @@ function Admin() {
             Salvar
           </button>
 
-          <button
-            type="button"
-            className="btn mb-4"
-            disabled={isLoggingOut}
-            onClick={() => {
-              setIsLoggingOut(true);
-              signOut({ callbackUrl: "/admin/login" });
-            }}
-          >
-            {isLoggingOut && <span className="loading loading-spinner" />}
-            Sair
-          </button>
+          <LogoutButton />
         </form>
       </FormProvider>
     </div>

@@ -5,6 +5,8 @@ import { auth } from "@/../auth";
 import { databaseOrder } from "@/services/database";
 import { getSnacks } from "@/services/store";
 
+import LogoutButton from "../components/LogoutButton";
+
 export default async function Orders() {
   const session = await auth();
   const snacks = await getSnacks();
@@ -20,7 +22,7 @@ export default async function Orders() {
   ])(orders);
 
   return (
-    <>
+    <div className="mt-4">
       <div className="prose">
         <h3 className="text-center">Últimos 20 pedidos</h3>
       </div>
@@ -66,6 +68,9 @@ export default async function Orders() {
           </tbody>
         </table>
       </div>
-    </>
+      <div className="sticky bottom-0 right-0 mt-2 flex flex-col items-stretch bg-white p-4 shadow-[0_0_10px_rgba(0,0,0,.1)]">
+        <LogoutButton />
+      </div>
+    </div>
   );
 }
